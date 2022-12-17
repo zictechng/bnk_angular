@@ -1,6 +1,8 @@
 import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +29,8 @@ import { AccountStatementComponent } from './components/dashboard/account-statem
 import { SupportComponent } from './components/dashboard/support/support.component';
 import { SettingComponent } from './components/dashboard/setting/setting.component';
 import { FormComponent } from './components/dashboard/form/form.component';
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 
@@ -52,13 +56,25 @@ import { FormComponent } from './components/dashboard/form/form.component';
     AccountStatementComponent,
     SupportComponent,
     SettingComponent,
-    FormComponent
+    FormComponent,
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+      progressBar: true,
+      enableHtml: true,
+      closeButton: true,
+      tapToDismiss: true
+    }),
+
   ],
   providers: [AuthService, AuthGuard,
     {

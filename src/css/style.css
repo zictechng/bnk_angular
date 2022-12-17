@@ -4,7 +4,7 @@
     Name                 : Mophy
     Author               : DexignZone
     Author Portfolio     : https://themeforest.net/user/dexignzone/portfolio
-    
+
 
 
     Table of Sass Contents
@@ -16,7 +16,7 @@
         _mixin
         _variable
 
-    2. bootstrap 
+    2. bootstrap
         -Here goes all official bootstrap scss files
 
     3. Global/Base
@@ -3820,7 +3820,7 @@ textarea.form-control {
     float: left;
     padding-right: 0.5rem;
     color: #6c757d;
-    content: var(--bs-breadcrumb-divider, "https://mophy.dexignzone.com/") /* rtl: var(--bs-breadcrumb-divider, "/") */; }
+    content: var(--bs-breadcrumb-divider, "Easily send funds to your love once") /* rtl: var(--bs-breadcrumb-divider, "/") */; }
 
 .breadcrumb-item.active {
   color: #6c757d; }
@@ -12624,10 +12624,10 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 @media (min-width: 64rem) {
   [data-layout="horizontal"] {
     /* .deznav {
-            &.dez-bg{                
+            &.dez-bg{
                 .metismenu li > ul li a {
                     color: #7e7e7e;
-                }    
+                }
             }
         } */ }
     [data-layout="horizontal"] .nav-header {
@@ -12924,13 +12924,13 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 						&>a{
 							color:$white;
 						}
-							
+
 						i{
 							color:$white;
 						}
-					}	
+					}
 				 }
-			}	
+			}
 		} */ }
     [data-sidebar-style="compact"] .nav-header {
       width: 11.25rem; }
@@ -19169,7 +19169,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 
 [data-theme-version="dark"] {
   /* svg{
-        g{        
+        g{
             circle{
                 fill: #fff;
             }
@@ -20619,9 +20619,9 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   height: 260px; }
 
 /* .legendLabel{
-    color: var(--primary);    
+    color: var(--primary);
     &:last-child{
-        color: #000;    
+        color: #000;
     }
 } */
 .morris-hover {
@@ -29886,7 +29886,7 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 
 [data-theme-version="dark"] {
   /* svg{
-        g{        
+        g{
             circle{
                 fill: #fff;
             }

@@ -26,6 +26,7 @@
             ],
             "styles": [
               "src/css/style.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/vendor/jqvmap/css/jqvmap.min.css",
               "src/vendor/chartist/css/chartist.min.css",
               "src/vendor/jqvmap/css/jqvmap.min.css",
@@ -34,11 +35,13 @@
               "src/styles.css"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/vendor/global/global.min.js",
               "src/vendor/bootstrap-select/dist/js/bootstrap-select.min.js",
               "src/vendor/chart.js/Chart.bundle.min.js",
               "src/vendor/owl-carousel/owl.carousel.js",
-              "src/vendor/peity/jquery.peity.min.js",
+
               "src/vendor/apexchart/apexchart.js",
               "src/js/dashboard/dashboard-1.js",
               "src/js/custom.min.js",
