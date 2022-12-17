@@ -26,9 +26,12 @@ loginUser(){
   subscribe(res =>{
 
     localStorage.setItem('token', res.token);
+    localStorage.setItem('user', res);
    //console.log(res);
-
-    this._router.navigate(['/dashboard']);
+   this._router.navigate(['/dashboard']).then(() =>{
+    window.location.reload()
+    }); //this will refresh/reload your page
+    //this._router.navigate(['/dashboard']);
   },
     err => console.log(err)
   );
