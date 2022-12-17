@@ -26,7 +26,7 @@ loginUser(){
   subscribe(res =>{
 
     localStorage.setItem('token', res.token);
-    localStorage.setItem('user', res);
+    //localStorage.setItem('user', res);
    //console.log(res);
    this._router.navigate(['/dashboard']).then(() =>{
     window.location.reload()

@@ -1,3 +1,5 @@
+import { FormComponent } from './components/dashboard/form/form.component';
+import { TransferFundComponent } from './components/dashboard/transfer-fund/transfer-fund.component';
 import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -13,7 +15,9 @@ const routes: Routes = [
   {path: 'forget-password', component: ForgetPasswordPageComponent},
   {path: 'dashboard', component: HomeComponent,
   canActivate: [AuthGuard] // this is the protecting guard to protect this route from unoauthorized users
-}
+},
+{path: 'transfer', component: TransferFundComponent},
+{path: 'forms', component: FormComponent},
 
 ];
 
