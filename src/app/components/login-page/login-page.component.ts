@@ -22,6 +22,7 @@ export class LoginPageComponent implements OnInit{
 
 // login method here
 loginUser(){
+  //debugger
   this._auth.loginUser(this.loginUserData).
   subscribe(res =>{
 
