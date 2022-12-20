@@ -26,10 +26,10 @@ loginUser(){
   subscribe(res =>{
 
     localStorage.setItem('token', res.token);
-    //localStorage.setItem('user', res);
-   //console.log(res);
+    localStorage.setItem('userData', res.user);
+   console.log(res.token);
    this._router.navigate(['/dashboard']).then(() =>{
-    window.location.reload()
+    //window.location.reload()
     }); //this will refresh/reload your page
     //this._router.navigate(['/dashboard']);
   },

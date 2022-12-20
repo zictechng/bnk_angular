@@ -1,1 +1,51 @@
-<p>setting works!</p>
+<app-top-bar></app-top-bar>
+<app-side-bar></app-side-bar>
+
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="form-head mb-4">
+      <h2 class="text-black font-w600 mb-0">Setting</h2>
+    </div>
+    <div class="page-titles">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Account Setting</a></li>
+        <li class="breadcrumb-item"><a href="#"> Security of your account is very import, regular password update is
+            required.</a> </li>
+        <li class="active"></li>
+      </ol>
+    </div>
+
+    <!-- row -->
+    <div class="row">
+      <div class="col-xl-8 col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title">Reset Login Details</h6>
+          </div>
+          <div class="card-body">
+            <div class="basic-form">
+              <form>
+
+                <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label class="form-label">New password</label>
+                    <input type="password" name="new_password" class="form-control" placeholder="New password">
+                  </div>
+                  <div class="mb-3 col-md-6">
+                    <label class="form-label">Confirm password</label>
+                    <input type="password" name="confirm_password" class="form-control" placeholder="confirm password">
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-primary"> Reset</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<app-footer></app-footer>

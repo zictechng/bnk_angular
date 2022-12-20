@@ -4,21 +4,26 @@
 <div class="content-body">
   <div class="container-fluid">
     <div class="form-head mb-4">
-      <h2 class="text-black font-w600 mb-0">Statement</h2>
+      <h2 class="text-black font-w600 mb-0">Search</h2>
     </div>
     <div class="page-titles">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Account statement</a></li>
-        <li class="breadcrumb-item"><a href="#"></a> </li>
-        <li class="active"></li>
+        <li class="breadcrumb-item"><a href="#">Type any words in the search to query report. </a></li>
+        &nbsp;&nbsp;&nbsp;
+        <li class="active">
+          <div class="input-group mb-6">
+            <input type="text" name="search_filter" class="form-control" placeholder="Search for record">
+            <button class="btn btn-warning" type="button">Search</button>
+          </div>
+        </li>
       </ol>
     </div>
 
-    <!-- row -->
+    <!-- when the search return result then this table will show and display the result details  -->
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <h6 class="card-title">Statement of account</h6>
+          <h6 class="card-title">Search result</h6>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -80,6 +85,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
 <app-footer></app-footer>

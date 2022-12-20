@@ -30,6 +30,9 @@ import { SupportComponent } from './components/dashboard/support/support.compone
 import { SettingComponent } from './components/dashboard/setting/setting.component';
 import { FormComponent } from './components/dashboard/form/form.component';
 import { ToastrModule } from 'ngx-toastr';
+import { WalletComponent } from './components/dashboard/wallet/wallet.component';
+import { SearchComponent } from './components/dashboard/search/search.component';
+
 
 
 
@@ -57,6 +60,9 @@ import { ToastrModule } from 'ngx-toastr';
     SupportComponent,
     SettingComponent,
     FormComponent,
+    WalletComponent,
+    SearchComponent,
+
 
   ],
   imports: [
