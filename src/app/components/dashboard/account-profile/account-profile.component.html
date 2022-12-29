@@ -24,7 +24,11 @@
             </div>
             <div class="profile-info">
               <div class="profile-photo">
-                <img src="/assets/images/profile/profile.png" class="img-fluid rounded-circle" alt="">
+                <img [src]="url" class="img-fluid rounded-circle" alt="">
+                <div class="container">
+                  <input type="file" id="img" accept="image/*" style="display: none;" (change)="onFileSelected($event)">
+                  <label for="img">Pick Image</label>
+                </div>
               </div>
               <div class="profile-details">
                 <div class="profile-name px-3 pt-2">
@@ -216,18 +220,24 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                      <form>
-                        <label class="form-label">Name</label>
-                        <input type="text" name="profile_name" placeholder="My name" class="form-control">
-                        <label class="form-label">Select image </label>
-                        <input type="file" name="profile_pic" placeholder="1234 Main St" class="form-control">
+                      <form method="post" enctype="multipart/form-data">
+                        <div class="profile-photo">
+                          <img [src]="url" class="img-fluid rounded-circle" alt="">
 
+                        </div>
+
+                        <!-- <label class="form-label">Name</label> -->
+                        <input type="text" name="profile_name" placeholder="My name" class="form-control">
+
+                        <input type="file" name="file_name" accept="image/*" (change)="onFileSelected($event)"
+                          placeholder="File" class="form-control">
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">btn-close</button>
+                          <button type="submit" (click)="uploadImage()" class="btn btn-primary">Upload</button>
+                        </div>
                       </form>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">btn-close</button>
-                      <button type="button" class="btn btn-primary">Upload</button>
-                    </div>
+
                   </div>
                 </div>
               </div>

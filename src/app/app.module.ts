@@ -2,8 +2,8 @@ import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgChartsModule } from 'ng2-charts';
-
+import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,13 +37,9 @@ import { LoanComponent } from './components/dashboard/loan/loan.component';
 
 
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
-
     LoginPageComponent,
     RegisterPageComponent,
     ForgetPasswordPageComponent,
@@ -65,13 +61,13 @@ import { LoanComponent } from './components/dashboard/loan/loan.component';
     WalletComponent,
     SearchComponent,
     LoanComponent,
-
+    CanvasJSChart,
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    NgChartsModule,
+
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,

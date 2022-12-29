@@ -1,24 +1,16 @@
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+
 //import{ Chart } from 'chart.js';
-
-
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  template: `<canvas #myCanvas></canvas>`,
 })
 export class HomeComponent implements OnInit{
-  datasets = [
-    {
-      label: 'Traffic',
-      data: [2112, 2343, 2545, 3423, 2365, 1985, 987],
-    },
-  ];
-  labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+  chart: any;
 
   myInfo:any;
   userDa = (JSON.parse(localStorage.getItem('userData')));
@@ -29,14 +21,29 @@ export class HomeComponent implements OnInit{
 
   constructor(private _auth: AuthService){}
 
-
-
   ngOnInit(): void {
     this.getUserData();
     this.getMyData();
     this.getMyIncomeFlow();
+
   }
 
+  // chartOptions = {
+  //   title: {
+  //     text: "Basic Column Chart in Angular"
+  //   },
+  //   data: [{
+  //     type: "column",
+  //     dataPoints: [
+  //       { label: "Apple",  y: 10  },
+  //       { label: "Orange", y: 15  },
+  //       { label: "Banana", y: 25  },
+  //       { label: "Mango",  y: 30  },
+  //       { label: "Grape",  y: 28  }
+  //     ]
+  //   }]
+
+  // };
   getUserData(){
     let myInfo = localStorage.getItem('userData');
     }
@@ -56,3 +63,4 @@ export class HomeComponent implements OnInit{
     });
   }
 }
+

@@ -21,7 +21,8 @@ export class AuthService {
   private _userProfileUrl = "http://localhost:3000/api/profile/";
 
   private _supportTicketUrl = "http://localhost:3000/api/support";
-  private _incomeUrl = "http://localhost:3000/api/income_details/"
+  private _incomeUrl = "http://localhost:3000/api/income_details/";
+  private _uploadImageUrl = "http://localhost:3000/api/upload";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -92,6 +93,11 @@ getMyIncomeFlow(id:any){
 // submit ticket support here
 supportTicket(user:any){
   return this.http.post<any>(this._supportTicketUrl, user);
+}
+
+// submit ticket support here
+uploadImage(user:any){
+  return this.http.post<any>(this._uploadImageUrl, user);
 }
 
 getLocalStorage(){
