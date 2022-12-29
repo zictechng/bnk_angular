@@ -2,6 +2,7 @@ import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgChartsModule } from 'ng2-charts';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +33,7 @@ import { FormComponent } from './components/dashboard/form/form.component';
 import { ToastrModule } from 'ngx-toastr';
 import { WalletComponent } from './components/dashboard/wallet/wallet.component';
 import { SearchComponent } from './components/dashboard/search/search.component';
+import { LoanComponent } from './components/dashboard/loan/loan.component';
 
 
 
@@ -62,12 +64,14 @@ import { SearchComponent } from './components/dashboard/search/search.component'
     FormComponent,
     WalletComponent,
     SearchComponent,
+    LoanComponent,
 
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    NgChartsModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -78,7 +82,7 @@ import { SearchComponent } from './components/dashboard/search/search.component'
       progressBar: true,
       enableHtml: true,
       closeButton: true,
-      tapToDismiss: true
+      tapToDismiss: true,
     }),
 
   ],

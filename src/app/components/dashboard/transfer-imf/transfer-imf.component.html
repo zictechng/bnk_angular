@@ -8,14 +8,38 @@
     </div>
     <div class="page-titles">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">IMF</a></li>
+        <li class="breadcrumb-item"><a href="#"></a></li>
         <li class="breadcrumb-item"><a href="#"> Enter your account IMF code to complete your transfer</a> </li>
         <li class="active"></li>
       </ol>
     </div>
 
     <!-- row -->
+    <div class="row">
+      <div class="col-xl-8 col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title">Confirm IMF</h6>
+          </div>
+          <div class="card-body">
+            <div class="basic-form">
+              <form>
+                <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label class="form-label">Enter IMF</label>
+                    <input type="password" [(ngModel)]="imfData.acct_imf" name="acct_imf" class="form-control"
+                      placeholder="Account IMF">
+                  </div>
 
+                </div>
+
+                <button type="button" (click)="imfConfirm()" class="btn btn-primary"> Confirm</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

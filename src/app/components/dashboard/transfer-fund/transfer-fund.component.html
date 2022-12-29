@@ -48,6 +48,7 @@
                       placeholder="Amount">
                   </div>
                 </div>
+
                 <div class="mb-3">
                   <label class="form-label">Bank Name</label>
                   <input type="text" [(ngModel)]="fundData.bank_name" name="bank_name"
@@ -58,6 +59,7 @@
                   <textarea _ngcontent-cqi-c52="" rows="5" [(ngModel)]="fundData.bank_address" name="bank_address"
                     class="form-control" spellcheck="false" placeholder="Bank address"></textarea>
                 </div>
+
                 <button type="button" (click)="transferFund()" class="btn btn-primary"> Send</button>
               </form>
             </div>

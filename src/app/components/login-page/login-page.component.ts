@@ -22,15 +22,14 @@ export class LoginPageComponent implements OnInit{
 
 // login method here
 loginUser(){
-  //debugger
   this._auth.loginUser(this.loginUserData).
   subscribe(res =>{
-
     localStorage.setItem('token', res.token);
-    localStorage.setItem('userData', res.user);
-   console.log(res.token);
+    localStorage.setItem('userData', JSON.stringify(res.userData));
+  //  console.log(res.token);
+  //  console.log(res.userData);
    this._router.navigate(['/dashboard']).then(() =>{
-    //window.location.reload()
+    window.location.reload()
     }); //this will refresh/reload your page
     //this._router.navigate(['/dashboard']);
   },

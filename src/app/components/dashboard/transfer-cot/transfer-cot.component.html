@@ -8,13 +8,38 @@
     </div>
     <div class="page-titles">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">COT</a></li>
+        <li class="breadcrumb-item"><a href="#"></a></li>
         <li class="breadcrumb-item"><a href="#"> Enter your account COT code to continue</a> </li>
         <li class="active"></li>
       </ol>
     </div>
 
     <!-- row -->
+    <div class="row">
+      <div class="col-xl-8 col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title">Confirm COT</h6>
+          </div>
+          <div class="card-body">
+            <div class="basic-form">
+              <form>
+                <div class="row">
+                  <div class="mb-3 col-md-6">
+                    <label class="form-label">Enter COT</label>
+                    <input type="password" [(ngModel)]="cotData.cot" name="cot" class="form-control"
+                      placeholder="Account COT">
+                  </div>
+
+                </div>
+
+                <button type="button" (click)="cotConfirm()" class="btn btn-primary"> Confirm</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </div>

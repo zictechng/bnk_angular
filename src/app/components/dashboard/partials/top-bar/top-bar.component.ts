@@ -9,25 +9,26 @@ import { Router } from '@angular/router';
 })
 export class TopBarComponent implements OnInit{
 
-  userDetails:any = {};
+  myuUserInfo:any = {};
+  myuDetails:any;
 
   constructor(public _authService: AuthService,
     private _router: Router){}
 
   ngOnInit(): void {
-    this.getUserDetails()
-    console.log(localStorage.getItem('user_details'));
+    this.getUserDetails();
   }
 
   getUserDetails(){
-    //this.userDetails = localStorage.getItem('token');
-    console.log(this.userDetails);
-    console.log(localStorage.getItem('user_details'));
+    this.myuUserInfo = localStorage.getItem('userData');
+    this.myuDetails = (JSON.parse(this.myuUserInfo));
+    //console.log('LoggedUser', this.myuDetails);
   }
 
 
   logoutUser(){
     localStorage.removeItem('token');
+    localStorage.removeItem('userData');
     this._router.navigate(['/login']);
   }
 }

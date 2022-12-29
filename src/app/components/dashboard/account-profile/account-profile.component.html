@@ -28,11 +28,11 @@
               </div>
               <div class="profile-details">
                 <div class="profile-name px-3 pt-2">
-                  <h4 class="text-primary mb-0">Mitchell C. Shay</h4>
-                  <p>UX / UI Designer</p>
+                  <h4 class="text-primary mb-0">{{myData.name}}</h4>
+                  <p>Account Holder</p>
                 </div>
                 <div class="profile-email px-2 pt-2">
-                  <h4 class="text-muted mb-0">info@example.com</h4>
+                  <h4 class="text-muted mb-0">{{myData.email}}</h4>
                   <p>Email</p>
                 </div>
                 <div class="dropdown ms-auto">
@@ -54,7 +54,8 @@
                     <li class="dropdown-item" style="cursor: pointer;"><i class="fa fa-users text-primary me-2"></i>
                       Update password
                     </li>
-                    <li class="dropdown-item" style="cursor: pointer;"><i class="fa fa-plus text-primary me-2"></i>
+                    <li routerLink="/transfer" class="dropdown-item" style="cursor: pointer;"><i
+                        class="fa fa-plus text-primary me-2"></i>
                       Transfer fund</li>
                     <li class="dropdown-item" style="cursor: pointer;"><i class="fa fa-ban text-primary me-2"></i>
                       Delete my account</li>
@@ -92,7 +93,7 @@
                           <h5 class="f-w-500">Account Full Name <span class="pull-end">:</span>
                           </h5>
                         </div>
-                        <div class="col-sm-9 col-7"><span>Mitchell C.Shay</span>
+                        <div class="col-sm-9 col-7"><span>{{myData.name}}</span>
                         </div>
                       </div>
                       <div class="row mb-2">
@@ -100,58 +101,58 @@
                           <h5 class="f-w-500">Email <span class="pull-end">:</span>
                           </h5>
                         </div>
-                        <div class="col-sm-9 col-7"><span>example@examplel.com</span>
+                        <div class="col-sm-9 col-7"><span>{{myData.email}}</span>
                         </div>
                       </div>
-                      <div class="row mb-2">
-                        <div class="col-sm-3 col-5">
-                          <h5 class="f-w-500">Sex <span class="pull-end">:</span></h5>
-                        </div>
-                        <div class="col-sm-9 col-7"><span>Full Time (Free Lancer)</span>
-                        </div>
-                      </div>
+
                       <div class="row mb-2">
                         <div class="col-sm-3 col-5">
                           <h5 class="f-w-500">Date of Birth <span class="pull-end">:</span>
                           </h5>
                         </div>
-                        <div class="col-sm-9 col-7"><span>27</span>
+                        <div class="col-sm-9 col-7"><span>{{myData.dob}}</span>
                         </div>
                       </div>
                       <div class="row mb-2">
                         <div class="col-sm-3 col-5">
                           <h5 class="f-w-500">Country <span class="pull-end">:</span></h5>
                         </div>
-                        <div class="col-sm-9 col-7"><span>Rosemont Avenue Melbourne,
-                            Florida</span>
+                        <div class="col-sm-9 col-7"><span>{{myData.country}}</span>
                         </div>
                       </div>
                       <div class="row mb-2">
                         <div class="col-sm-3 col-5">
                           <h5 class="f-w-500">Account Type <span class="pull-end">:</span></h5>
                         </div>
-                        <div class="col-sm-9 col-7"><span>07 Year Experiences</span>
+                        <div class="col-sm-9 col-7"><span>{{myData.acct_type}}</span>
+                        </div>
+                      </div>
+                      <div class="row mb-2">
+                        <div class="col-sm-3 col-5">
+                          <h5 class="f-w-500">Account Pin <span class="pull-end">:</span></h5>
+                        </div>
+                        <div class="col-sm-9 col-7"><span>{{myData.acct_pin}}</span>
                         </div>
                       </div>
                       <div class="row mb-2">
                         <div class="col-sm-3 col-5">
                           <h5 class="f-w-500">Account Username <span class="pull-end">:</span></h5>
                         </div>
-                        <div class="col-sm-9 col-7"><span>07 Year Experiences</span>
+                        <div class="col-sm-9 col-7"><span>{{myData.username}}</span>
                         </div>
                       </div>
                       <div class="row mb-2">
                         <div class="col-sm-3 col-5">
                           <h5 class="f-w-500">Account Number <span class="pull-end">:</span></h5>
                         </div>
-                        <div class="col-sm-9 col-7"><span>07 Year Experiences</span>
+                        <div class="col-sm-9 col-7"><span>{{myData.acct_number}}</span>
                         </div>
                       </div>
                       <div class="row mb-2">
                         <div class="col-sm-3 col-5">
                           <h5 class="f-w-500">Holder Address <span class="pull-end">:</span></h5>
                         </div>
-                        <div class="col-sm-9 col-7"><span>07 Year Experiences</span>
+                        <div class="col-sm-9 col-7"><span>{{myData.address}}</span>
                         </div>
                       </div>
                     </div>
@@ -217,9 +218,9 @@
                     <div class="modal-body">
                       <form>
                         <label class="form-label">Name</label>
-                        <input type="text" placeholder="My name" class="form-control">
+                        <input type="text" name="profile_name" placeholder="My name" class="form-control">
                         <label class="form-label">Select image </label>
-                        <input type="file" placeholder="1234 Main St" class="form-control">
+                        <input type="file" name="profile_pic" placeholder="1234 Main St" class="form-control">
 
                       </form>
                     </div>

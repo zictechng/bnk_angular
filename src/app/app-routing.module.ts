@@ -1,3 +1,4 @@
+import { LoanComponent } from './components/dashboard/loan/loan.component';
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { WalletComponent } from './components/dashboard/wallet/wallet.component';
 import { TransferPinComponent } from './components/dashboard/transfer-pin/transfer-pin.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
 {path: 'successful', component: TransferSuccessComponent},
 {path: 'ewallet', component: WalletComponent},
 {path: 'search', component: SearchComponent},
+{path: 'loan', component: LoanComponent},
 
 
 

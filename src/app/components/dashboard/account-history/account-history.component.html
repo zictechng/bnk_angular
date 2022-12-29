@@ -34,61 +34,33 @@
                   <th>Date</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngFor="let historyDatas of historyData; index as i">
                 <tr>
-                  <td>Tiger Nixon</td>
-                  <td>$320,800</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>Accountant</td>
-                  <td>2011/04/25</td>
+                  <td>{{historyDatas.transaction_status}}</td>
+                  <td>{{historyDatas.trans_balance}}</td>
+                  <td *ngIf="historyDatas.transac_nature === 'Credit'; else isNotCredit">+{{historyDatas.amount |
+                    currency}}
+                  </td>
+                  <td *ngIf="historyDatas.transac_nature === 'Debit'; else isNotDebit">-{{historyDatas.amount |
+                    currency}}
+                  </td>
+                  <ng-container [ngSwitch]="historyDatas.transac_nature">
+                    <td *ngSwitchCase="'Credit'"><span class="badge badge-success">Credit</span>
+                    </td>
+                    <td *ngSwitchCase="'Debit'"><span class="badge badge-danger">Debit</span>
+                    </td>
+                    <td *ngSwitchDefault><span class="badge badge-default">Unknow status</span>
+                    </td>
+                  </ng-container>
+                  <td>{{historyDatas.tran_desc}}</td>
+                  <td>{{historyDatas.createdOn | date:'medium'}}</td>
                 </tr>
-                <tr>
-                  <td>Garrett Winters</td>
-                  <td>$170,750</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>63</td>
-                  <td>2011/07/25</td>
-                  <td>2011/04/25</td>
-                </tr>
-                <tr>
-                  <td>Ashton Cox</td>
-                  <td>$170,750</td>
-                  <td>Junior Technical Author</td>
-                  <td>San Francisco</td>
-                  <td>66</td>
-                  <td>2009/01/12</td>
-                  <td>$86,000</td>
-                </tr>
-                <tr>
-                  <td>Cedric Kelly</td>
-                  <td>$170,750</td>
-                  <td>Senior Javascript Developer</td>
-                  <td>Edinburgh</td>
-                  <td>22</td>
-                  <td>2012/03/29</td>
-                  <td>$433,060</td>
-                </tr>
-                <tr>
-                  <td>Airi Satou</td>
-                  <td>$170,750</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>33</td>
-                  <td>2008/11/28</td>
-                  <td>$162,700</td>
-                </tr>
-                <tr>
-                  <td>Brielle Williamson</td>
-                  <td>$170,750</td>
-                  <td>Integration Specialist</td>
-                  <td>New York</td>
-                  <td>61</td>
-                  <td>2012/12/02</td>
-                  <td>$372,000</td>
-                </tr>
+                <ng-template #isNotCredit>
+                  <td></td>
+                </ng-template>
+                <ng-template #isNotDebit>
+                  <td></td>
+                </ng-template>
 
               </tbody>
               <!-- <tfoot>

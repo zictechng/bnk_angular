@@ -19,6 +19,12 @@
       <div class="card">
         <div class="card-header">
           <h6 class="card-title">Statement of account</h6>
+          <li class="active">
+            <div class="input-group mb-6">
+              <input type="text" name="search_filter" class="form-control" placeholder="Search for record">
+              <button class="btn btn-primary" type="button">Search</button>
+            </div>
+          </li>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -26,53 +32,38 @@
               <thead>
                 <tr>
                   <th>TID</th>
-                  <th>User</th>
+                  <th>Description</th>
                   <th>Amount</th>
                   <th>Status</th>
                   <th>Date Posted</th>
                   <th>Transaction Date</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngFor="let statementDatas of statementData; index as i">
                 <tr>
-                  <td><a href="javascript:void(0)">Order #26589</a>
+                  <td><a href="javascript:void(0)">{{ i +1}}</a>
                   </td>
-                  <td>Herman Beck</td>
+                  <td>{{statementDatas.tran_desc}}</td>
 
-                  <td>$45.00</td>
-                  <td><span class="badge badge-success">Paid</span>
+                  <td>{{statementDatas.amount | currency}}</td>
+                  <!-- <td
+                  *ngIf="statementDatas.transac_nature === 'Credit'"><span class="badge badge-success">Credit</span>
+                  </td> -->
+                  <ng-container [ngSwitch]="statementDatas.transac_nature">
+                    <td *ngSwitchCase="'Credit'"><span class="badge badge-success">Credit</span>
+                    </td>
+                    <td *ngSwitchCase="'Debit'"><span class="badge badge-danger">Debit</span>
+                    </td>
+                    <td *ngSwitchDefault><span class="badge badge-default">Unknow status</span>
+                    </td>
+                  </ng-container>
+                  <td><span class="text-muted">{{statementDatas.createdOn | date:'shortDate'}}</span>
                   </td>
-                  <td><span class="text-muted">Oct 16, 2017</span>
-                  </td>
-                  <td><span class="text-muted">Oct 16, 2017</span>
+                  <td><span class="text-muted">{{statementDatas.createdOn | date:'shortDate'}}</span>
                   </td>
                 </tr>
-                <tr>
-                  <td><a href="javascript:void(0)">Order #58746</a>
-                  </td>
-                  <td>Mary Adams</td>
 
-                  <td>$245.30</td>
-                  <td><span class="badge badge-info light">Shipped</span>
-                  </td>
-                  <td><span class="text-muted">Oct 12, 2017</span>
-                  </td>
-                  <td><span class="text-muted">Oct 16, 2017</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td><a href="javascript:void(0)">Order #98458</a>
-                  </td>
-                  <td>Caleb Richards</td>
 
-                  <td>$38.00</td>
-                  <td><span class="badge badge-danger">Shipped</span>
-                  </td>
-                  <td><span class="text-muted">May 18, 2017</span>
-                  </td>
-                  <td><span class="text-muted">Oct 16, 2017</span>
-                  </td>
-                </tr>
 
               </tbody>
             </table>
