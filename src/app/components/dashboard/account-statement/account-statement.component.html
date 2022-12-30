@@ -31,6 +31,12 @@
             <table class="table header-border table-responsive-sm">
               <thead>
                 <tr>
+                  <th>
+                    <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
+                      <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                      <label class="custom-control-label" for="customCheckBox2"></label>
+                    </div>
+                  </th>
                   <th>TID</th>
                   <th>Description</th>
                   <th>Amount</th>
@@ -41,6 +47,12 @@
               </thead>
               <tbody *ngFor="let statementDatas of statementData; index as i">
                 <tr>
+                  <td>
+                    <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
+                      <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                      <label class="custom-control-label" for="customCheckBox2"></label>
+                    </div>
+                  </td>
                   <td><a href="javascript:void(0)">{{ i +1}}</a>
                   </td>
                   <td>{{statementDatas.tran_desc}}</td>

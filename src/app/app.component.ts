@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-
+declare let $: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

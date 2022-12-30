@@ -23,12 +23,19 @@ export class AuthService {
   private _supportTicketUrl = "http://localhost:3000/api/support";
   private _incomeUrl = "http://localhost:3000/api/income_details/";
   private _uploadImageUrl = "http://localhost:3000/api/upload";
+  private _deleteHistoryUrl = "http://localhost:3000/api/delete-history/";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
 
     recordId:any = '';
     userId : any = '';
+
+    defaultProfileImage = '/assets/images/profile/profile.png'; // this is for default image if user don't have
+
+    serverURL = 'http://localhost:3000'; // this is backend server url
+
+
   // register method that process the registration
   registerUser(user:any){
     return this.http.post<any>(this._registerUrl, user);
@@ -99,6 +106,12 @@ supportTicket(user:any){
 uploadImage(user:any){
   return this.http.post<any>(this._uploadImageUrl, user);
 }
+
+//delete history record here...
+deleteHistory(id:any){
+  return this.http.get<any>(this._deleteHistoryUrl + id);
+}
+
 
 getLocalStorage(){
  return this.recordId = localStorage.getItem('userData');

@@ -11,12 +11,16 @@ export class TopBarComponent implements OnInit{
 
   myuUserInfo:any = {};
   myuDetails:any;
+  userDa = (JSON.parse(localStorage.getItem('userData')));
+  userDatas:any;
+  myProfilePhoto = '';
 
   constructor(public _authService: AuthService,
     private _router: Router){}
 
   ngOnInit(): void {
     this.getUserDetails();
+    this.getMyData()
   }
 
   getUserDetails(){
@@ -25,6 +29,14 @@ export class TopBarComponent implements OnInit{
     //console.log('LoggedUser', this.myuDetails);
   }
 
+// get user profile details here
+getMyData(){
+  this._authService.getMyData(this.userDa._id).subscribe(res =>{
+    this.userDatas = res.others.photo;
+    this.myProfilePhoto = this._authService.serverURL+res.others.photo
+    console.log(this.userDatas)
+  });
+}
 
   logoutUser(){
     localStorage.removeItem('token');

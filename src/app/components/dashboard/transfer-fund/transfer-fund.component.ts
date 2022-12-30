@@ -50,18 +50,17 @@ transferFund(){
       localStorage.setItem('transaction_id', this.obj2.tid);
       this._router.navigate(['/pin']); // after transfer, go back to dashboard page
     }
-    // else if(res.msg == "402"){
-    //     this._toastr.error('User not found', 'Failed', {
-    //       timeOut: 3000,
-    //     });
-    // }
+    else if(res.msg == "402"){
+        this._toastr.error('User not found', 'Failed', {
+          timeOut: 3000,
+        });
+    }
 
   }, err =>{
      if(err.status == "402"){
       this._toastr.error('User not found', 'Failed', {
         timeOut: 3000,
-      }
-);
+      });
 
   } else if(err.status == "403"){
     this._toastr.error('User account not active, or account blocked!', 'Error occured!', {
@@ -74,9 +73,8 @@ transferFund(){
       timeOut: 3000,
     });
 
-  }
-  }
-  )
+  }})
+
 };
 
 // generate random string for transaction ID
