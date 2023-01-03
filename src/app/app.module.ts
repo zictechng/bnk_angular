@@ -15,7 +15,7 @@ import { HomeComponent } from './components/dashboard/home/home.component';
 import { FooterComponent } from './components/dashboard/partials/footer/footer.component';
 import { SideBarComponent } from './components/dashboard/partials/side-bar/side-bar.component';
 import { TopBarComponent } from './components/dashboard/partials/top-bar/top-bar.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
@@ -84,7 +84,8 @@ import { FindProductComponent } from './components/dashboard/find-product/find-p
       closeButton: true,
       tapToDismiss: true,
     }),
-  Ng2SearchPipeModule
+  Ng2SearchPipeModule,
+  ReactiveFormsModule
   ],
   providers: [AuthService, AuthGuard,
     {

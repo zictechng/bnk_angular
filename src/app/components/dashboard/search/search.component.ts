@@ -19,6 +19,7 @@ export class SearchComponent implements OnInit{
   count = 0;
   pageSize = 3;
   pageSizes = [3, 6, 9];
+
   recordId:any = '';
   myId : any = localStorage.getItem('userData');
   statementData:any[] = [];
@@ -31,6 +32,7 @@ export class SearchComponent implements OnInit{
       // this.retrieveTutorials();
       this.accountStatement();
   }
+
 
   // getRequestParams(searchTitle: string, page: number, pageSize: number): any {
   //   let params: any = {};
@@ -86,10 +88,9 @@ export class SearchComponent implements OnInit{
     this.loading = true
     this._auth.accountStatement().subscribe(res =>{
       this.statementData = res;
-     console.log('search ,,,,,,,,,,,,,,,,,,,,,,,,,......................................',this.statementData)
+
       this.loading = false
     });
-
   }
 }
 

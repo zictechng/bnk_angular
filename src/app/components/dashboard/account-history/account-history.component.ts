@@ -30,13 +30,14 @@ export class AccountHistoryComponent implements OnInit{
     this.showSpinner = true
     this._auth.accountHistory().subscribe(res =>{
       this.historyData = res;
+      console.log(res);
       this.showSpinner = false
     });
   }
 
   //delete record from history table
   deleteHistory(id: any){
-    console.log(id);
+    //console.log(id);
     if (confirm("Are you sure to delete?")){
     this._auth.deleteHistory(id).subscribe(res =>{
       if(res.msg == 200){

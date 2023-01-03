@@ -6,20 +6,21 @@
     <div class="form-head mb-4">
       <h2 class="text-black font-w600 mb-0">Search</h2>
     </div>
-    <div class="page-titles">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Type any words in the search to query report. </a></li>
-        &nbsp;&nbsp;&nbsp;
-        <li class="active">
-          <div class="input-group mb-6">
-            <input type="search" name="search_filter" [(ngModel)]="searchName" class="form-control"
-              placeholder="Search for record">
-            <button class="btn btn-warning" type="button">Search</button>
-          </div>
-        </li>
-      </ol>
-    </div>
-
+    <form (submit)="accountStatement()" #f="ngForm">
+      <div class="page-titles">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Type any words in the search to query report. </a></li>
+          &nbsp;&nbsp;&nbsp;
+          <li class="active">
+            <div class="input-group mb-6">
+              <input type="search" name="searchName" [(ngModel)]="searchName" class="form-control"
+                placeholder="Search for record">
+              <button class="btn btn-warning" type="submit" [disabled]="!f.valid">Search</button>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </form>
     <!-- when the search return result then this table will show and display the result details  -->
     <div class="col-lg-12">
       <div class="card">
@@ -36,7 +37,7 @@
 
                 </tr>
               </thead>
-              <tbody *ngFor="let s of statementData| filter:searchName index as i;">
+              <tbody *ngFor="let s of statementData| filter:searchName ;">
                 <tr>
 
                   <td>{{s.acct_name}}</td>
