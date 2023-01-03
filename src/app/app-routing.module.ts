@@ -1,3 +1,5 @@
+import { FindProductComponent } from './components/dashboard/find-product/find-product.component';
+import { ProductSearchComponent } from './components/dashboard/product-search/product-search.component';
 import { LoanComponent } from './components/dashboard/loan/loan.component';
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { WalletComponent } from './components/dashboard/wallet/wallet.component';
@@ -42,6 +44,8 @@ const routes: Routes = [
 {path: 'ewallet', component: WalletComponent},
 {path: 'search', component: SearchComponent},
 {path: 'loan', component: LoanComponent},
+{path: 'product-search', component: ProductSearchComponent},
+{path: 'findproduct', component: FindProductComponent}
 
 
 

@@ -24,6 +24,8 @@ export class AuthService {
   private _incomeUrl = "http://localhost:3000/api/income_details/";
   private _uploadImageUrl = "http://localhost:3000/api/upload";
   private _deleteHistoryUrl = "http://localhost:3000/api/delete-history/";
+  private _deleteCheckHistoryUrl = "http://localhost:3000/api/history_delete";
+  private _productSearchUrl = "http://localhost:3000/api/product-search/";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -112,6 +114,15 @@ deleteHistory(id:any){
   return this.http.get<any>(this._deleteHistoryUrl + id);
 }
 
+//delete history record here...
+deleteHistoryCheckBox(ids:String[]){
+  return this.http.post<any>(this._deleteCheckHistoryUrl, ids);
+}
+
+// get product search details here
+productSearch(id:String){
+  return this.http.get<any>(this._productSearchUrl + id);
+}
 
 getLocalStorage(){
  return this.recordId = localStorage.getItem('userData');

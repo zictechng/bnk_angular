@@ -17,71 +17,85 @@
     <!-- row -->
     <div class="col-lg-12">
       <div class="card">
-        <div class="card-header">
-          <h6 class="card-title">Statement of account</h6>
-          <li class="active">
-            <div class="input-group mb-6">
-              <input type="text" name="search_filter" class="form-control" placeholder="Search for record">
-              <button class="btn btn-primary" type="button">Search</button>
+        <div class="wrapper">
+          <!-- loading spinner here top of the page -->
+          <div class="overlay d-flex justify-content-center" *ngIf="loading; else loadingFalse">
+            <div class="spinner-border m-2" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
-          </li>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table header-border table-responsive-sm">
-              <thead>
-                <tr>
-                  <th>
-                    <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
-                      <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
-                      <label class="custom-control-label" for="customCheckBox2"></label>
-                    </div>
-                  </th>
-                  <th>TID</th>
-                  <th>Description</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                  <th>Date Posted</th>
-                  <th>Transaction Date</th>
-                </tr>
-              </thead>
-              <tbody *ngFor="let statementDatas of statementData; index as i">
-                <tr>
-                  <td>
-                    <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
-                      <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
-                      <label class="custom-control-label" for="customCheckBox2"></label>
-                    </div>
-                  </td>
-                  <td><a href="javascript:void(0)">{{ i +1}}</a>
-                  </td>
-                  <td>{{statementDatas.tran_desc}}</td>
+          </div>
 
-                  <td>{{statementDatas.amount | currency}}</td>
-                  <!-- <td
-                  *ngIf="statementDatas.transac_nature === 'Credit'"><span class="badge badge-success">Credit</span>
-                  </td> -->
-                  <ng-container [ngSwitch]="statementDatas.transac_nature">
-                    <td *ngSwitchCase="'Credit'"><span class="badge badge-success">Credit</span>
-                    </td>
-                    <td *ngSwitchCase="'Debit'"><span class="badge badge-danger">Debit</span>
-                    </td>
-                    <td *ngSwitchDefault><span class="badge badge-default">Unknow status</span>
-                    </td>
-                  </ng-container>
-                  <td><span class="text-muted">{{statementDatas.createdOn | date:'shortDate'}}</span>
-                  </td>
-                  <td><span class="text-muted">{{statementDatas.createdOn | date:'shortDate'}}</span>
-                  </td>
-                </tr>
+          <div class="loaded-content" [class.blurred]="loading">
+            <ng-template #loadingFalse>
+              <div class="card-header">
+                <h6 class="card-title">Statement of account</h6>
+                <li class="active">
+                  <div class="input-group mb-6">
+                    <input type="text" name="search_filter" class="form-control" placeholder="Search for record">
+                    <button class="btn btn-primary" type="button">Search</button>
+                  </div>
+                </li>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table header-border table-responsive-sm">
+                    <thead>
+                      <tr>
+                        <th>
+                          <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
+                            <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                            <label class="custom-control-label" for="customCheckBox2"></label>
+                          </div>
+                        </th>
+                        <th>TID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date Posted</th>
+                        <th>Transaction Date</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let statementDatas of statementData; index as i">
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
+                            <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                            <label class="custom-control-label" for="customCheckBox2"></label>
+                          </div>
+                        </td>
+                        <td><a href="javascript:void(0)">{{ i +1}}</a>
+                        </td>
+                        <td>{{statementDatas.tran_desc}}</td>
+
+                        <td>{{statementDatas.amount | currency}}</td>
+                        <!-- <td
+                    *ngIf="statementDatas.transac_nature === 'Credit'"><span class="badge badge-success">Credit</span>
+                    </td> -->
+                        <ng-container [ngSwitch]="statementDatas.transac_nature">
+                          <td *ngSwitchCase="'Credit'"><span class="badge badge-success">Credit</span>
+                          </td>
+                          <td *ngSwitchCase="'Debit'"><span class="badge badge-danger">Debit</span>
+                          </td>
+                          <td *ngSwitchDefault><span class="badge badge-default">Unknow status</span>
+                          </td>
+                        </ng-container>
+                        <td><span class="text-muted">{{statementDatas.createdOn | date:'shortDate'}}</span>
+                        </td>
+                        <td><span class="text-muted">{{statementDatas.createdOn | date:'shortDate'}}</span>
+                        </td>
+                      </tr>
 
 
 
-              </tbody>
-            </table>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>

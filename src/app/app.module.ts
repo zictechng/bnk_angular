@@ -34,7 +34,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { WalletComponent } from './components/dashboard/wallet/wallet.component';
 import { SearchComponent } from './components/dashboard/search/search.component';
 import { LoanComponent } from './components/dashboard/loan/loan.component';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ProductSearchComponent } from './components/dashboard/product-search/product-search.component';
+import { FindProductComponent } from './components/dashboard/find-product/find-product.component';
 
 
 @NgModule({
@@ -62,6 +64,8 @@ import { LoanComponent } from './components/dashboard/loan/loan.component';
     SearchComponent,
     LoanComponent,
     CanvasJSChart,
+    ProductSearchComponent,
+    FindProductComponent,
 
   ],
   imports: [
@@ -80,7 +84,7 @@ import { LoanComponent } from './components/dashboard/loan/loan.component';
       closeButton: true,
       tapToDismiss: true,
     }),
-
+  Ng2SearchPipeModule
   ],
   providers: [AuthService, AuthGuard,
     {

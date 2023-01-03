@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class TopBarComponent implements OnInit{
 
-  myuUserInfo:any = {};
-  myuDetails:any;
+ public myuUserInfo:any = {};
+ public myuDetails:any;
   userDa = (JSON.parse(localStorage.getItem('userData')));
   userDatas:any;
   myProfilePhoto = '';

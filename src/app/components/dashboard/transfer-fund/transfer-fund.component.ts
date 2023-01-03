@@ -14,6 +14,7 @@ export class TransferFundComponent implements OnInit{
   recordId:any = '';
   myId : any = localStorage.getItem('userData');
   fundData:any = {};
+  loading:Boolean = false
 
 constructor(private _auth : AuthService,
   private _router: Router,

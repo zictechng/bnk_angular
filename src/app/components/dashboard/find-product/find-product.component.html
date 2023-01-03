@@ -12,15 +12,14 @@
         &nbsp;&nbsp;&nbsp;
         <li class="active">
           <div class="input-group mb-6">
-            <input type="search" name="search_filter" [(ngModel)]="searchName" class="form-control"
+            <input type="search" name="searchTerm" [(ngModel)]="searchName.searchTerm" class="form-control"
               placeholder="Search for record">
-            <button class="btn btn-warning" type="button">Search</button>
+            <button class="btn btn-primary" type="button" (click)="productSearch()">Search</button>
           </div>
         </li>
       </ol>
     </div>
 
-    <!-- when the search return result then this table will show and display the result details  -->
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
@@ -36,12 +35,12 @@
 
                 </tr>
               </thead>
-              <tbody *ngFor="let s of statementData | filter:searchName index as i">
-                <tr *ngIf="searchName">
+              <tbody>
+                <tr>
 
-                  <td>{{s.acct_name}}</td>
+                  <td></td>
 
-                  <td>{{s.amount | currency}}</td>
+                  <td></td>
                 </tr>
                 <!--  -->
 

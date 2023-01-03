@@ -13,6 +13,7 @@ export class AccountStatementComponent implements OnInit{
   recordId:any = '';
   myId : any = localStorage.getItem('userData');
   statementData:any[] = [];
+  loading:Boolean = false;
 
   constructor(private _auth: AuthService,
     private _router: Router,
@@ -24,9 +25,10 @@ export class AccountStatementComponent implements OnInit{
   }
 
   accountStatement(){
+    this.loading = true
     this._auth.accountStatement().subscribe(res =>{
       this.statementData = res;
-
+      this.loading = false
     });
 
   }
