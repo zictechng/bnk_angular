@@ -15,7 +15,7 @@ export class AuthService {
   private _transferpinUrl = "http://localhost:3000/api/pin";
   private _transfercotUrl = "http://localhost:3000/api/cot";
   private _transferimfUrl = "http://localhost:3000/api/imf";
-  private _acct_statementUrl = "http://localhost:3000/api/statement";
+   _acct_statementUrl = "http://localhost:3000/api/statement";
   private _acct_historyUrl = "http://localhost:3000/api/history";
 
   private _userProfileUrl = "http://localhost:3000/api/profile/";

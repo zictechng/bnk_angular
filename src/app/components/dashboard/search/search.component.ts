@@ -28,65 +28,65 @@ export class SearchComponent implements OnInit{
     private _router: Router){}
 
   ngOnInit(): void {
-      this.retrieveTutorials();
+      // this.retrieveTutorials();
       this.accountStatement();
   }
 
-  getRequestParams(searchTitle: string, page: number, pageSize: number): any {
-    let params: any = {};
+  // getRequestParams(searchTitle: string, page: number, pageSize: number): any {
+  //   let params: any = {};
 
-    if (searchTitle) {
-      params[`title`] = searchTitle;
-    }
+  //   if (searchTitle) {
+  //     params[`title`] = searchTitle;
+  //   }
 
-    if (page) {
-      params[`page`] = page - 1;
-    }
+  //   if (page) {
+  //     params[`page`] = page - 1;
+  //   }
 
-    if (pageSize) {
-      params[`size`] = pageSize;
-    }
+  //   if (pageSize) {
+  //     params[`size`] = pageSize;
+  //   }
 
-    return params;
-  }
+  //   return params;
+  // }
 
-  retrieveTutorials(): void {
-    const params = this.getRequestParams(this.title, this.page, this.pageSize);
+  // retrieveTutorials(): void {
+  //   const params = this.getRequestParams(this.title, this.page, this.pageSize);
 
-    this.dataResult.getAll(params)
-    .subscribe(
-      response => {
-        const { tutorials, totalItems } = response;
-        this.tutorials = tutorials;
-        this.count = totalItems;
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      });
-  }
+  //   this.dataResult.getAll(params)
+  //   .subscribe(
+  //     response => {
+  //       const { tutorials, totalItems } = response;
+  //       this.tutorials = tutorials;
+  //       this.count = totalItems;
+  //       console.log(response);
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     });
+  // }
 
-  handlePageChange(event: number): void {
-    this.page = event;
-    this.retrieveTutorials();
-  }
+  // handlePageChange(event: number): void {
+  //   this.page = event;
+  //   this.retrieveTutorials();
+  // }
 
-  handlePageSizeChange(event: any): void {
-    this.pageSize = event.target.value;
-    this.page = 1;
-    this.retrieveTutorials();
-  }
+  // handlePageSizeChange(event: any): void {
+  //   this.pageSize = event.target.value;
+  //   this.page = 1;
+  //   this.retrieveTutorials();
+  // }
 
-  searchTitle(): void {
-    this.page = 1;
-    this.retrieveTutorials();
-  }
+  // searchTitle(): void {
+  //   this.page = 1;
+  //   this.retrieveTutorials();
+  // }
 
   accountStatement(){
     this.loading = true
     this._auth.accountStatement().subscribe(res =>{
       this.statementData = res;
-     //console.log('search',res)
+     console.log('search ,,,,,,,,,,,,,,,,,,,,,,,,,......................................',this.statementData)
       this.loading = false
     });
 
