@@ -44,7 +44,121 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="wrapper">
+          <!-- loading spinner here top of the page -->
+          <div class="overlay d-flex justify-content-center" *ngIf="loading; else loadingFalse">
+            <div class="spinner-border m-2" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
 
+          <div class="loaded-content" [class.blurred]="loading">
+            <ng-template #loadingFalse>
+              <div class="card-header">
+                <h6 class="card-title">Statement paginate</h6>
+                <li class="active">
+                  <div class="input-group mb-6">
+                    <input type="text" name="search_filter" class="form-control" placeholder="Search for record">
+                    <button class="btn btn-primary" type="button">Search</button>
+                  </div>
+                </li>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table header-border table-responsive-sm">
+                    <thead>
+                      <tr>
+                        <th>
+                          <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
+                            <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                            <label class="custom-control-label" for="customCheckBox2"></label>
+                          </div>
+                        </th>
+                        <th>TID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date Posted</th>
+                        <th>Transaction Date</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngFor="let itemDatas of paginationStatementData; index as i">
+                      <tr>
+                        <td>
+                          <div class="custom-control custom-checkbox checkbox-success check-lg me-3">
+                            <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                            <label class="custom-control-label" for="customCheckBox2"></label>
+                          </div>
+                        </td>
+                        <td><a href="javascript:void(0)">{{ i +1}}</a>
+                        </td>
+                        <td>{{itemDatas.tran_desc}}</td>
+
+                        <td>{{itemDatas.amount | currency}}</td>
+                        <!-- <td
+                    *ngIf="statementDatas.transac_nature === 'Credit'"><span class="badge badge-success">Credit</span>
+                    </td> -->
+                        <ng-container [ngSwitch]="itemDatas.transac_nature">
+                          <td *ngSwitchCase="'Credit'"><span class="badge badge-success">Credit</span>
+                          </td>
+                          <td *ngSwitchCase="'Debit'"><span class="badge badge-danger">Debit</span>
+                          </td>
+                          <td *ngSwitchDefault><span class="badge badge-default">Unknow status</span>
+                          </td>
+                        </ng-container>
+                        <td><span class="text-muted">{{itemDatas.createdOn | date:'shortDate'}}</span>
+                        </td>
+                        <td><span class="text-muted">{{itemDatas.createdOn | date:'shortDate'}}</span>
+                        </td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <!-- <pagination-controls (pageChange)="pageChangeEvent($event)"></pagination-controls> -->
+
+                  <div class="container">
+                    <div class="row justify-content-end">
+                      <div class="col-4">
+                        <ul class="pagination">
+                          <li class="page-item">
+                            <a class="page-link"> {{currentPageItem}} - {{totalPageItem}} of
+                              {{pager.totalDocs}}</a>
+                            <!-- <span class="page-link"></span> -->
+                          </li>
+                          <li class="page-item"><a class="page-link">Page {{pager.page}} of Page
+                              {{pager.totalPages}}</a></li>
+                        </ul>
+                      </div>
+                      <div class="col-4">
+                        <ul *ngIf="pager.page && pager.page != 0" class="pagination">
+                          <li [ngClass]="{disabled:pager.page === 1}" class="page-item first-item">
+                            <a style="cursor: pointer;" (click)="firstPageFetch()" class="page-link">First</a>
+                          </li>
+                          <li [ngClass]="{disabled:pager.hasPrevPage === false}" class="page-item previous-item">
+                            <a style="cursor: pointer;" (click)="previousPageFetch()" class="page-link">Previous</a>
+                          </li>
+                          <li [ngClass]="{disabled:pager.nextPage === null}" class="page-item next-item">
+                            <a style="cursor: pointer;" (click)="nextPageFetch()" class="page-link"
+                              [ngClass]="{disabled:pager.nextPage === null}">Next</a>
+                          </li>
+                          <li [ngClass]="{disabled:pager.page === pager.totalPages}" class="page-item last-item">
+                            <a style="cursor: pointer;" (click)="lastPageFetch()" class="page-link">Last</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
   </div>
 </div>

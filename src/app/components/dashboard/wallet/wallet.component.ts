@@ -1,5 +1,7 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import {Chart, registerables} from 'node_modules/chart.js';
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-wallet',
@@ -19,22 +21,65 @@ export class WalletComponent implements OnInit{
   maskAccNumber:any = '';
   lastFiv:String = '';
 
-
+  // chart properties
+  chartdata:any;
+  labeldata:any[]=[];
+  realdata:any[]=[];
+  colordata:any[]=[];
 
   constructor(private _auth: AuthService){
   }
   obj2 = ''+this.userDa._id // get the current logged user ID
 
   ngOnInit(): void {
-    this.historyStatement();
+    this.accountHistoryWallet();
     this.getMyData();
     this.getMyIncomeFlow();
-
+    this.getChartFinance();
   }
 
+  RenderChart(labeldata:any, maindata:any, colordata:any, type:any, id:any){
+    const myChart = new Chart(id, {
+      type: type,
+      data: {
+          labels: labeldata,
+          datasets: [{
+              label: 'Transaction Flow',
+              data: maindata,
+              backgroundColor: colordata,
+              borderColor: ['#D2D2D2'],
+              borderWidth: 1,
+              borderRadius: 5,
+          },
+        ],
+      },
+  });
+  }
 
-  historyStatement(){
-    this._auth.accountHistory().subscribe(res =>{
+  // get chart details from the api call here...
+  getChartFinance(){
+    this._auth.walletDailyFinance(this.userDa._id)
+    .subscribe(res =>{
+     // console.log(res);
+     this.chartdata = res;
+    if(this.chartdata!=null){
+       for(let i=0; i<this.chartdata.length; i++){
+        if(this.chartdata[i]._id == 'Credit'){
+          this.colordata.push('#1EAAE7')
+        }
+        else if(this.chartdata[i]._id == 'Debit'){
+          this.colordata.push('orange')
+        }
+         this.labeldata.push(this.chartdata[i]._id)
+         this.realdata.push(this.chartdata[i].totalAmount)
+       }
+       this.RenderChart(this.labeldata, this.realdata, this.colordata, 'pie', 'piechart');
+       }
+   });
+  }
+
+  accountHistoryWallet(){
+    this._auth.accountHistoryWallet(this.userDa._id).subscribe(res =>{
       this.historyData = res;
     });
   }

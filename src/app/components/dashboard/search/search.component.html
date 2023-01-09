@@ -6,26 +6,33 @@
     <div class="form-head mb-4">
       <h2 class="text-black font-w600 mb-0">Search</h2>
     </div>
-    <form (submit)="accountStatement()" #f="ngForm">
-      <div class="page-titles">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Type any words in the search to query report. </a></li>
-          &nbsp;&nbsp;&nbsp;
-          <li class="active">
+    <div class="page-titles">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a>Type any words in the search to query report. </a></li>
+        &nbsp;&nbsp;&nbsp;
+        <!-- <li class="active">
             <div class="input-group mb-6">
-              <input type="search" name="searchName" [(ngModel)]="searchName" class="form-control"
+              <input type="text" name="searchName" [(ngModel)]="searchName" class="form-control"
                 placeholder="Search for record">
               <button class="btn btn-warning" type="submit" [disabled]="!f.valid">Search</button>
             </div>
-          </li>
-        </ol>
-      </div>
-    </form>
+          </li> -->
+      </ol>
+    </div>
     <!-- when the search return result then this table will show and display the result details  -->
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <h6 class="card-title">Search result found 20 record matches</h6>
+          <h6 class="card-title">Search any item quickly </h6>
+          <form (submit)="accountStatement()" #f="ngForm">
+            <li class="active">
+              <div class="input-group mb-6">
+                <input type="text" name="searchName" [(ngModel)]="searchName" class="form-control"
+                  placeholder="Search for record">
+                <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Search</button>
+              </div>
+            </li>
+          </form>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -37,7 +44,7 @@
 
                 </tr>
               </thead>
-              <tbody *ngFor="let s of statementData| filter:searchName ;">
+              <tbody *ngFor="let s of statementData | filter:searchName ;">
                 <tr>
 
                   <td>{{s.acct_name}}</td>

@@ -12,7 +12,7 @@ export class ProductSearchComponent implements OnInit{
 
   searchProductData:any[] = [];
   loading:Boolean = false;
-  searchName :any = {}
+  searchName :any = {};
 
 constructor(private _auth: AuthService,
   private _router: Router,
@@ -23,8 +23,8 @@ ngOnInit(): void {
 }
 
   productSearch(){
-    console.log(this.searchName);
-    this._auth.productSearch(this.searchName).
+    console.log(this.searchName.searchTerm);
+    this._auth.productSearch(this.searchName.searchTerm).
   subscribe(res =>{
     this.searchProductData = res;
     console.log(res);

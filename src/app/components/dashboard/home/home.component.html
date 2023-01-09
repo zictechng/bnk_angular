@@ -200,29 +200,80 @@
 
 
           <div class="card-body">
-            <div id="chartBar"></div>
+            <h3>Analysis </h3>
+            <canvas id="barchart"></canvas>
             <div class="d-flex">
               <div class="form-check custom-switch toggle-switch text-end me-4">
                 <input type="checkbox" class="form-check-input mt-0" id="customSwitch11">
-                <label class="form-check-label fs-14 text-black pe-2" for="customSwitch11">Number</label>
+                <label class="form-check-label fs-14 text-black pe-2" for="customSwitch11">Pie Chart</label>
               </div>
               <div class="form-check custom-switch toggle-switch text-end me-4">
                 <input type="checkbox" class="form-check-input mt-0" id="customSwitch12">
-                <label class="form-check-label fs-14 text-black pe-2" for="customSwitch12">Analytics</label>
+                <label class="form-check-label fs-14 text-black pe-2" for="customSwitch12">Line Chart</label>
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
+      <div class="col-12">
+        <div class="row">
+          <div class="col-3 col-sm-6">
+            <div class="card">
+              <div class="card-header flex-wrap border-0 pb-0">
+                <div class="me-3 mb-2">
+                  <p class="fs-14 mb-1">Pie chart analysis</p>
+                </div>
+              </div>
+              <div class="card-body p-0">
+                <canvas id="piechart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 col-sm-6">
+            <div class="card">
+              <div class="card-header flex-wrap border-0 pb-0">
+                <div class="me-3 mb-2">
+                  <p class="fs-14 mb-1">Line chart analysis</p>
+                </div>
 
-      <div class="resize-triggers">
-        <div class="expand-trigger">
-          <div style="width: 472px; height: 478px;"></div>
+              </div>
+              <div class="card-body">
+                <canvas id="dochart" height="80px" width="80px"></canvas>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-xl-9 col-sm-9">
+            <div class="card">
+              <div class="card-header flex-wrap border-0 pb-0">
+                <div class="me-3 mb-2">
+                  <p class="fs-14 mb-1">Withdraw / Transfer</p>
+                  <span class="fs-24 text-black font-w600">{{myTransaction[0].totalAmount | currency}}</span>
+                </div>
+                <span class="fs-12 mb-2">
+                  <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.3514 7.5C15.9974 9.37169 19.0572 12.8253 20 14H1V1L8.18919 10.75L14.3514 7.5Z"
+                      fill="url(#paint0_linear1)" />
+                    <path d="M19.5 13.5C18.582 12.4157 15.6027 9.22772 14 7.5L8 10.5L1 1.5" stroke="#FF2E2E"
+                      stroke-width="2" stroke-linecap="round" />
+                    <defs>
+                      <linearGradient id="paint0_linear1" x1="10.5" y1="2.625" x2="9.64345" y2="13.9935"
+                        gradientUnits="userSpaceOnUse">
+                        <stop offset="0" stop-color="#FF2E2E" />
+                        <stop offset="1" stop-color="#FF2E2E" stop-opacity="0.03" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                  4% (30 days)</span>
+              </div>
+              <div class="card-body p-0">
+                <canvas id="widgetChart2" height="80"></canvas>
+              </div>
+            </div>
+          </div> -->
         </div>
-        <div class="contract-trigger"></div>
       </div>
+
     </div>
 
 

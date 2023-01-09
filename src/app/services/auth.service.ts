@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -15,8 +16,9 @@ export class AuthService {
   private _transferpinUrl = "http://localhost:3000/api/pin";
   private _transfercotUrl = "http://localhost:3000/api/cot";
   private _transferimfUrl = "http://localhost:3000/api/imf";
-   _acct_statementUrl = "http://localhost:3000/api/statement";
+  private _acct_statementUrl = "http://localhost:3000/api/statement";
   private _acct_historyUrl = "http://localhost:3000/api/history";
+  private _acct_historyWalletUrl = "http://localhost:3000/api/history-wallet/";
 
   private _userProfileUrl = "http://localhost:3000/api/profile/";
 
@@ -26,6 +28,12 @@ export class AuthService {
   private _deleteHistoryUrl = "http://localhost:3000/api/delete-history/";
   private _deleteCheckHistoryUrl = "http://localhost:3000/api/history_delete";
   private _productSearchUrl = "http://localhost:3000/api/product-search/";
+
+  private _getHistoryhUrl = "http://localhost:3000/api/histories";
+
+  private _getFinanceAnnalyUrl = "http://localhost:3000/api/finance";
+  private _getWalletFinaceUrl = "http://localhost:3000/api/wallet-finance/";
+  private _getStatementUrl = "http://localhost:3000/api/statement-details";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -42,7 +50,17 @@ export class AuthService {
   registerUser(user:any){
     return this.http.post<any>(this._registerUrl, user);
   }
-
+  //this return chart finance details
+  dailyFinance(){
+    return this.http.get<any>(this._getFinanceAnnalyUrl)
+    pipe(
+      map(result => result)
+    )
+  }
+  //this return wallet chart finance details
+  walletDailyFinance(id:any){
+    return this.http.get<any>(this._getWalletFinaceUrl + id)
+  }
   // register method that process the registration
   loginUser(user:any){
     return this.http.post<any>(this._login, user);
@@ -83,9 +101,19 @@ accountStatement(){
   return this.http.get<any>(this._acct_statementUrl);
 }
 
+// get account statement pagination here
+statementPagination(page: number, pageSize:number){
+  return this.http.get<any>(this._getStatementUrl+'?page='+page+'&pageSize='+pageSize);
+}
+
 // get account history statement here
-accountHistory(){
-  return this.http.get<any>(this._acct_historyUrl);
+accountHistory(page: number, pageSize: number){
+  return this.http.get<any>(this._acct_historyUrl+'?page='+page+'&pageSize='+pageSize);
+}
+
+// get account history statement here
+accountHistoryWallet(id:any){
+  return this.http.get<any>(this._acct_historyWalletUrl + id);
 }
 
 // get user profile details here
@@ -119,8 +147,17 @@ deleteHistoryCheckBox(ids:String[]){
   return this.http.post<any>(this._deleteCheckHistoryUrl, ids);
 }
 
+//get history pagination here
+getHistoryDetails(page: number){
+  return this.http.get<any>(this._getHistoryhUrl + '?page='+page);
+}
+
+// getPaginatedPermissionUsage(page, pageType, pageSize){
+//   return this.http.get('http://localhost:3000/api/histories/paginated?page='+page+'&pageType='+pageType+'&pageSize='+pageSize);
+// }
+
 // get product search details here
-productSearch(id:String){
+productSearch(id:any){
   return this.http.get<any>(this._productSearchUrl + id);
 }
 

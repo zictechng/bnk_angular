@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { range } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-account-history',
@@ -17,6 +19,16 @@ export class AccountHistoryComponent implements OnInit{
   selectedItems:any [];
   showSpinner: Boolean = false;
 
+  activePage: any = 1;
+  pager: any = {};
+
+  total_count : any;
+
+  totalRecord: number = 0;
+  pagination: number = 1;
+  pageSize: number = 5;
+  totalPages: number = 1;
+
   constructor(private _auth: AuthService,
     private _router: Router,
     private _toastr: ToastrService){}
@@ -26,14 +38,63 @@ export class AccountHistoryComponent implements OnInit{
     this.historyStatement()
   }
 
+  // getPager(totalItems:number, currentPage: number = 1, pageSize:number = 10){
+  //   let totalPages = Math.ceil(totalItems/ pageSize);
+
+  //   let startPage: number, endPage: number;
+  //   if(totalPages <= 10){
+  //     startPage = 1;
+  //     endPage = totalPages
+  //   }
+  //   else{
+  //     if(currentPage<=6){
+  //       startPage = 1;
+  //       endPage = 10;
+  //     }
+  //     else if(currentPage + 4 >= totalPages){
+  //       startPage = totalPages - 9;
+  //       endPage = totalPages
+  //     }
+  //     else{
+  //       startPage = currentPage - 5;
+  //       endPage = currentPage + 4;
+  //     }
+  //   }
+  //   let startIndex = (currentPage -1) * pageSize;
+  //   let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
+
+  //   let pages = range(startPage, endPage +1)
+
+  //   return {
+  //     totalItems: totalItems,
+  //     currentPage: currentPage,
+  //     pageSize: pageSize,
+  //     startPage: startPage,
+  //     endPage: endPage,
+  //     startIndex: startIndex,
+  //     endIndex: endIndex,
+  //     pages: pages
+  //   };
+  // }
+
   historyStatement(){
     this.showSpinner = true
-    this._auth.accountHistory().subscribe(res =>{
-      this.historyData = res;
-      console.log(res);
+    this._auth.accountHistory(this.pagination, this.pageSize).subscribe((res: any) =>{
+      this.historyData = res.data;
+      this.totalRecord = res.total_record;
+      this.totalPages = window.Math.ceil(this.totalRecord/this.pageSize);
+      console.log(this.totalRecord);
       this.showSpinner = false
     });
   }
+
+
+  renderPage(event: number) {
+    this.pagination = event;
+    this.historyStatement();
+  }
+
+
 
   //delete record from history table
   deleteHistory(id: any){

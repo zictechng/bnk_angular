@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as CanvasJSAngularChart from '../assets/canvasjs.angular.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { LoanComponent } from './components/dashboard/loan/loan.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ProductSearchComponent } from './components/dashboard/product-search/product-search.component';
 import { FindProductComponent } from './components/dashboard/find-product/find-product.component';
+import { EstoreComponent } from './components/dashboard/estore/estore.component';
 
 
 @NgModule({
@@ -66,6 +68,7 @@ import { FindProductComponent } from './components/dashboard/find-product/find-p
     CanvasJSChart,
     ProductSearchComponent,
     FindProductComponent,
+    EstoreComponent,
 
   ],
   imports: [
@@ -85,7 +88,8 @@ import { FindProductComponent } from './components/dashboard/find-product/find-p
       tapToDismiss: true,
     }),
   Ng2SearchPipeModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  NgxPaginationModule,
   ],
   providers: [AuthService, AuthGuard,
     {

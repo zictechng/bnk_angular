@@ -15,6 +15,11 @@ export class AccountStatementComponent implements OnInit{
   statementData:any[] = [];
   loading:Boolean = false;
 
+  pageNumber:number = 1;
+  pageSize: number = 3;
+
+  paginationStatementData:any [] = [];
+
   constructor(private _auth: AuthService,
     private _router: Router,
     private _toastr: ToastrService){}
@@ -30,7 +35,8 @@ export class AccountStatementComponent implements OnInit{
       this.statementData = res;
       this.loading = false
     });
-
   }
+
+
 
 }
