@@ -34,6 +34,7 @@ export class AuthService {
   private _getFinanceAnnalyUrl = "http://localhost:3000/api/finance";
   private _getWalletFinaceUrl = "http://localhost:3000/api/wallet-finance/";
   private _getStatementUrl = "http://localhost:3000/api/statement-details";
+  private _formDatatUrl = "http://localhost:3000/api/form-data";
 
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -150,6 +151,10 @@ deleteHistoryCheckBox(ids:String[]){
 //get history pagination here
 getHistoryDetails(page: number){
   return this.http.get<any>(this._getHistoryhUrl + '?page='+page);
+}
+//delete history record here...
+postFormData(datas:String[]){
+  return this.http.post<any>(this._formDatatUrl, datas);
 }
 
 // getPaginatedPermissionUsage(page, pageType, pageSize){
