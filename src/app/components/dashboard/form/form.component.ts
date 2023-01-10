@@ -22,6 +22,7 @@ export class FormComponent implements OnInit{
     this.createForm();
   }
 
+  // get the value from the form here
   createForm(){
     this.userForm = new FormGroup({
       fname: new FormControl("", [Validators.required, Validators.minLength(10)]),
@@ -37,31 +38,7 @@ export class FormComponent implements OnInit{
       ])
     });
   }
-
-
-  // adding more dynamic input fields here
-  addMoreFields(){
-    const control = <FormArray>this.userForm.controls['contact'];
-    control.push(
-      new FormGroup({
-        ca1: new FormControl(''),
-        ca2: new FormControl(''),
-        ca3: new FormControl(''),
-      })
-    );
-  }
-
-  // removing dynamic inputs fields here
-  removeMoreFields(index){
-    const control = <FormArray>this.userForm.controls['contact'];
-    control.removeAt(index);
-  }
-
-  // save the form details
-  // saveFormDetails_1(){
-  //   const empDetails = this.userForm.value;
-  //   console.log(empDetails);
-  // }
+  //send data to server to store
   saveFormDetails(){
     const empDetails = this.userForm.value;
     console.log(empDetails);
@@ -89,6 +66,31 @@ export class FormComponent implements OnInit{
   }merged(merged: any) {
     throw new Error('Method not implemented.');
   };
+
+  // adding more dynamic input fields here
+  addMoreFields(){
+    const control = <FormArray>this.userForm.controls['contact'];
+    control.push(
+      new FormGroup({
+        ca1: new FormControl(''),
+        ca2: new FormControl(''),
+        ca3: new FormControl(''),
+      })
+    );
+  }
+
+  // removing dynamic inputs fields here
+  removeMoreFields(index){
+    const control = <FormArray>this.userForm.controls['contact'];
+    control.removeAt(index);
+  }
+
+  // save the form details
+  // saveFormDetails_1(){
+  //   const empDetails = this.userForm.value;
+  //   console.log(empDetails);
+  // }
+
 
 
   ngOnInit(): void {

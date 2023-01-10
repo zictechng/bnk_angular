@@ -152,8 +152,8 @@ deleteHistoryCheckBox(ids:String[]){
 getHistoryDetails(page: number){
   return this.http.get<any>(this._getHistoryhUrl + '?page='+page);
 }
-//delete history record here...
-postFormData(datas:String[]){
+//post dynamic data to backend via service here...
+postFormData(datas:any){
   return this.http.post<any>(this._formDatatUrl, datas);
 }
 
