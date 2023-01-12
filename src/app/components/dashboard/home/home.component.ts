@@ -15,11 +15,11 @@ export class HomeComponent implements OnInit{
 
   chart: [];
 
-  chartdata:any;
+  // chartdata:any;
 
-  labeldata:any[]=[];
-  realdata:any[]=[];
-  colordata:any[]=[];
+  // labeldata:any[]=[];
+  // realdata:any[]=[];
+  // colordata:any[]=[];
 
   myInfo:any;
   userDa = (JSON.parse(localStorage.getItem('userData')));
@@ -36,40 +36,40 @@ export class HomeComponent implements OnInit{
     this.getUserData();
     this.getMyData();
     this.getMyIncomeFlow();
-    this.getFinance();
+    //this.getFinance();
   }
-  RenderChart(labeldata:any, maindata:any, colordata:any, type:any, id:any){
-    const myChart = new Chart(id, {
-      type: type,
-      data: {
-          labels: labeldata,
-          datasets: [{
-              label: 'Account Flow',
-              data: maindata,
-              backgroundColor: colordata,
-              borderColor: ['#D2D2D2'],
-              borderWidth: 1,
-              borderRadius: 5,
-          },
-        //   {
-        //     label: 'Credit 2',
-        //     data: maindata,
-        //     backgroundColor: '#E69500',
-        //     borderColor: ['#D2D2D2'],
-        //     borderWidth: 1,
-        //     borderRadius: 5,
-        // }
-        ],
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
-              }
-          },
-      }
-  });
-  }
+  // RenderChart(labeldata:any, maindata:any, colordata:any, type:any, id:any){
+  //   const myChart = new Chart(id, {
+  //     type: type,
+  //     data: {
+  //         labels: labeldata,
+  //         datasets: [{
+  //             label: 'Account Flow',
+  //             data: maindata,
+  //             backgroundColor: colordata,
+  //             borderColor: ['#D2D2D2'],
+  //             borderWidth: 1,
+  //             borderRadius: 5,
+  //         },
+  //       //   {
+  //       //     label: 'Credit 2',
+  //       //     data: maindata,
+  //       //     backgroundColor: '#E69500',
+  //       //     borderColor: ['#D2D2D2'],
+  //       //     borderWidth: 1,
+  //       //     borderRadius: 5,
+  //       // }
+  //       ],
+  //     },
+  //     options: {
+  //         scales: {
+  //             y: {
+  //                 beginAtZero: true
+  //             }
+  //         },
+  //     }
+  // });
+  // }
   getUserData(){
     let myInfo = localStorage.getItem('userData');
     }
@@ -89,23 +89,23 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  getFinance(){
-    this._auth.dailyFinance().subscribe(res =>{
-      this.chartdata = res;
-      //console.log(this.labeldata)
-      if(this.chartdata!=null){
-        for(let i=0; i<this.chartdata.length; i++){
-          //console.log(this.chartdata[i]);
-          this.labeldata.push(this.chartdata[i].tr_year)
-          this.realdata.push(this.chartdata[i].amount)
-          this.colordata.push(this.chartdata[i].colorcode)
-        }
-        this.RenderChart(this.labeldata, this.realdata, this.colordata, 'bar', 'barchart');
-        this.RenderChart(this.labeldata, this.realdata, this.colordata, 'pie', 'piechart');
-        this.RenderChart(this.labeldata, this.realdata, this.colordata, 'line', 'dochart');
-        }
-    });
-  }
+  // getFinance(){
+  //   this._auth.dailyFinance().subscribe(res =>{
+  //     this.chartdata = res;
+  //     //console.log(this.labeldata)
+  //     if(this.chartdata!=null){
+  //       for(let i=0; i<this.chartdata.length; i++){
+  //         //console.log(this.chartdata[i]);
+  //         this.labeldata.push(this.chartdata[i].tr_year)
+  //         this.realdata.push(this.chartdata[i].amount)
+  //         this.colordata.push(this.chartdata[i].colorcode)
+  //       }
+  //       this.RenderChart(this.labeldata, this.realdata, this.colordata, 'bar', 'barchart');
+  //       this.RenderChart(this.labeldata, this.realdata, this.colordata, 'pie', 'piechart');
+  //       this.RenderChart(this.labeldata, this.realdata, this.colordata, 'line', 'dochart');
+  //       }
+  //   });
+  // }
 
   // RenderChart2(){
   //   const myChart = new Chart('piechart', {

@@ -22,10 +22,10 @@ export class WalletComponent implements OnInit{
   lastFiv:String = '';
 
   // chart properties
-  chartdata:any;
-  labeldata:any[]=[];
-  realdata:any[]=[];
-  colordata:any[]=[];
+  // chartdata:any;
+  // labeldata:any[]=[];
+  // realdata:any[]=[];
+  // colordata:any[]=[];
 
   constructor(private _auth: AuthService){
   }
@@ -35,48 +35,48 @@ export class WalletComponent implements OnInit{
     this.accountHistoryWallet();
     this.getMyData();
     this.getMyIncomeFlow();
-    this.getChartFinance();
+    //this.getChartFinance();
   }
 
-  RenderChart(labeldata:any, maindata:any, colordata:any, type:any, id:any){
-    const myChart = new Chart(id, {
-      type: type,
-      data: {
-          labels: labeldata,
-          datasets: [{
-              label: 'Transaction Flow',
-              data: maindata,
-              backgroundColor: colordata,
-              borderColor: ['#D2D2D2'],
-              borderWidth: 1,
-              borderRadius: 5,
-          },
-        ],
-      },
-  });
-  }
+  // RenderChart(labeldata:any, maindata:any, colordata:any, type:any, id:any){
+  //   const myChart = new Chart(id, {
+  //     type: type,
+  //     data: {
+  //         labels: labeldata,
+  //         datasets: [{
+  //             label: 'Transaction Flow',
+  //             data: maindata,
+  //             backgroundColor: colordata,
+  //             borderColor: ['#D2D2D2'],
+  //             borderWidth: 1,
+  //             borderRadius: 5,
+  //         },
+  //       ],
+  //     },
+  // });
+  // }
 
   // get chart details from the api call here...
-  getChartFinance(){
-    this._auth.walletDailyFinance(this.userDa._id)
-    .subscribe(res =>{
-     // console.log(res);
-     this.chartdata = res;
-    if(this.chartdata!=null){
-       for(let i=0; i<this.chartdata.length; i++){
-        if(this.chartdata[i]._id == 'Credit'){
-          this.colordata.push('#1EAAE7')
-        }
-        else if(this.chartdata[i]._id == 'Debit'){
-          this.colordata.push('orange')
-        }
-         this.labeldata.push(this.chartdata[i]._id)
-         this.realdata.push(this.chartdata[i].totalAmount)
-       }
-       this.RenderChart(this.labeldata, this.realdata, this.colordata, 'pie', 'piechart');
-       }
-   });
-  }
+  // getChartFinance(){
+  //   this._auth.walletDailyFinance(this.userDa._id)
+  //   .subscribe(res =>{
+  //    // console.log(res);
+  //    this.chartdata = res;
+  //   if(this.chartdata!=null){
+  //      for(let i=0; i<this.chartdata.length; i++){
+  //       if(this.chartdata[i]._id == 'Credit'){
+  //         this.colordata.push('#1EAAE7')
+  //       }
+  //       else if(this.chartdata[i]._id == 'Debit'){
+  //         this.colordata.push('orange')
+  //       }
+  //        this.labeldata.push(this.chartdata[i]._id)
+  //        this.realdata.push(this.chartdata[i].totalAmount)
+  //      }
+  //      this.RenderChart(this.labeldata, this.realdata, this.colordata, 'pie', 'piechart');
+  //      }
+  //  });
+  // }
 
   accountHistoryWallet(){
     this._auth.accountHistoryWallet(this.userDa._id).subscribe(res =>{

@@ -241,6 +241,9 @@
                   <div class="mb-3 col-md-6">
                     <label class="form-label">First Name</label>
                     <input type="text" class="form-control" formControlName="fname" placeholder="1234 Main St">
+                    <small *ngIf="userForm.get('fname').errors?.['required']">
+                      First Name is required
+                    </small>
                   </div>
                   <div class="mb-3 col-md-6">
                     <label class="form-label">Other Name</label>
@@ -271,16 +274,28 @@
                       <div class="mb-3 col-md-3">
                         <label class="form-label">CA 1 Score</label>
                         <input type="text" class="form-control" formControlName="ca1" placeholder="CA 1">
-
+                        <!-- <small *ngIf="userForm.get('contact.ca1').errors?.['maxInputValue']">
+                          No space allowed
+                        </small> -->
                       </div>
                       <div class="mb-3 col-md-3">
                         <label class="form-label">CA 2 Score</label>
-                        <input type="text" class="form-control" formControlName="ca2" placeholder="CA 2">
+                        <input type="text" (change)="sum()" class="form-control" formControlName="ca2"
+                          placeholder="CA 2">
                       </div>
 
                       <div class="mb-3 col-md-3">
                         <label class="form-label">CA 3 Score</label>
-                        <input type="text" class="form-control" formControlName="ca3" placeholder="CA 3">
+                        <input (change)="sum()" type="text" class="form-control" formControlName="ca3"
+                          placeholder="CA 3">
+                      </div>
+                      <div class="mb-3 col-md-3">
+                        <label class="form-label">CA Total Score</label>
+                        <input type="text" class="form-control" formControlName="ca_total" placeholder="CA Total">
+                        <div class="form-group">
+                          <label>Sum</label>
+                          <p>{{total}}</p>
+                        </div>
                       </div>
                       <div class="mb-3 col-md-3" *ngIf="i>0">
                         <span class="badge badge-danger" style="cursor: pointer;" (click)="removeMoreFields(i)"><i
