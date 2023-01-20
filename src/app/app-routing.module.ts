@@ -1,3 +1,4 @@
+import { StudentsComponent } from './components/dashboard/students/students.component';
 import { EstoreComponent } from './components/dashboard/estore/estore.component';
 import { FindProductComponent } from './components/dashboard/find-product/find-product.component';
 import { ProductSearchComponent } from './components/dashboard/product-search/product-search.component';
@@ -47,7 +48,8 @@ const routes: Routes = [
 {path: 'loan', component: LoanComponent},
 {path: 'product-search', component: ProductSearchComponent},
 {path: 'findproduct', component: FindProductComponent},
-{path: 'store', component: EstoreComponent}
+{path: 'store', component: EstoreComponent},
+{path: 'students', component: StudentsComponent}
 
 
 

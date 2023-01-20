@@ -39,6 +39,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ProductSearchComponent } from './components/dashboard/product-search/product-search.component';
 import { FindProductComponent } from './components/dashboard/find-product/find-product.component';
 import { EstoreComponent } from './components/dashboard/estore/estore.component';
+import { StudentsComponent } from './components/dashboard/students/students.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { EstoreComponent } from './components/dashboard/estore/estore.component'
     ProductSearchComponent,
     FindProductComponent,
     EstoreComponent,
+    StudentsComponent,
 
   ],
   imports: [

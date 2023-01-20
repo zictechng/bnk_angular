@@ -4,8 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import {Chart, registerables} from 'node_modules/chart.js';
 Chart.register(...registerables);
 
-//import{ Chart } from 'chart.js';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,7 +11,7 @@ Chart.register(...registerables);
 })
 export class HomeComponent implements OnInit{
 
-  chart: [];
+  //chart: [];
 
   // chartdata:any;
 

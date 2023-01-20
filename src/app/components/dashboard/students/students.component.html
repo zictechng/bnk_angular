@@ -1,0 +1,160 @@
+<app-top-bar></app-top-bar>
+<app-side-bar></app-side-bar>
+
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="form-head mb-4">
+      <h2 class="text-black font-w600 mb-0">Students</h2>
+    </div>
+    <div class="page-titles">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Student record</a></li>
+
+        <li class="active"></li>
+      </ol>
+    </div>
+    <div class="row">
+      <div class="wrapper">
+        <!-- loading spinner here top of the page -->
+        <div class="overlay d-flex justify-content-center" *ngIf="loading; else loadingFalse">
+          <div class="spinner-border m-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #loadingFalse>
+        <div class="col-lg-12">
+          <div class="card">
+            <form (ngSubmit)="saveDynamicFormDetails(dynamicForm)" #dynamicForm="ngForm">
+              <div class="card-header">
+                <h6 class="card-title">Total student found <span
+                    class="badge light text-white bg-danger">{{studentData.length}}</span></h6>
+                &nbsp;&nbsp;&nbsp;
+                <li class="active">
+                  <div class="input-group mb-6">
+                    <button (click)="openModal('myModal')" class="btn btn-primary btn-xs" type="button">Add
+                      Student</button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-success btn-xs" type="submit">Save</button>
+                  </div>
+                </li>
+
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+
+                  <table class="table header-border table-responsive-sm">
+                    <thead>
+                      <tr>
+                        <th>TID</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Term</th>
+                        <th>Year</th>
+                        <th>Subject</th>
+                        <th>CA 1 Score</th>
+                        <th>CA 2 Score</th>
+                        <th>Total CA Score</th>
+                        <th>Exam Score</th>
+                        <th>G. Total Score</th>
+                        <th>Ref Code</th>
+                      </tr>
+                    </thead>
+
+                    <tbody *ngFor="let sDatas of studentData; let i=index">
+                      <tr>
+                        <td><input type="text" name="stu_reg{{i}}" ngModel="{{sDatas.reg_number}}"
+                            placeholder="Reg Name" class="form-control"></td>
+                        <td><input type="text" name="stu_name{{i}}" [(ngModel)]="sDatas.name" placeholder="Student Name"
+                            class="form-control"></td>
+                        <td><input type="text" name="stu_class{{i}}" ngModel="{{sDatas.student_class}}"
+                            placeholder="Class Name" class="form-control"></td>
+                        <td><input type="text" name="term_name{{i}}" ngModel placeholder="Term Name"
+                            class="form-control">
+                        </td>
+                        <td><input type="text" name="year_name{{i}}" ngModel placeholder="Year Name"
+                            class="form-control">
+                        </td>
+                        <td><input type="text" name="subject_name{{i}}" ngModel placeholder="Subject Name"
+                            class="form-control"></td>
+                        <td><input type="text" name="ca1{{i}}" ngModel placeholder="CA 1 Score" class="form-control">
+                        </td>
+                        <td><input type="text" name="ca2{{i}}" ngModel placeholder="CA 2 Score" class="form-control">
+                        </td>
+                        <td><input type="text" name="total_ca{{i}}" ngModel placeholder="Total CA" class="form-control">
+                        </td>
+                        <td><input type="text" name="exam_score{{i}}" ngModel placeholder="Exam Score"
+                            class="form-control">
+                        </td>
+                        <td><input type="text" name="g_total{{i}}" ngModel placeholder="Grand Total"
+                            class="form-control">
+                        </td>
+                        <td><input type="text" name="ref_code_name{{i}}" ngModel="{{ref_code}}" placeholder="Ref Code"
+                            class="form-control"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </ng-template>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Register new student</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="saveStudent()" #studentForm="ngForm">
+              <div class="row">
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Name</label>
+                  <input type="text" name="student_name" ngModel placeholder="Student name" class="form-control">
+                </div>
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">TID</label>
+                  <input type="text" name="tid_name" ngModel placeholder="Student Reg. Number" class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Class</label>
+                  <input type="text" name="class" ngModel placeholder="Class " class="form-control">
+                </div>
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">School Type</label>
+                  <select class="default-select  form-control wide" name="sch_type" ngModel>
+                    <option value="">Choose</option>
+                    <option value="Primary">Primary</option>
+                    <option value="Secondary">Secondary</option>
+                    <option value="KG">KG</option>
+                    <option value="Pre-KG">Pre-KG</option>
+                    <option value="Nursery">Nursery</option>
+                    <option value="Pre-Nursery">Pre-Nursery</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">btn-close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- row -->
+    <br />
+    <br />
+  </div>
+</div>
+<app-footer></app-footer>

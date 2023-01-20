@@ -36,6 +36,10 @@ export class AuthService {
   private _getStatementUrl = "http://localhost:3000/api/statement-details";
   private _formDatatUrl = "http://localhost:3000/api/form-data";
 
+  private _regStudentUrl = "http://localhost:3000/api/students";
+  private _getStudentUrl = "http://localhost:3000/api/fetch_students";
+  private _regDynamicDatatUrl = "http://localhost:3000/api/dynamicform";
+
   constructor(private http: HttpClient,
     private _router: Router) { }
 
@@ -51,6 +55,16 @@ export class AuthService {
   registerUser(user:any){
     return this.http.post<any>(this._registerUrl, user);
   }
+
+  // register new student method that process the registration
+  registerNewStudent(user:any){
+    return this.http.post<any>(this._regStudentUrl, user);
+  }
+
+  //this return all student details
+  fetchStudent(){
+    return this.http.get<any>(this._getStudentUrl)
+    }
   //this return chart finance details
   dailyFinance(){
     return this.http.get<any>(this._getFinanceAnnalyUrl)
@@ -155,6 +169,11 @@ getHistoryDetails(page: number){
 //post dynamic data to backend via service here...
 postFormData(datas:any){
   return this.http.post<any>(this._formDatatUrl, datas);
+}
+
+// post dynamic table data here
+dynamicTableData(tableData: any){
+  return this.http.post<any>(this._regDynamicDatatUrl, tableData);
 }
 
 // getPaginatedPermissionUsage(page, pageType, pageSize){
