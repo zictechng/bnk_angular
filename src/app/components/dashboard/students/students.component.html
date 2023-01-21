@@ -64,33 +64,36 @@
 
                     <tbody *ngFor="let sDatas of studentData; let i=index">
                       <tr>
-                        <td><input type="text" name="stu_reg{{i}}" ngModel="{{sDatas.reg_number}}"
+                        <td><input type="text" name="stu_reg{{i}}" [(ngModel)]="sDatas.reg_number"
                             placeholder="Reg Name" class="form-control"></td>
                         <td><input type="text" name="stu_name{{i}}" [(ngModel)]="sDatas.name" placeholder="Student Name"
                             class="form-control"></td>
-                        <td><input type="text" name="stu_class{{i}}" ngModel="{{sDatas.student_class}}"
+                        <td><input type="text" name="stu_class{{i}}" [(ngModel)]="sDatas.student_class"
                             placeholder="Class Name" class="form-control"></td>
-                        <td><input type="text" name="term_name{{i}}" ngModel placeholder="Term Name"
+                        <td><input type="text" name="term_name{{i}}" [(ngModel)]="sDatas.term_name"
+                            placeholder="Term Name" class="form-control">
+                        </td>
+                        <td><input type="text" name="year_name{{i}}" [(ngModel)]="sDatas.year_name"
+                            placeholder="Year Name" class="form-control">
+                        </td>
+                        <td><input type="text" name="subject_name{{i}}" [(ngModel)]="sDatas.subject_name"
+                            placeholder="Subject Name" class="form-control"></td>
+                        <td><input type="text" name="ca1{{i}}" [(ngModel)]="sDatas.ca1" placeholder="CA 1 Score"
                             class="form-control">
                         </td>
-                        <td><input type="text" name="year_name{{i}}" ngModel placeholder="Year Name"
+                        <td><input type="text" name="ca2" [(ngModel)]="sDatas.ca2" placeholder="CA 2 Score"
                             class="form-control">
                         </td>
-                        <td><input type="text" name="subject_name{{i}}" ngModel placeholder="Subject Name"
-                            class="form-control"></td>
-                        <td><input type="text" name="ca1{{i}}" ngModel placeholder="CA 1 Score" class="form-control">
-                        </td>
-                        <td><input type="text" name="ca2{{i}}" ngModel placeholder="CA 2 Score" class="form-control">
-                        </td>
-                        <td><input type="text" name="total_ca{{i}}" ngModel placeholder="Total CA" class="form-control">
-                        </td>
-                        <td><input type="text" name="exam_score{{i}}" ngModel placeholder="Exam Score"
+                        <td><input type="text" name="total_ca" [(ngModel)]="sDatas.total_ca" placeholder="Total CA"
                             class="form-control">
                         </td>
-                        <td><input type="text" name="g_total{{i}}" ngModel placeholder="Grand Total"
+                        <td><input type="text" name="exam_score" [(ngModel)]="sDatas.exam_score"
+                            placeholder="Exam Score" class="form-control">
+                        </td>
+                        <td><input type="text" name="g_total" [(ngModel)]="sDatas.g_total" placeholder="Grand Total"
                             class="form-control">
                         </td>
-                        <td><input type="text" name="ref_code_name{{i}}" ngModel="{{ref_code}}" placeholder="Ref Code"
+                        <td><input type="text" name="ref_code_name" ngModel="{{ref_code}}" placeholder="Ref Code"
                             class="form-control"></td>
                       </tr>
                     </tbody>

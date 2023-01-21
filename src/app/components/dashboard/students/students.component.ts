@@ -4,6 +4,35 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import * as Notiflix from 'notiflix';
 declare let $: any;
+
+interface student{
+  email: String,
+  name: String,
+  phone: String,
+  password: String,
+  photo: String,
+  student_class: String,
+  sch_category: String,
+  acct_pin: String,
+  acct_status: String,
+  acct_type: String,
+  country: String,
+  reg_number: String,
+  dob: String,
+  address: String,
+  addedby: String,
+  student_role: any,
+  createdOn: any,
+  term_name?:string,
+  year_name?:string,
+  g_total?:string,
+  exam_score?:string,
+  total_ca?:string,
+  ca2?:string,
+  ca1?:string,
+  subject_name?:string,
+}
+
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
@@ -15,13 +44,11 @@ export class StudentsComponent implements OnInit{
   // (studentForm ) local variable name
   // we can still use viewChild variable method to pass the form details
   // @ViewChild('studentForm') form: NgForm   Like this
-      studentData:any [] = [];
+      studentData:student [] = [];
       ref_code: any = {};
 
       myId : any = localStorage.getItem('userData');
       @ViewChild('studentForm') form: NgForm;
-
-
 
       loading:Boolean = false;
 
@@ -97,8 +124,9 @@ export class StudentsComponent implements OnInit{
 
       // save the dynamic form detials here
       saveDynamicFormDetails(form: NgForm){
-        console.log('student data', this.studentData);
-        // const formData = Object.assign(form.value, this.obj2);
+console.log(this.studentData)
+        const formData = Object.assign(form.value, this.obj2);
+       // console.log('student data', formData);
         this._auth.dynamicTableData(this.studentData).subscribe(res =>{
           //console.log(res);
           if(res.msg == '200')
