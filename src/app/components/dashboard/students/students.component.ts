@@ -31,6 +31,7 @@ interface student{
   ca2?:string,
   ca1?:string,
   subject_name?:string,
+  ref_code?:string
 }
 
 @Component({
@@ -73,6 +74,7 @@ export class StudentsComponent implements OnInit{
 
       obj2 = {
         "tick_createdBy": (JSON.parse(this.myId)),
+        "reg_code": this.ref_code,
        };
        // merged all object and send to api backend
 
@@ -125,7 +127,13 @@ export class StudentsComponent implements OnInit{
       // save the dynamic form detials here
       saveDynamicFormDetails(form: NgForm){
 console.log(this.studentData)
-        const formData = Object.assign(form.value, this.obj2);
+this.studentData = this.studentData.map((m)=>{
+  return {
+    ...m,
+    ref_code:this.ref_code
+  }
+})
+        // const formData = Object.assign(this.studentData, this.obj2);
        // console.log('student data', formData);
         this._auth.dynamicTableData(this.studentData).subscribe(res =>{
           //console.log(res);
@@ -184,6 +192,7 @@ console.log(this.studentData)
         this.loading = true;
         this._auth.fetchStudent().subscribe(res =>{
           this.studentData = res;
+
           this.ref_code = this.randomString(25);
           //console.log(res)
           this.loading = false
