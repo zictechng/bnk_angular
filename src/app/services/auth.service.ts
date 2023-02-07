@@ -39,7 +39,7 @@ export class AuthService {
   private _regStudentUrl = "http://localhost:3000/api/students";
   private _getStudentUrl = "http://localhost:3000/api/fetch_students";
   private _regDynamicDatatUrl = "http://localhost:3000/api/dynamicform";
-
+  private _baseURL = "http://localhost:3000/api/"
   constructor(private http: HttpClient,
     private _router: Router) { }
 
@@ -187,5 +187,11 @@ productSearch(id:any){
 
 getLocalStorage(){
  return this.recordId = localStorage.getItem('userData');
+ }
+
+ orderCreateAPI(orderDetails){
+return this.http.post(this._baseURL+'order/create',orderDetails).subscribe((response)=>{
+  console.log(response)
+})
  }
 }

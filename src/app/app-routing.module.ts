@@ -1,3 +1,4 @@
+import { DynamicformComponent } from './components/dashboard/dynamicform/dynamicform.component';
 import { StudentsComponent } from './components/dashboard/students/students.component';
 import { EstoreComponent } from './components/dashboard/estore/estore.component';
 import { FindProductComponent } from './components/dashboard/find-product/find-product.component';
@@ -49,7 +50,8 @@ const routes: Routes = [
 {path: 'product-search', component: ProductSearchComponent},
 {path: 'findproduct', component: FindProductComponent},
 {path: 'store', component: EstoreComponent},
-{path: 'students', component: StudentsComponent}
+{path: 'students', component: StudentsComponent},
+{path: 'dynamic', component: DynamicformComponent}
 
 
 

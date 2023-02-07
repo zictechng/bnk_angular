@@ -34,7 +34,7 @@ getMyData(){
   this._authService.getMyData(this.userDa._id).subscribe(res =>{
     this.userDatas = res.others.photo;
     this.myProfilePhoto = this._authService.serverURL+res.others.photo
-    console.log(this.userDatas)
+    //console.log(this.userDatas)
   });
 }
 

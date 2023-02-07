@@ -40,6 +40,7 @@ import { ProductSearchComponent } from './components/dashboard/product-search/pr
 import { FindProductComponent } from './components/dashboard/find-product/find-product.component';
 import { EstoreComponent } from './components/dashboard/estore/estore.component';
 import { StudentsComponent } from './components/dashboard/students/students.component';
+import { DynamicformComponent } from './components/dashboard/dynamicform/dynamicform.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { StudentsComponent } from './components/dashboard/students/students.comp
     FindProductComponent,
     EstoreComponent,
     StudentsComponent,
+    DynamicformComponent,
 
   ],
   imports: [
