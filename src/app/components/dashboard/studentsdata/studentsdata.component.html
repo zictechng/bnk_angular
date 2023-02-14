@@ -1,0 +1,134 @@
+<app-top-bar></app-top-bar>
+<app-side-bar></app-side-bar>
+
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="form-head mb-4">
+      <h2 class="text-black font-w600 mb-0">Students result details</h2>
+    </div>
+    <div class="page-titles">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Student record data</a></li>
+
+        <li class="active"></li>
+      </ol>
+    </div>
+    <div class="row">
+      <div class="wrapper">
+        <!-- loading spinner here top of the page -->
+        <div class="overlay d-flex justify-content-center" *ngIf="loading; else loadingFalse">
+          <div class="spinner-border m-2" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #loadingFalse>
+        <div class="col-lg-12">
+          <div class="card">
+            <form>
+              <div class="card-header">
+                <h6 class="card-title">Total student found <span
+                    class="badge light text-white bg-danger">{{studentData.length}}</span></h6>
+                &nbsp;&nbsp;&nbsp;
+                <li class="active">
+                  <div class="input-group mb-6">
+                    <!-- <button class="btn btn-primary btn-xs" type="button">Add
+                      Student</button> -->
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-success btn-xs" type="submit" (click)="saveStudent()">Save Position</button>
+                  </div>
+                </li>
+
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+
+                  <table class="table header-border table-responsive-sm">
+                    <thead>
+                      <tr>
+                        <th>TID</th>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Term</th>
+                        <th>Year</th>
+                        <th>Subject</th>
+                        <th>Total CA Score</th>
+                        <th>Exam Score</th>
+                        <th>G. Total Score</th>
+                        <th>Final Total Score</th>
+                        <th>Position</th>
+                      </tr>
+                    </thead>
+
+                    <tbody *ngFor="let sDatas of studentData; let i=index">
+                      <tr>
+                        <td><input type="text" name="stu_reg{{i}}" [(ngModel)]="sDatas.student_reg"
+                            placeholder="Reg Name" class="form-control"></td>
+                        <td><input type="text" name="stu_name{{i}}" [(ngModel)]="sDatas.student_name"
+                            placeholder="Student Name" class="form-control"></td>
+                        <td><input type="text" name="stu_class{{i}}" [(ngModel)]="sDatas.class_name"
+                            placeholder="Class Name" class="form-control"></td>
+                        <td><input type="text" name="term_name{{i}}" [(ngModel)]="sDatas.term_name"
+                            placeholder="Term Name" class="form-control">
+                        </td>
+                        <td><input type="text" name="year_name{{i}}" [(ngModel)]="sDatas.year_name"
+                            placeholder="Year Name" class="form-control">
+                        </td>
+                        <td><input type="text" name="subject_name{{i}}" [(ngModel)]="sDatas.subject_name"
+                            placeholder="Subject Name" class="form-control"></td>
+
+                        <td><input type="text" name="total_ca{{i}}" [(ngModel)]="sDatas.tca_score"
+                            placeholder="Total CA" class="form-control">
+                        </td>
+                        <td><input type="text" name="exam_score{{i}}" [(ngModel)]="sDatas.exam_score"
+                            placeholder="Exam Score" class="form-control">
+                        </td>
+                        <td><input type="text" name="g_total{{i}}" [(ngModel)]="sDatas.total_score"
+                            placeholder=" Grand Total" class="form-control">
+                        </td>
+
+                        <td><input type="text" name="f_total{{i}}" [(ngModel)]="sDatas.grand_total"
+                            placeholder="Final Total" class="form-control">
+                        </td>
+
+                        <!-- <td><input type="text" name="f_total{{i}}" [(ngModel)]="sDatas.rankSuffix"
+                            placeholder="Final Total" class="form-control">
+                        </td> -->
+
+
+
+
+                        <!-- <td><input type="text" name="g_total{{i}}" [(ngModel)]="sDatas.grand_total"
+                            placeholder="Position" class="form-control">
+                        </td> -->
+
+
+                        <!-- <td><input type="text" name="f_total{{i}}" [(ngModel)]="sDatas.grand_total
+                            " placeholder="Grand Total" class="form-control">
+                        </td> -->
+
+                        <!-- <td><sup>{{ this.studentData }}</sup></td> -->
+                        <!-- <input type="hidden" name="ref_code_name" [(ngModel)]="sDatas.reg_code" placeholder="Ref Code"
+                          class="form-control"> -->
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </ng-template>
+    </div>
+
+
+
+    <!-- row -->
+    <br />
+    <br />
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -62,24 +62,28 @@
                     <div class="mb-3 col-md-3">
                       <label class="form-label">Order Name</label>
                       <input type="text" class="form-control" name="order_name{{i}}" [(ngModel)]="obj.order_name"
-                        placeholder="Order Name">
-
+                        placeholder="Order Name"
+                        (change)="obj.order_name.length > 25 && validationMessage('order name should be less than 25 characters')">
+                      <!-- <div *ngIf='obj.order_name.length >7' class="text-danger">order name must be 7 letter
+                      </div> -->
                     </div>
                     <div class="mb-2 col-md-2">
                       <label class="form-label">Price</label>
-                      <input type="text" class="form-control" name="order_amt{{i}}" [(ngModel)]="obj.order_amt"
-                        placeholder="Price">
+                      <input type="number" class="form-control" name="order_amt{{i}}" [(ngModel)]="obj.order_amt"
+                        placeholder="Price"
+                        (change)="obj.order_amt < 5 && validationMessage('order price less than $5')">
                     </div>
 
                     <div class="mb-2 col-md-2">
                       <label class="form-label">Qty</label>
-                      <input type="text" class="form-control" name="order_qty{{i}}" [(ngModel)]="obj.order_qty"
-                        placeholder="Qty">
+                      <input type="number" class="form-control" name="order_qty{{i}}" [(ngModel)]="obj.order_qty"
+                        placeholder="Qty"
+                        (change)="obj.order_qty > 10 && validationMessage('order qty greater than 10')">
                     </div>
                     <div class="mb-2 col-md-2">
                       <label class="form-label">Total</label>
-                      <input type="text" class="form-control" name="order_total{{i}}" [(ngModel)]="obj.order_total"
-                        placeholder="Total">
+                      <input type="number" class="form-control" name="order_total{{i}}" [(ngModel)]="obj.order_total"
+                        [value]=obj.order_amt*obj.order_qty placeholder="Total">
                     </div>
                     <div class="mb-3 col-md-3" *ngIf="i!=0">
                       <span (click)="removeFields(i)" class="badge badge-danger" style="cursor: pointer;"><i

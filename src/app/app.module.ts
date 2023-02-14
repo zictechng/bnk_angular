@@ -41,6 +41,7 @@ import { FindProductComponent } from './components/dashboard/find-product/find-p
 import { EstoreComponent } from './components/dashboard/estore/estore.component';
 import { StudentsComponent } from './components/dashboard/students/students.component';
 import { DynamicformComponent } from './components/dashboard/dynamicform/dynamicform.component';
+import { StudentsdataComponent } from './components/dashboard/studentsdata/studentsdata.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { DynamicformComponent } from './components/dashboard/dynamicform/dynamic
     EstoreComponent,
     StudentsComponent,
     DynamicformComponent,
+    StudentsdataComponent,
 
   ],
   imports: [

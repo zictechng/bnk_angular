@@ -8,5 +8,5 @@ export class home {
   customer_email:any;
   customer_address:any
   reg_id:any;
-
+  addedby:string
 }

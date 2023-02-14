@@ -38,6 +38,7 @@ export class AuthService {
 
   private _regStudentUrl = "http://localhost:3000/api/students";
   private _getStudentUrl = "http://localhost:3000/api/fetch_students";
+  private _getStudentDataUrl = "http://localhost:3000/api/fetch_studentsData";
   private _regDynamicDatatUrl = "http://localhost:3000/api/dynamicform";
   private _baseURL = "http://localhost:3000/api/"
   constructor(private http: HttpClient,
@@ -65,6 +66,12 @@ export class AuthService {
   fetchStudent(){
     return this.http.get<any>(this._getStudentUrl)
     }
+
+    //this return all student data to get position ranking details
+  fetchStudentData(){
+    return this.http.get<any>(this._getStudentDataUrl)
+    }
+
   //this return chart finance details
   dailyFinance(){
     return this.http.get<any>(this._getFinanceAnnalyUrl)
@@ -189,9 +196,7 @@ getLocalStorage(){
  return this.recordId = localStorage.getItem('userData');
  }
 
- orderCreateAPI(orderDetails){
-return this.http.post(this._baseURL+'order/create',orderDetails).subscribe((response)=>{
-  console.log(response)
-})
+ orderCreateAPI(orderDetails:any){
+return this.http.post(this._baseURL+'order/create', orderDetails);
  }
 }
