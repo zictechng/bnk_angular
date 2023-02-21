@@ -25,11 +25,11 @@ interface student{
   createdOn: any,
   term_name?:string,
   year_name?:string,
-  g_total?:string,
-  exam_score?:string,
-  total_ca?:string,
-  ca2?:string,
-  ca1?:string,
+  g_total?:number,
+  exam_score?:number,
+  total_ca?:number,
+  ca2?:number,
+  ca1?:number,
   subject_name?:string,
   ref_code?:string
 }
@@ -125,7 +125,7 @@ export class StudentsComponent implements OnInit{
       }
 
       // save the dynamic form detials here
-      saveDynamicFormDetails(form: NgForm){
+saveDynamicFormDetails(form: NgForm){
 console.log(this.studentData)
 this.studentData = this.studentData.map((m)=>{
   return {
@@ -214,5 +214,14 @@ randomString(length: Number) {
       result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
   }
   return result;
+}
+
+validationMessage(msg){
+  Notiflix.Report.failure('Failed', msg, 'ok',
+  {
+    width: '300px',
+    svgSize: '60px',
+    backOverlayColor: '#000000',
+  },);
 }
 }

@@ -56,8 +56,8 @@
                         <th>Total CA Score</th>
                         <th>Exam Score</th>
                         <th>G. Total Score</th>
-                        <th>Final Total Score</th>
                         <th>Position</th>
+                        <th>Final Total Score</th>
                       </tr>
                     </thead>
 
@@ -88,29 +88,15 @@
                             placeholder=" Grand Total" class="form-control">
                         </td>
 
-                        <td><input type="text" name="f_total{{i}}" [(ngModel)]="sDatas.grand_total"
+                        <td><input type="text" name="stu_position{{i}}" [(ngModel)]="sDatas.grand_total"
                             placeholder="Final Total" class="form-control">
                         </td>
 
-                        <!-- <td><input type="text" name="f_total{{i}}" [(ngModel)]="sDatas.rankSuffix"
+                        <td><input type="text" name="final_total{{i}}" [(ngModel)]="sDatas.grand_total_rank"
                             placeholder="Final Total" class="form-control">
-                        </td> -->
-
-
-
-
-                        <!-- <td><input type="text" name="g_total{{i}}" [(ngModel)]="sDatas.grand_total"
-                            placeholder="Position" class="form-control">
-                        </td> -->
-
-
-                        <!-- <td><input type="text" name="f_total{{i}}" [(ngModel)]="sDatas.grand_total
-                            " placeholder="Grand Total" class="form-control">
-                        </td> -->
-
-                        <!-- <td><sup>{{ this.studentData }}</sup></td> -->
-                        <!-- <input type="hidden" name="ref_code_name" [(ngModel)]="sDatas.reg_code" placeholder="Ref Code"
-                          class="form-control"> -->
+                        </td>
+                        <input type="hidden" name="ref_code_name" [(ngModel)]="sDatas.reg_code" placeholder="Ref Code"
+                          class="form-control">
                       </tr>
                     </tbody>
                   </table>

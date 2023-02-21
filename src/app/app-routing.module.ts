@@ -1,3 +1,4 @@
+import { CreateInvoiceComponent } from './components/dashboard/create-invoice/create-invoice.component';
 import { StudentsdataComponent } from './components/dashboard/studentsdata/studentsdata.component';
 import { DynamicformComponent } from './components/dashboard/dynamicform/dynamicform.component';
 import { StudentsComponent } from './components/dashboard/students/students.component';
@@ -54,6 +55,7 @@ const routes: Routes = [
 {path: 'students', component: StudentsComponent},
 {path: 'dynamic', component: DynamicformComponent},
 {path: 'students-data', component: StudentsdataComponent},
+{path: 'create-invoice', component: CreateInvoiceComponent},
 
 
 

@@ -63,7 +63,7 @@
                       <label class="form-label">Order Name</label>
                       <input type="text" class="form-control" name="order_name{{i}}" [(ngModel)]="obj.order_name"
                         placeholder="Order Name"
-                        (change)="obj.order_name.length > 25 && validationMessage('order name should be less than 25 characters')">
+                        (keyup)="obj.order_name.length > 25 && validationMessage('order name should be less than 25 characters')">
                       <!-- <div *ngIf='obj.order_name.length >7' class="text-danger">order name must be 7 letter
                       </div> -->
                     </div>
@@ -71,14 +71,14 @@
                       <label class="form-label">Price</label>
                       <input type="number" class="form-control" name="order_amt{{i}}" [(ngModel)]="obj.order_amt"
                         placeholder="Price"
-                        (change)="obj.order_amt < 5 && validationMessage('order price less than $5')">
+                        (keyup)="obj.order_amt < 5 && validationMessage('order price less than $5')">
                     </div>
 
                     <div class="mb-2 col-md-2">
                       <label class="form-label">Qty</label>
                       <input type="number" class="form-control" name="order_qty{{i}}" [(ngModel)]="obj.order_qty"
                         placeholder="Qty"
-                        (change)="obj.order_qty > 10 && validationMessage('order qty greater than 10')">
+                        (keyup)="obj.order_qty > 10 && validationMessage('order qty greater than 10')">
                     </div>
                     <div class="mb-2 col-md-2">
                       <label class="form-label">Total</label>

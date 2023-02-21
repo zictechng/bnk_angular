@@ -36,10 +36,14 @@ export class AuthService {
   private _getStatementUrl = "http://localhost:3000/api/statement-details";
   private _formDatatUrl = "http://localhost:3000/api/form-data";
 
+  private _createInvoiceUrl = "http://localhost:3000/api/create-invoice";
+
   private _regStudentUrl = "http://localhost:3000/api/students";
   private _getStudentUrl = "http://localhost:3000/api/fetch_students";
   private _getStudentDataUrl = "http://localhost:3000/api/fetch_studentsData";
   private _regDynamicDatatUrl = "http://localhost:3000/api/dynamicform";
+
+  private _rankDynamicPostionUrl = "http://localhost:3000/api/student-position";
   private _baseURL = "http://localhost:3000/api/"
   constructor(private http: HttpClient,
     private _router: Router) { }
@@ -178,9 +182,19 @@ postFormData(datas:any){
   return this.http.post<any>(this._formDatatUrl, datas);
 }
 
+//post dynamic invoice data to backend via service here...
+postInvoiceFormData(invoiceDatas:any){
+  return this.http.post<any>(this._createInvoiceUrl, invoiceDatas);
+}
+
 // post dynamic table data here
 dynamicTableData(tableData: any){
   return this.http.post<any>(this._regDynamicDatatUrl, tableData);
+}
+
+// post student position data here
+savePosition(positionData: any){
+  return this.http.post<any>(this._rankDynamicPostionUrl, positionData);
 }
 
 // getPaginatedPermissionUsage(page, pageType, pageSize){

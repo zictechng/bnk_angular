@@ -78,20 +78,21 @@
                         </td>
                         <td><input type="text" name="subject_name{{i}}" [(ngModel)]="sDatas.subject_name"
                             placeholder="Subject Name" class="form-control"></td>
-                        <td><input type="text" name="ca1{{i}}" [(ngModel)]="sDatas.ca1" placeholder="CA 1 Score"
+                        <td><input type="number" name="ca1{{i}}" [(ngModel)]="sDatas.ca1" placeholder="CA 1 Score"
                             class="form-control">
                         </td>
-                        <td><input type="text" name="ca2{{i}}" [(ngModel)]="sDatas.ca2" placeholder="CA 2 Score"
-                            class="form-control">
+                        <td><input type="number" name="ca2{{i}}" [(ngModel)]="sDatas.ca2" placeholder="CA 2 Score"
+                            class="form-control"
+                            (keyup)="sDatas.ca2 > 20 && validationMessage('CA Score not more than 20 ! Please, correct it')">
                         </td>
-                        <td><input type="text" name="total_ca{{i}}" [(ngModel)]="sDatas.total_ca" placeholder="Total CA"
-                            class="form-control">
+                        <td><input type="text" name="total_ca{{i}}" [(ngModel)]="sDatas.total_ca"
+                            [value]=sDatas.ca1+sDatas.ca2 placeholder="Total CA" class="form-control" readonly>
                         </td>
                         <td><input type="text" name="exam_score{{i}}" [(ngModel)]="sDatas.exam_score"
                             placeholder="Exam Score" class="form-control">
                         </td>
                         <td><input type="text" name="g_total{{i}}" [(ngModel)]="sDatas.g_total"
-                            placeholder="Grand Total" class="form-control">
+                            [value]=(sDatas.exam_score+sDatas.total_ca) placeholder="Grand Total" class="form-control">
                         </td>
                         <td><input type="text" name="ref_code_name" ngModel="{{ref_code}}" placeholder="Ref Code"
                             class="form-control"></td>

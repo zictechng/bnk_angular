@@ -1,0 +1,92 @@
+<app-top-bar></app-top-bar>
+<app-side-bar></app-side-bar>
+
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="page-titles">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Form</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Element</a></li>
+      </ol>
+    </div>
+
+    <div class="col-xl-6 col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Invoice Processing Form</h4>
+        </div>
+        <div class="card-body">
+          <div class="basic-form">
+            <form [formGroup]="userForm">
+              <div class="row">
+                <div class="mb-3 col-md-6">
+                  <label class="form-label">First Name</label>
+                  <input type="text" class="form-control" formControlName="fname" placeholder="1234 Main St">
+                  <small *ngIf="userForm.get('fname').errors?.['required']">
+                    First Name is required
+                  </small>
+                </div>
+                <div class="mb-3 col-md-6">
+                  <label class="form-label">Other Name</label>
+                  <input type="text" class="form-control" formControlName="lname" placeholder="Other Name">
+                </div>
+                <div class="mb-3 col-md-6">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-control" formControlName="email" placeholder="Email">
+                </div>
+                <div class="mb-3 col-md-6">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" formControlName="phone" placeholder="Phone">
+                </div>
+              </div>
+              <div>
+                <div class="mb-3 col-md-3">
+
+                </div>
+              </div>
+              <small>Dynamically add new inputs <span class="badge badge-primary" style="cursor: pointer; float: right;"
+                  (click)="addMoreFields()"><i class="fa fa-plus text-white"></i>
+                  Add</span></small>
+              <br /><br />
+              <div class="row" formArrayName="contact">
+                <div *ngFor="let child of userForm.get('contact')['controls']; let i = index" formGroupName="{{i}}">
+                  <div class="row">
+                    <div class="mb-3 col-md-3">
+                      <label class="form-label">CA 1 Score</label>
+                      <input type="text" class="form-control" formControlName="ca1" placeholder="CA 1">
+                      <!-- <small *ngIf="userForm.get('contact.ca1').errors?.['maxInputValue']">
+                    No space allowed
+                  </small> -->
+                    </div>
+                    <div class="mb-3 col-md-3">
+                      <label class="form-label">CA 2 Score</label>
+                      <input type="text" class="form-control" formControlName="ca2" placeholder="CA 2">
+                    </div>
+
+                    <div class="mb-3 col-md-3">
+                      <label class="form-label">CA 3 Score</label>
+                      <input type="text" class="form-control" formControlName="ca3" placeholder="CA 3">
+                    </div>
+                    <div class="mb-3 col-md-3">
+                      <label class="form-label">CA Total Score</label>
+                      <input type="text" class="form-control" formControlName="ca_total" placeholder="CA Total">
+
+                    </div>
+                    <div class="mb-3 col-md-3" *ngIf="i>0">
+                      <span class="badge badge-danger" style="cursor: pointer;" (click)="removeMoreFields(i)"><i
+                          class="fa fa-times text-white"></i>
+                        Remove</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <button type="submit" class="btn btn-primary" (click)="saveFormDetails()">Process</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

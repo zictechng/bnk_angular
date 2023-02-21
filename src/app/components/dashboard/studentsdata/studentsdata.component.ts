@@ -51,10 +51,7 @@ export class StudentsdataComponent implements OnInit{
       }
 
     }
-    console.log("is ",this.studentData);
-
-
-
+    //console.log("is ",this.studentData);
       this.ref_code = this.randomString(25);
       //,thiconsole.log(res)
       this.loading = false
@@ -65,7 +62,44 @@ export class StudentsdataComponent implements OnInit{
   // save the final ranking details
   saveStudent(){
     // here we post the form complete details to backend
-    console.log(this.studentData)
+    console.log(this.studentData);
+    this._auth.savePosition(this.studentData).subscribe(res =>{
+      if(res.msg == '200')
+          {
+            Notiflix.Notify.success('Result Save Successfully', {
+              // success: {
+              //     background: '#1EAAE7',
+              //     },
+              });
+           // this._router.navigate(['/dashboard']); // redirect back home
+          }
+            else {
+              Notiflix.Notify.failure('Sorry! Failed to save record',
+                {
+                });
+           }
+         }, err =>{
+           if(err.status == "404"){
+            Notiflix.Report.failure('Failed', 'Scores required', 'Ok',
+            {
+              width: '300px',
+              svgSize: '40px',
+              backOverlayColor: '#000000',
+            },);
+            }
+          else if(err.status == "403"){
+            Notiflix.Report.failure('Failed', 'All Fields Are Required', 'Ok',
+              {
+                width: '300px',
+                svgSize: '40px',
+                backOverlayColor: '#000000',
+              },);
+          }
+          else if(err.status == '503'){
+            Notiflix.Notify.failure('Failed to save new record', {
+              });
+          }
+        });
   }
   // generate random string for transaction ID
 randomString(length: Number) {

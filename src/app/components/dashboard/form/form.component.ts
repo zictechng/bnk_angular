@@ -92,7 +92,7 @@ sum () {
     console.log(empDetails);
     this._auth.postFormData(empDetails).
     subscribe(res =>{
-      //console.log(res);
+      console.log(res);
       if(res.msg == '200')
       {
         Notiflix.Loading.remove();
@@ -130,17 +130,29 @@ sum () {
         //     width: '150px',
         //   });
 
-        this._router.navigate(['/dashbaord']);
+        this._router.navigate(['/dashboard']);
+      }
+      else if(res.msg == '400'){
+        Notiflix.Notify.warning('Error! Some fields missing..', {
+          width: '150px',
+        });
+    Notiflix.Loading.remove();
       }
      }, err =>{
        if(err.status == "402"){
         this._toastr.error('User not found', 'Failed', {
           timeOut: 3000,
         });
+        Notiflix.Loading.remove();
 
     }
-
-    }
+    else if(err.status == "400"){
+      Notiflix.Notify.warning('Error! Some fields missing..', {
+            width: '150px',
+          });
+      Notiflix.Loading.remove();
+      }
+     }
     )
   }merged(merged: any) {
     throw new Error('Method not implemented.');
