@@ -31,8 +31,6 @@ export class CreateInvoiceComponent implements OnInit{
 
   }
 
-
-
    // get the value from the form here
    createForm(){
     this.userForm = new FormGroup({
@@ -60,13 +58,13 @@ export class CreateInvoiceComponent implements OnInit{
   saveFormDetails(){
     Notiflix.Loading.standard('Processing...');
     const invoiceForm = this.userForm.value;
+    console.log(invoiceForm);
     this._auth.postInvoiceFormData(invoiceForm).
     subscribe(res =>{
       console.log(res);
       if(res.msg == '200')
       {
         Notiflix.Loading.remove();
-
         Notify.success('Invoice Create', {
           success: {
               background: '#1EAAE7',
@@ -75,10 +73,10 @@ export class CreateInvoiceComponent implements OnInit{
 
       }
       else if(res.msg == '400'){
+        Notiflix.Loading.remove();
         Notiflix.Notify.warning('Error! Some fields missing..', {
           width: '150px',
         });
-    Notiflix.Loading.remove();
       }
      }, err =>{
        if(err.status == "402"){
@@ -102,6 +100,7 @@ export class CreateInvoiceComponent implements OnInit{
   }
   // adding more dynamic input fields here
   addMoreFields(){
+    console.log('Hi')
     const control = <FormArray>this.userForm.controls['contact'];
     control.push(
       new FormGroup({
