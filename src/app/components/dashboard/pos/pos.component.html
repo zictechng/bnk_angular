@@ -25,12 +25,8 @@
                 <form (ngSubmit)="searchProduct()" #posForm="ngForm" class="d-flex align-items-center Confirm">
                   <div class="col-xl-9 col-lg-12 mb-9 mx-sm-3 searchContainer">
                     <input type="text" class="form-control" name="search_name" ngModel
-                      placeholder="Scan product / Type product name" (keyup)="searchProduct()">
-                    <ng-container *ngIf="products">
-                      <div *ngFor="let p of products">
-                        <div>{{p.product_name}}</div>
-                      </div>
-                    </ng-container>
+                      placeholder="Scan product / Type product name">
+
                   </div>
                   <button type="submit" class="btn btn-primary Confirm-btn mb-2">Add</button>
                 </form>
@@ -48,6 +44,42 @@
 
 
     </div>
+
+    <!-- <div class="col-lg-12">
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="basic-form">
+                <form (ngSubmit)="searchProduct()" #posForm="ngForm" class="d-flex align-items-center Confirm">
+                  <div class="col-xl-9 col-lg-12 mb-9 mx-sm-3 searchContainer">
+                    <input type="text" class="form-control" name="search_name" ngModel
+                      placeholder="Scan product / Type product name" (keyup)="searchProduct()">
+                    <ng-container *ngIf="products">
+
+                      <div *ngFor="let p of products">
+                        <div>{{p.product_name}}</div>
+
+                      </div>
+
+                    </ng-container>
+                  </div>
+                  <button type="submit" class="btn btn-primary Confirm-btn mb-2">Add</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div style="float: right">
+            <h2 class="text-black font-w600 mb-0">G.Total: &#8358;30,000</h2>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div> -->
 
     <br /><br /><br />
     <!-- <ng-template *ngIf="productData.length < 1; else loadingProduct">

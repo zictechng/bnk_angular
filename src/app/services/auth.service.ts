@@ -223,6 +223,7 @@ findProductData(productData:any){
 
 // pos product search api call here..
 posProduct(searchKey:any){
+  console.log(searchKey);
   return this.http.post(this._search_posProductUrl, searchKey )
 }
 

@@ -1,0 +1,11 @@
+div {
+  display: block;
+}
+#container {
+  margin: 0px 25%;
+}
+element.style {
+}
+.e-input-group input.e-input, .e-input-group.e-control-wrapper input.e-input, .e-input-group textarea.e-input, .e-input-group.e-control-wrapper textarea.e-input {
+    border-color: #ced4da;
+}

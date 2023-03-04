@@ -20,7 +20,7 @@ export class PosComponent implements OnInit{
 
   myId : any = localStorage.getItem('userData');
   @ViewChild('posForm') form: NgForm;
-  products : any[] = [];
+  products : any = [];
   constructor(private _auth: AuthService,
     private fb: FormBuilder,
       private _router: Router){
