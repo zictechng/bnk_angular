@@ -92,7 +92,8 @@
                             placeholder="Exam Score" class="form-control">
                         </td>
                         <td><input type="text" name="g_total{{i}}" [(ngModel)]="sDatas.g_total"
-                            [value]=(sDatas.exam_score+sDatas.total_ca) placeholder="Grand Total" class="form-control">
+                            [value]="(+sDatas.exam_score+ +sDatas.ca1+sDatas.ca2)" placeholder="Grand Total"
+                            class="form-control">
                         </td>
                         <td><input type="text" name="ref_code_name" ngModel="{{ref_code}}" placeholder="Ref Code"
                             class="form-control"></td>

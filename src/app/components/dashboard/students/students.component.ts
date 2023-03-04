@@ -125,14 +125,14 @@ export class StudentsComponent implements OnInit{
       }
 
       // save the dynamic form detials here
-saveDynamicFormDetails(form: NgForm){
-console.log(this.studentData)
-this.studentData = this.studentData.map((m)=>{
-  return {
-    ...m,
-    ref_code:this.ref_code
-  }
-})
+        saveDynamicFormDetails(form: NgForm){
+        console.log(this.studentData)
+        this.studentData = this.studentData.map((m)=>{
+          return {
+            ...m,
+            ref_code:this.ref_code
+          }
+        })
         // const formData = Object.assign(this.studentData, this.obj2);
        // console.log('student data', formData);
         this._auth.dynamicTableData(this.studentData).subscribe(res =>{
@@ -224,4 +224,5 @@ validationMessage(msg){
     backOverlayColor: '#000000',
   },);
 }
+
 }

@@ -1,0 +1,17 @@
+element.style {
+
+
+}
+.searchContainer{
+  position: relative;
+}
+
+.searchList{
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  padding: 8px;
+  border-radius: 4px;
+  position: absolute;
+  width: 100%;
+  top: 52px;
+}

@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -41,7 +42,7 @@ export class CreateInvoiceComponent implements OnInit{
       created_by: new FormControl(JSON.parse(this.myId)),
       contact: new FormArray([
         new FormGroup({
-          ca1: new FormControl("", Validators.required),
+          ca1: new FormControl("", [Validators.required, Validators.minLength(2)]),
           ca2: new FormControl("",  Validators.required),
           ca3: new FormControl("",  Validators.required),
           ca_total: new FormControl(""),
@@ -56,6 +57,7 @@ export class CreateInvoiceComponent implements OnInit{
 
    // send the dynamic data to db here...
   saveFormDetails(){
+
     Notiflix.Loading.standard('Processing...');
     const invoiceForm = this.userForm.value;
     console.log(invoiceForm);
@@ -100,7 +102,6 @@ export class CreateInvoiceComponent implements OnInit{
   }
   // adding more dynamic input fields here
   addMoreFields(){
-    console.log('Hi')
     const control = <FormArray>this.userForm.controls['contact'];
     control.push(
       new FormGroup({
@@ -110,6 +111,7 @@ export class CreateInvoiceComponent implements OnInit{
         ca_total: new FormControl(""),
       })
     );
+    this.updateValueSub(control.length-1);
   }
 
   // removing dynamic inputs fields here
@@ -119,5 +121,35 @@ export class CreateInvoiceComponent implements OnInit{
   }
   ngOnInit(): void {
     this.createForm();
+    this.updateValueSub(0);
+
+  // const length = this..get('length');
+  // const width = this.basketForm.get('width');
+  // length.valueChanges.subscribe(val => {
+  //   width.setValue(val * 2);
+  // });
+
+
   }
+
+  // auto add the value of the input here
+  updateValueSub(i:number){
+    const control = <FormArray>this.userForm.controls['contact'];
+
+    function updateValue(){
+     control.at(i).get('ca_total').setValue(
+       +control.at(i).get('ca1').value + +control.at(i).get('ca2').value +  +control.at(i).get('ca3').value
+       )
+     }
+     control.at(i).get('ca1').valueChanges.subscribe(val=>{
+       updateValue();
+     })
+     control.at(i).get('ca2').valueChanges.subscribe(val=>{
+       updateValue();
+     })
+     control.at(i).get('ca3').valueChanges.subscribe(val=>{
+       updateValue();
+     })
+  }
+
 }

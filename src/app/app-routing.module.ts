@@ -1,3 +1,5 @@
+import { PosComponent } from './components/dashboard/pos/pos.component';
+import { BuyProductComponent } from './components/dashboard/buy-product/buy-product.component';
 import { CreateInvoiceComponent } from './components/dashboard/create-invoice/create-invoice.component';
 import { StudentsdataComponent } from './components/dashboard/studentsdata/studentsdata.component';
 import { DynamicformComponent } from './components/dashboard/dynamicform/dynamicform.component';
@@ -56,6 +58,8 @@ const routes: Routes = [
 {path: 'dynamic', component: DynamicformComponent},
 {path: 'students-data', component: StudentsdataComponent},
 {path: 'create-invoice', component: CreateInvoiceComponent},
+{path: 'buy-product', component: BuyProductComponent},
+{path: 'pos', component: PosComponent},
 
 
 

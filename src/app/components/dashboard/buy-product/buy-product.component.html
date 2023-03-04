@@ -1,0 +1,199 @@
+<app-top-bar></app-top-bar>
+<app-side-bar></app-side-bar>
+
+<div class="content-body">
+  <div class="container-fluid">
+    <div class="form-head mb-4">
+      <h2 class="text-black font-w600 mb-0">Buy Product</h2>
+    </div>
+    <div class="page-titles">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Sales of products: Easily Scan product / Type product name / Product
+            ID</a> <button (click)="openModal('myModal')" class="btn btn-primary btn-xs" type="button"
+            style="float: right">Add
+            New Product</button>
+          &nbsp;&nbsp;&nbsp;</li>
+        <li class="active"></li>
+      </ol>
+    </div>
+
+    <div class="col-lg-12">
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="basic-form">
+                <form (ngSubmit)="searchProduct(productForm)" #productForm="ngForm"
+                  class="d-flex align-items-center Confirm">
+                  <div class="col-xl-9 col-lg-12 mb-9 mx-sm-3 searchContainer">
+                    <input type="text" class="form-control" name="product_name" ngModel
+                      placeholder="Scan product / Type product name">
+                    <div class="searchList" *ngIf="productData.length">
+                      <ul>
+                        <li *ngFor="let product of productData; index as i" (click)="saveToCart(i)">
+                          {{product.product_name}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary Confirm-btn mb-2">Add</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3">
+          <div style="float: right">
+            <h2 class="text-black font-w600 mb-0">G.Total: &#8358;30,000</h2>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <br /><br /><br />
+    <!-- <ng-template *ngIf="productData.length < 1; else loadingProduct">
+      <div class="col-lg-9">
+        <div class="table-responsive">
+          <div class="page-titles">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Shopping cart is currently empty! Pick product to get started</a>
+              </li>
+              <li class="active"></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </ng-template> -->
+    <div class="col-lg-9">
+      <div class="table-responsive">
+        <table class="table table-bordered verticle-middle table-responsive-sm">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Descriptions</th>
+              <th scope="col">Amt</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let sDatas of cartProduct;">
+            <tr>
+              <td>{{sDatas.product_name}}</td>
+              <td> {{sDatas.product_description}} </td>
+              <td>{{sDatas.product_sale_price}}</td>
+              <td style="width: 20%;"><input type="text" class="form-control form-control-sm" name="poduct_qty"
+                  [(ngModel)]="sDatas.product_qty" style="width: 100px;" /></td>
+              <td><span class="badge badge-dark">{{sDatas.product_sale_price * sDatas.product_qty}}</span></td>
+              <td><span>
+                  <!-- <a href="javascript:void()" class="me-4" data-bs-toggle=cartProduct"tooltip" data-placement="top" title="Edit"><i
+                      class="fas fa-pencil-alt color-muted"></i> </a> -->
+                  <a (click)="delete(sDatas._id)" data-bs-toggle="tooltip" data-placement="top" title="Remove"
+                    class="btn btn-danger shadow btn-xs sharp"><i class="fas fa-trash-alt"></i></a>
+                </span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+        <button type="submit" class="btn btn-danger" style="float: right" (click)="checkout()">Check Out</button>
+        <div class="page-titles">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Please click on the checkout button to process the order</a></li>
+            <li class="active"></li>
+          </ol>
+        </div>
+
+        <br /><br />
+      </div>
+    </div>
+    <ng-template #loadingProduct>
+
+    </ng-template>
+
+
+
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Register new product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="addNewProduct()" #studentForm="ngForm">
+              <div class="row">
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Product Name</label>
+                  <input type="text" name="product_name" ngModel placeholder="Product name" class="form-control">
+                </div>
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Desc</label>
+                  <input type="text" name="product_desc" ngModel placeholder="Description" class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Cost Price</label>
+                  <input type="number" name="cost_price" ngModel placeholder="Cost Price " class="form-control">
+                </div>
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Category</label>
+                  <select class="default-select  form-control wide" name="product_category" ngModel>
+                    <option value="">Choose</option>
+                    <option value="Primary">Primary</option>
+                    <option value="Secondary">Secondary</option>
+                    <option value="KG">KG</option>
+                    <option value="Pre-KG">Pre-KG</option>
+                    <option value="Nursery">Nursery</option>
+                    <option value="Pre-Nursery">Pre-Nursery</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Sale Price</label>
+                  <input type="number" name="sale_price" ngModel placeholder="Sale Price " class="form-control">
+                </div>
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Qty</label>
+                  <input type="text" name="product_qty" ngModel placeholder="Quantity " class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Buy Date</label>
+                  <input type="date" name="buy_date" ngModel placeholder="Buy Date " class="form-control">
+                </div>
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Expiration</label>
+                  <input type="date" name="expire_date" ngModel placeholder="Expiration " class="form-control">
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5 col-md-6">
+                  <label class="form-label">Pruduct ID/Qrcode</label>
+                  <input type="text" name="product_code" ngModel placeholder="Pruduct ID/Qrcode " class="form-control">
+                </div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">btn-close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+  </div>
+</div>

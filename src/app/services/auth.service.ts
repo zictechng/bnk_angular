@@ -44,7 +44,12 @@ export class AuthService {
   private _regDynamicDatatUrl = "http://localhost:3000/api/dynamicform";
 
   private _rankDynamicPostionUrl = "http://localhost:3000/api/student-position";
-  private _baseURL = "http://localhost:3000/api/"
+  private _product_dataUrl = "http://localhost:3000/api/fetch_product";
+  private _checkout = "http://localhost:3000/api/checkout";
+  private _addNew_ProductUrl = "http://localhost:3000/api/add-product";
+  private _search_ProductUrl = "http://localhost:3000/api/search";
+  private _search_posProductUrl = "http://localhost:3000/api/search-pos";
+  private _baseURL = "http://localhost:3000/api"
   constructor(private http: HttpClient,
     private _router: Router) { }
 
@@ -184,6 +189,7 @@ postFormData(datas:any){
 
 //post dynamic invoice data to backend via service here...
 postInvoiceFormData(invoiceDatas:any){
+  console.log(invoiceDatas)
   return this.http.post<any>(this._createInvoiceUrl, invoiceDatas);
 }
 
@@ -197,6 +203,10 @@ savePosition(positionData: any){
   return this.http.post<any>(this._rankDynamicPostionUrl, positionData);
 }
 
+// searchProduct(product_keyData:string){
+// return this.http.post(this._search_ProductUrl, product_keyData);
+// }
+
 // getPaginatedPermissionUsage(page, pageType, pageSize){
 //   return this.http.get('http://localhost:3000/api/histories/paginated?page='+page+'&pageType='+pageType+'&pageSize='+pageSize);
 // }
@@ -206,6 +216,24 @@ productSearch(id:any){
   return this.http.get<any>(this._productSearchUrl + id);
 }
 
+// fetch sale product when user type/scan product name
+findProductData(productData:any){
+  return this.http.get<any>(this._product_dataUrl+'/'+productData)
+}
+
+// pos product search api call here..
+posProduct(searchKey:any){
+  return this.http.post(this._search_posProductUrl, searchKey )
+}
+
+checkoutProduct(payload:any){
+return this.http.post(this._checkout,payload);
+}
+
+// Register new product details here name
+addNewProduct(addproductData:any){
+  return this.http.post<any>(this._addNew_ProductUrl, addproductData)
+}
 getLocalStorage(){
  return this.recordId = localStorage.getItem('userData');
  }

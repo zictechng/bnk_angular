@@ -43,6 +43,8 @@ import { StudentsComponent } from './components/dashboard/students/students.comp
 import { DynamicformComponent } from './components/dashboard/dynamicform/dynamicform.component';
 import { StudentsdataComponent } from './components/dashboard/studentsdata/studentsdata.component';
 import { CreateInvoiceComponent } from './components/dashboard/create-invoice/create-invoice.component';
+import { BuyProductComponent } from './components/dashboard/buy-product/buy-product.component';
+import { PosComponent } from './components/dashboard/pos/pos.component';
 
 
 @NgModule({
@@ -77,6 +79,8 @@ import { CreateInvoiceComponent } from './components/dashboard/create-invoice/cr
     DynamicformComponent,
     StudentsdataComponent,
     CreateInvoiceComponent,
+    BuyProductComponent,
+    PosComponent,
 
   ],
   imports: [

@@ -60,9 +60,7 @@ ca3: any;
     // this.userForm.valueChanges.subscribe((value) =>{
     //   console.log(value);
     // })
-    this.userForm.statusChanges.subscribe((value) =>{
-      console.log(value);
-    })
+
   }
 
 
