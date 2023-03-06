@@ -22,7 +22,8 @@
           <div class="card">
             <div class="card-body">
               <div class="basic-form">
-                <form (ngSubmit)="searchProduct()" #posForm="ngForm" class="d-flex align-items-center Confirm">
+                <form (ngSubmit)="searchProduct()" #posForm="ngForm" class="d-flex align-items-center Confirm"
+                  (keyup)="search($event)">
                   <div class="col-xl-9 col-lg-12 mb-9 mx-sm-3 searchContainer">
                     <input type="text" class="form-control" name="search_name" ngModel
                       placeholder="Scan product / Type product name">
