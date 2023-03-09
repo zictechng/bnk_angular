@@ -23,7 +23,7 @@
           <div class="card">
             <div class="card-body">
               <div class="basic-form">
-                <form (ngSubmit)="searchProduct(productForm)" #productForm="ngForm"
+                <form (ngSubmit)="searchProduct(searchForm)" #searchForm="ngForm"
                   class="d-flex align-items-center Confirm">
                   <div class="col-xl-9 col-lg-12 mb-9 mx-sm-3 searchContainer">
                     <input type="text" class="form-control" name="product_name" ngModel
@@ -126,7 +126,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <form (ngSubmit)="addNewProduct()" #studentForm="ngForm">
+            <form (ngSubmit)="addNewProduct()" #productForm="ngForm">
               <div class="row">
                 <div class="mb-5 col-md-6">
                   <label class="form-label">Product Name</label>

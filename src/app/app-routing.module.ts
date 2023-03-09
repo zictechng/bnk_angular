@@ -1,3 +1,5 @@
+import { OrdercomfirmComponent } from './components/dashboard/ordercomfirm/ordercomfirm.component';
+import { OrderformComponent } from './components/dashboard/orderform/orderform.component';
 import { PosComponent } from './components/dashboard/pos/pos.component';
 import { BuyProductComponent } from './components/dashboard/buy-product/buy-product.component';
 import { CreateInvoiceComponent } from './components/dashboard/create-invoice/create-invoice.component';
@@ -60,6 +62,8 @@ const routes: Routes = [
 {path: 'create-invoice', component: CreateInvoiceComponent},
 {path: 'buy-product', component: BuyProductComponent},
 {path: 'pos', component: PosComponent},
+{path: 'order-form', component: OrderformComponent},
+{path: 'order-confirm', component: OrdercomfirmComponent},
 
 
 

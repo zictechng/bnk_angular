@@ -22,15 +22,37 @@
           <div class="card">
             <div class="card-body">
               <div class="basic-form">
-                <form (ngSubmit)="searchProduct()" #posForm="ngForm" class="d-flex align-items-center Confirm"
-                  (keyup)="search($event)">
+                <!-- <form (ngSubmit)="searchProduct()" #posForm="ngForm" class="d-flex align-items-center Confirm">
                   <div class="col-xl-9 col-lg-12 mb-9 mx-sm-3 searchContainer">
                     <input type="text" class="form-control" name="search_name" ngModel
                       placeholder="Scan product / Type product name">
-
                   </div>
                   <button type="submit" class="btn btn-primary Confirm-btn mb-2">Add</button>
                 </form>
+                <br /><br /> -->
+                <input type="text" class="form-control" name="search_name" [(ngModel)]="searchKey"
+                  placeholder="Scan product / Type product name" (keyup)="sendData($event)">
+                <!-- <div class="input-group transparent-append">
+                 <input type="text" class="form-control" placeholder="Choose a safe one.." required="">
+                  <span class="input-group-text search_icon show-pass br-style badge badge-danger"
+                    *ngIf="product.length > 0 && hasQuery">
+                    <a data-bs-toggle="tooltip" data-placement="top" title="Remove"><i class="fas fa-times"></i></a>
+                  </span>
+
+                </div> -->
+
+
+                <div class="mb-9 col-md-9 search-result">
+                  <p *ngIf="product.length < 1 && hasQuery">Sorry! Nothing Found.</p>
+                  <div *ngFor="let sDatas of product; let i=index">
+                    <hr *ngIf="i > 0">
+                    <p class="pointer" (click)="selectFromSearch(sDatas)">{{sDatas.product_name}} || Price:
+                      {{sDatas.product_sale_price}}</p>
+                  </div>
+
+                </div>
+
+
               </div>
             </div>
           </div>
@@ -82,7 +104,7 @@
 
     </div> -->
 
-    <br /><br /><br />
+    <br />
     <!-- <ng-template *ngIf="productData.length < 1; else loadingProduct">
       <div class="col-lg-9">
         <div class="table-responsive">
@@ -96,8 +118,51 @@
         </div>
       </div>
     </ng-template> -->
+
+    <div class="col-lg-6">
+      <div class="table-responsive">
+        <p><b>Item listed list</b></p>
+        <table class="table table-bordered verticle-middle table-responsive-sm">
+          <thead>
+            <tr>
+              <th scope="col">Item Name</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td style="width: 20%;"><input type="text" class="form-control form-control-sm" name="poduct_qty"
+                  style="width: 100px;" /></td>
+              <td></td>
+              <td><span>
+                  <a data-bs-toggle="tooltip" data-placement="top" title="Remove"
+                    class="btn btn-danger shadow btn-xs sharp"><i class="fas fa-times"></i></a>
+                </span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+        <button type="submit" class="btn btn-primary" style="float: right">Add</button>
+        <div class="page-titles">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Please click on the Add button to add the order to cart</a></li>
+            <li class="active"></li>
+          </ol>
+        </div>
+
+        <br /><br />
+      </div>
+    </div>
+
     <div class="col-lg-9">
       <div class="table-responsive">
+        <p><b>Item Ordered List</b></p>
         <table class="table table-bordered verticle-middle table-responsive-sm">
           <thead>
             <tr>

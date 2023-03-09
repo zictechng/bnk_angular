@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angula
 import { Router } from '@angular/router';
 import * as Notiflix from 'notiflix';
 import { debounceTime, Subject } from 'rxjs';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService, Product } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-pos',
@@ -23,6 +23,9 @@ export class PosComponent implements OnInit{
  public toggle: Boolean = false;
  public selectedInput: any = {};
 
+ // search product interface model call here
+ product:any[] = [];
+ hasQuery:Boolean = false;
 
 
   myId : any = localStorage.getItem('userData');
@@ -36,35 +39,6 @@ export class PosComponent implements OnInit{
 
   }
 
-//   public seriesList:any = [
-//     {
-//          "name": "Prison Break",
-//          "description": "Structural Engineer Michael Scofield turns himself into the Fox River Penitentiary in order to break out his brother Lincoln Burrows, who is on death row for the murder of the Vice President's brother. But Lincoln was set up by some of the Company (an agency formed by corrupt government officials) guys, headed by General Jonathan Krantz. Michael breaks out from Fox River with his brother Lincoln and other convicts.",
-//          "genres": "Action, Crime, Drama, Mystery, Thriller",
-//          "releaseDate": "29 August 2005 (USA)"
-//      },
-//      {
-//       "name": "Prison Break",
-//       "description": "Structural Engineer Michael Scofield turns himself into the Fox River Penitentiary in order to break out his brother Lincoln Burrows, who is on death row for the murder of the Vice President's brother. But Lincoln was set up by some of the Company (an agency formed by corrupt government officials) guys, headed by General Jonathan Krantz. Michael breaks out from Fox River with his brother Lincoln and other convicts.",
-//       "genres": "Action, Crime, Drama, Mystery, Thriller",
-//       "releaseDate": "29 August 2005 (USA)"
-//   },
-//  {
-//       "name": "Vikings",
-//       "description": "The adventures of Ragnar Lothbrok: the greatest hero of his age. The series tells the saga of Ragnar's band of Viking brothers and his family as he rises to become King of the Viking tribes. As well as being a fearless warrior, Ragnar embodies the Norse traditions of devotion to the gods: legend has it that he was a direct descendant of Odin, the god of war and warriors.",
-//       "genres": "Action, Drama, History, War",
-//       "releaseDate": "3 March 2013 (USA)"
-//   },
-// {
-//       "name": "Person of Interest",
-//       "description": "A billionaire software-genius named Harold Finch creates a Machine for the government that is designed to detect acts of terror before they can happen, by monitoring the entire world through every cell-phone, email and surveillance camera. Finch discovered that the machine sees everything, potential terrorist acts and violent crimes that involve ordinary people.",
-//       "genres": "Action, Drama, Mystery, Sci-Fi, Thriller",
-//       "releaseDate": "22 September 2011 (USA)"
-//   },
-
-
-//    //Truncated for brevity
-//    ]
 
   obj2 = {
     "user_createdBy": (JSON.parse(this.myId)),
@@ -73,15 +47,32 @@ export class PosComponent implements OnInit{
    public selectedValue: any;
    public searchValue: any;
    public filteredList: any = [];
+
    ngOnInit() {
 
    }
 
-   abc(){
-    console.log('hi');
+   // auto complete search request here
+   sendData(event:any){
+    // console.log(event.target.value);
+    let query:string = event.target.value;
+    // remove space in the type words
+    this.searchDataFn(query)
    }
 
-
+   searchDataFn(query){
+    let matchSpaces:any = query.match(/\s*/);
+    if(matchSpaces[0] === query){
+      this.product = [];
+      this.hasQuery = false;
+      return
+    }
+    this._auth.searchPosProduct(query.trim()).subscribe(results =>{
+      this.hasQuery = true;
+      this.product = results;
+      console.log(results)
+    });
+   }
 
   //  fetchSeries(event: any): any {
   //   if (event.target.value === '') {
@@ -93,11 +84,11 @@ export class PosComponent implements OnInit{
   // }
 
 
-showDetails(series) {
+    showDetails(series) {
        this.selectedInput = series;
        this.toggle = true;
        this.searchInput = series.name;
-}
+      }
 
 
   search(event: any) {
@@ -119,11 +110,20 @@ showDetails(series) {
 
       }})
   }
+      searchKey = ''
 
-// call search api here
-  searchProduct(){
-    console.log(this.form.value)
-    const newSearchKey = Object.assign(this.form.value);
+          selectFromSearch(data:any){
+          this.searchKey = data.product_name;
+          this.hasQuery = false
+          // this.searchDataFn(this.searchKey);
+          this.product = []
+          this.searchProduct(data._id);
+          //console.log(data)
+          }
+// call product ID from search input unchange here
+  searchProduct(id:string){
+    console.log(this.searchKey)
+    const newSearchKey = Object.assign({search_name:id});
     console.log(newSearchKey)
     this._auth.posProduct(newSearchKey).subscribe((res:any) =>{
     console.log(res)
@@ -140,17 +140,17 @@ showDetails(series) {
   }
 
   // save all the here
-  saveOrder(){
-
-  }
+      enterKeySave(){
+        console.log(this.searchKey)
+      }
 
    // generate random string for transaction ID
-randomString(length: Number) {
-  var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var result = '';
-  for ( var i = 0; i < length; i++ ) {
-      result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
-  }
-  return result;
-}
+      randomString(length: Number) {
+        var randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var result = '';
+        for ( var i = 0; i < length; i++ ) {
+            result += randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+        }
+        return result;
+      }
 }

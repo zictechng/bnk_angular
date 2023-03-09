@@ -45,6 +45,8 @@ import { StudentsdataComponent } from './components/dashboard/studentsdata/stude
 import { CreateInvoiceComponent } from './components/dashboard/create-invoice/create-invoice.component';
 import { BuyProductComponent } from './components/dashboard/buy-product/buy-product.component';
 import { PosComponent } from './components/dashboard/pos/pos.component';
+import { OrderformComponent } from './components/dashboard/orderform/orderform.component';
+import { OrdercomfirmComponent } from './components/dashboard/ordercomfirm/ordercomfirm.component';
 
 
 @NgModule({
@@ -81,6 +83,8 @@ import { PosComponent } from './components/dashboard/pos/pos.component';
     CreateInvoiceComponent,
     BuyProductComponent,
     PosComponent,
+    OrderformComponent,
+    OrdercomfirmComponent,
 
   ],
   imports: [

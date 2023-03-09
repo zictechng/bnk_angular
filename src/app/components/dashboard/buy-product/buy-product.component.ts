@@ -22,6 +22,7 @@ export class BuyProductComponent implements OnInit{
   myId : any = localStorage.getItem('userData');
   @ViewChild('productForm') form: NgForm;
 
+
   productInputname: any;
   constructor(private _auth: AuthService,
     private fb: FormBuilder,
@@ -36,7 +37,7 @@ export class BuyProductComponent implements OnInit{
   // add new product here
   addNewProduct(){
     const newData = Object.assign(this.form.value, this.obj2);
-        //console.log(newData);
+        console.log(newData);
         this._auth.addNewProduct(newData).subscribe(res =>{
           //console.log(res);
           if(res.msg == '200')
@@ -98,11 +99,11 @@ delete(id:string){
   }
 
   // search for product base on the input user enter
-  searchProduct(productForm){
+  searchProduct(searchForm){
     // console.log(productForm.form.value.product_name)
     // const product_id = Object.assign(this.form.value, this.obj2)
     //console.log(product_id);
-    this._auth.findProductData(productForm.form.value.product_name).subscribe(res =>{
+    this._auth.findProductData(searchForm.form.value.product_name).subscribe(res =>{
       this.productData = res;
       console.log(this.productData);
       // if(this.productData == null)

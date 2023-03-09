@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+export interface Product{
+  _id: string,
+  product_name: string
+}
 
 @Injectable({
   providedIn: 'root'
@@ -50,6 +54,8 @@ export class AuthService {
   private _search_ProductUrl = "http://localhost:3000/api/search";
   private _search_posProductUrl = "http://localhost:3000/api/search-pos";
   private _baseURL = "http://localhost:3000/api"
+  private _search_posUrl = "http://localhost:3000/api/fetchpos";
+  private _item_orderUrl = "http://localhost:3000/api/item_order";
   constructor(private http: HttpClient,
     private _router: Router) { }
 
@@ -231,10 +237,24 @@ checkoutProduct(payload:any){
 return this.http.post(this._checkout,payload);
 }
 
+// pos product live search fetching...
+searchPosProduct(query:any){
+  return this.http.post<{payload: Array<Product>}>(this._search_posUrl,{payload: query}).pipe(
+    map(data => data.payload)
+  );
+  }
+
+
 // Register new product details here name
 addNewProduct(addproductData:any){
   return this.http.post<any>(this._addNew_ProductUrl, addproductData)
 }
+
+// post item order selected data here
+saveItemOrder(itemData: any){
+  return this.http.post<any>(this._item_orderUrl, itemData);
+}
+
 getLocalStorage(){
  return this.recordId = localStorage.getItem('userData');
  }
