@@ -14,6 +14,7 @@ export class OrderformComponent implements OnInit {
   orderData:any = {}
   myId : any = localStorage.getItem('userData');
   public userForm!:FormGroup;
+
   selectedTeam = '';
 
   constructor(private _auth: AuthService,
@@ -83,9 +84,10 @@ export class OrderformComponent implements OnInit {
      //send dynamic data to api here...
      dynamicDataSend(){
       const formData = this.userForm.value
-      this._auth.sendDynamicData(formData).subscribe(res =>{
-        console.log(res);
-      })
+      console.log(formData)
+      // this._auth.sendDynamicData(formData).subscribe(res =>{
+      //   console.log(res);
+      // })
      }
 
 
