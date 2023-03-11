@@ -67,18 +67,6 @@ ca3: any;
   obj2 = {
     "createdBy": (JSON.parse(this.myId)),
    };
-// add total ca score
-AddTotalScore(){
-}
-
-sum () {
-  let { fname, lname, email, phone, contact } = this.userForm.value;
-  this.total = this.ca1 + this.ca2
-  //console.log(fname, lname, email, phone, contact);
-  this.userForm.get('ca1').value
-  console.log("Name: " + this['fname'])
-  console.log("Name: " + this.userForm.get(lname).value)
-}
 
   //send data to server to store
   saveFormDetails(){

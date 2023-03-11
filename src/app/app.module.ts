@@ -47,6 +47,7 @@ import { BuyProductComponent } from './components/dashboard/buy-product/buy-prod
 import { PosComponent } from './components/dashboard/pos/pos.component';
 import { OrderformComponent } from './components/dashboard/orderform/orderform.component';
 import { OrdercomfirmComponent } from './components/dashboard/ordercomfirm/ordercomfirm.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -106,6 +107,7 @@ import { OrdercomfirmComponent } from './components/dashboard/ordercomfirm/order
   Ng2SearchPipeModule,
   ReactiveFormsModule,
   NgxPaginationModule,
+  NgSelectModule,
   ],
   providers: [AuthService, AuthGuard,
     {

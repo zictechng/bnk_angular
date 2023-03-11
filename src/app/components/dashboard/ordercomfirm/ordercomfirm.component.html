@@ -5,11 +5,12 @@
 <div class="content-body">
   <div class="container-fluid">
     <div class="form-head mb-4">
-      <h2 class="text-black font-w600 mb-0">Order Confirmation</h2>
+      <h2 class="text-black font-w600 mb-0">Confirm order details</h2>
     </div>
     <div class="page-titles">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Please confirm the details are correct before you send for shippment</a>
+        <li class="breadcrumb-item"><a href="#">Please confirm that details are correct before you send for
+            shippment</a>
           &nbsp;&nbsp;&nbsp;</li>
         <li class="active"></li>
       </ol>
@@ -23,37 +24,36 @@
           </div>
           <div class="card-body">
             <div class="basic-form">
-              <form>
+              <form [formGroup]="orderConfirmForm">
                 <div class="row">
                   <div class="mb-3 col-md-12">
                     <label class="form-label">Type</label>
-                    <select class="form-control default-select wide" name="shipp_type" id="inputState">
-                      <option selected="">Choose...</option>
-                      <option>Instant Shippment</option>
-                      <option>Shipp Later</option>
-                      <option>Schedule Shippment</option>
-                      <option>Others</option>
-                    </select>
+                    <input type="text" name="shipp_type" formControlName="shipp_type"
+                      [(ngModel)]="orderConfirmData.shipp_type" class="form-control" placeholder="Order Type">
                   </div>
 
                 </div>
                 <div class="row">
                   <div class="mb-3 col-md-6">
                     <label class="form-label">Sender Name</label>
-                    <input type="text" name="shipp_sender_name" class="form-control" placeholder="Sender Name">
+                    <input type="text" name="shipp_sender_name" formControlName="shipp_sender_name"
+                      [(ngModel)]="orderConfirmData.shipp_sender_name" class="form-control" placeholder="Sender Name">
                   </div>
                   <div class="mb-3 col-md-6">
                     <label class="form-label">Sender Email</label>
-                    <input type="email" name="shipp_sender_email" class="form-control" placeholder="Sender Email">
+                    <input type="email" name="shipp_sender_email" formControlName="shipp_sender_email"
+                      [(ngModel)]="orderConfirmData.shipp_sender_email" class="form-control" placeholder="Sender Email">
                   </div>
                 </div>
 
                 <div class="mb-3">
                   <label class="form-label">Receiver Address</label>
-                  <textarea _ngcontent-cqi-c52="" rows="5" name="shipp_address" class="form-control" spellcheck="true"
+                  <textarea _ngcontent-cqi-c52="" rows="5" name="shipp_address" formControlName="shipp_address"
+                    [(ngModel)]="orderConfirmData.shipp_address" class="form-control" spellcheck="true"
                     placeholder="Enter receiver address"></textarea>
                 </div>
-                <button type="button" class="btn btn-primary" (click)="submitConfirmOrder()"> Confirm</button>
+                <button type="button" [disabled]="orderConfirmForm.invalid == true" class="btn btn-primary"
+                  (click)="submitConfirmOrder()"> Confirm</button>
               </form>
             </div>
           </div>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,15 +11,36 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class OrdercomfirmComponent {
 
+  public orderConfirmForm:FormGroup;
   orderConfirmData:any = {}
+
   myId : any = localStorage.getItem('userData');
 
-  constructor(private _auth: AuthService,
-    private _router: Router){}
 
+
+  constructor(private _auth: AuthService,
+    private fb: FormBuilder,
+    private _router: Router){
+      this.orderConfirmForm = this.fb.group({
+        shipp_type: new FormControl("", Validators.required),
+        shipp_address: new FormControl("", Validators.required),
+        shipp_sender_email: new FormControl("", Validators.required),
+        shipp_sender_name:new FormControl("", Validators.required),
+       });
+    }
 
     ngOnInit(): void {
-
+      // get the data passed from order page here
+      const orderInfo = this._auth.getDataStream();
+      orderInfo.subscribe({
+        next:(data: any) =>{
+          this.orderConfirmData = data;
+          //console.log(this.orderConfirmData);
+        },
+        error:(err: any) =>{
+          console.log(err);
+        }
+      })
     }
 
 
@@ -29,7 +51,7 @@ export class OrdercomfirmComponent {
 
      // send all form data to data here...
   submitConfirmOrder(){
-
+    console.log( 'Here is the details ', this.orderConfirmForm)
   }
 
 

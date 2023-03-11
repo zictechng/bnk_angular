@@ -15,46 +15,246 @@
       </ol>
     </div>
 
+    <div class="col-xl-12 col-lg-12">
+      <div class="row">
+        <div class="col-xl-5 col-lg-5">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title">Create order shippment</h6>
+            </div>
+            <div class="card-body">
+              <div class="basic-form">
+                <form [formGroup]="userForm">
+                  <div class="row">
+                    <div class="mb-3 col-md-12">
+                      <label class="form-label">Type</label>
+                      <select #teams (change)="onSelected(teams.value)" formControlName="shipp_type"
+                        class="form-control default-select wide" name="shipp_type" id="shipp_type">
+                        <option selected="">Choose...</option>
+                        <option>Instant Shippment</option>
+                        <option>Shipp Later</option>
+                        <option>Schedule Shippment</option>
+                        <option>Others</option>
+                      </select>
+                    </div>
 
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label">Sender Name</label>
+                      <input type="text" name="shipp_sender_name" class="form-control"
+                        formControlName="shipp_sender_name" placeholder="Sender Name">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label">Sender Email</label>
+                      <input type="email" name="shipp_sender_email" formControlName="shipp_sender_email"
+                        class="form-control" placeholder="Sender Email">
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Receiver Address</label>
+                    <textarea _ngcontent-cqi-c52="" rows="5" formControlName="shipp_address" name="shipp_address"
+                      class="form-control" spellcheck="true" placeholder="Enter receiver address"></textarea>
+                  </div>
+                  <button type="button" class="btn btn-primary" (click)="submitOrder()"> Send</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-7 col-lg-7">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title">Multiple image upload</h6>
+            </div>
+            <div class="card-body">
+              <div class="basic-form">
+                <form [formGroup]="userForm">
+                  <div class="row">
+                    <div class="mb-3 col-md-12">
+                      <label class="form-label">Type</label>
+                      <ng-select [items]="cars" bindLabel="name" placeholder="Select Category" [multiple]="true"
+                        [(ngModel)]="selected" name="shipp_type" id="shipp_type">
+
+                      </ng-select>
+                    </div>
+
+                    <div class="mb-3 col-md-12">
+                      <label class="form-label">Type</label>
+                      <ng-select [items]="cars" bindLabel="name" placeholder="Select Category" [(ngModel)]="selected"
+                        name="shipp_type" id="shipp_type">
+
+                      </ng-select>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label">Sender Name</label>
+                      <input type="text" name="shipp_sender_name" class="form-control"
+                        formControlName="shipp_sender_name" placeholder="Sender Name">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label">Sender Email</label>
+                      <input type="email" name="shipp_sender_email" formControlName="shipp_sender_email"
+                        class="form-control" placeholder="Sender Email">
+                    </div>
+                  </div>
+                  <span class="badge badge-primary" style="cursor: pointer; float: right;" (click)="addMoreFields()"><i
+                      class="fa fa-plus text-white"></i>
+                    Add</span>
+                  <div class="row" formArrayName="contact">
+                    <div *ngFor="let child of userForm.get('contact')['controls']; let i = index" formGroupName="{{i}}">
+                      <div class="row">
+                        <div class="mb-3 col-md-3">
+                          <label class="form-label">Company Name</label>
+                          <input type="text" class="form-control" formControlName="comp_name"
+                            placeholder="Company Name">
+                          <!-- <small *ngIf="userForm.get('contact.ca1').errors?.['maxInputValue']">
+                        No space allowed
+                      </small> -->
+                        </div>
+                        <div class="mb-4 col-md-4">
+                          <label class="form-label">Company Phone</label>
+                          <input type="text" class="form-control" formControlName="comp_phone"
+                            placeholder="Company Phone">
+                        </div>
+
+                        <div class="mb-4 col-md-4">
+                          <label class="form-label">Company Address</label>
+                          <textarea type="text" rows="2" class="form-control" formControlName="ca3"
+                            placeholder="Company Address"></textarea>
+                        </div>
+
+                        <div class="mb-4 col-md-4" *ngIf="i>0">
+                          <span class="badge badge-danger" style="cursor: pointer;" (click)="removeMoreFields(i)"><i
+                              class="fa fa-times text-white"></i>
+                            Remove</span>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- <div class="mb-3">
+                    <label class="form-label">Photos </label>
+                    <input type="file" formControlName="shipp_address" name="shipp_address" class="form-control"
+                      spellcheck="true" placeholder="Enter receiver address">
+                  </div> -->
+                  <button type="button" class="btn btn-primary"> Save</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-xl-8 col-lg-8">
+
+    </div>
+
+
+    <div class="col-xl-12 col-lg-12">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title">Upload Image</h6>
+            </div>
+            <div class="card-body">
+              <div class="basic-form">
+                <form [formGroup]="userForm">
+
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label">Name</label>
+                      <input type="text" name="shipp_sender_name" class="form-control"
+                        formControlName="shipp_sender_name" placeholder="Sender Name">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label">Email</label>
+                      <input type="email" name="shipp_sender_email" formControlName="shipp_sender_email"
+                        class="form-control" placeholder="Sender Email">
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Photo</label>
+                    <file _ngcontent-cqi-c52="" formControlName="shipp_address" name="shipp_address"
+                      class="form-control" spellcheck="true" placeholder="Enter receiver address"></file>
+                  </div>
+                  <button type="button" class="btn btn-secondary"> Upload</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-6">
+          <div class="card">
+            <div class="card-header">
+              <h6 class="card-title">Upload Image</h6>
+            </div>
+            <div class="card-body">
+              <div class="basic-form">
+                <form [formGroup]="userForm">
+
+                  <div class="row">
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label">Name</label>
+                      <input type="text" name="shipp_sender_name" class="form-control"
+                        formControlName="shipp_sender_name" placeholder="Sender Name">
+                    </div>
+                    <div class="mb-3 col-md-6">
+                      <label class="form-label">Email</label>
+                      <input type="email" name="shipp_sender_email" formControlName="shipp_sender_email"
+                        class="form-control" placeholder="Sender Email">
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Photo</label>
+                    <file _ngcontent-cqi-c52="" formControlName="shipp_address" name="shipp_address"
+                      class="form-control" spellcheck="true" placeholder="Enter receiver address"></file>
+                  </div>
+                  <button type="button" class="btn btn-secondary"> Upload</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-6 col-lg-6">
         <div class="card">
           <div class="card-header">
-            <h6 class="card-title">Create order shippment</h6>
+            <h6 class="card-title">Upload Image</h6>
           </div>
           <div class="card-body">
             <div class="basic-form">
-              <form>
-                <div class="row">
-                  <div class="mb-3 col-md-12">
-                    <label class="form-label">Type</label>
-                    <select class="form-control default-select wide" name="shipp_type" id="shipp_type">
-                      <option selected="">Choose...</option>
-                      <option>Instant Shippment</option>
-                      <option>Shipp Later</option>
-                      <option>Schedule Shippment</option>
-                      <option>Others</option>
-                    </select>
-                  </div>
+              <form [formGroup]="userForm">
 
-                </div>
                 <div class="row">
                   <div class="mb-3 col-md-6">
-                    <label class="form-label">Sender Name</label>
-                    <input type="text" name="shipp_sender_name" class="form-control" placeholder="Sender Name">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="shipp_sender_name" class="form-control" formControlName="shipp_sender_name"
+                      placeholder="Sender Name">
                   </div>
                   <div class="mb-3 col-md-6">
-                    <label class="form-label">Sender Email</label>
-                    <input type="email" name="shipp_sender_email" class="form-control" placeholder="Sender Email">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="shipp_sender_email" formControlName="shipp_sender_email"
+                      class="form-control" placeholder="Sender Email">
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label">Receiver Address</label>
-                  <textarea _ngcontent-cqi-c52="" rows="5" name="shipp_address" class="form-control" spellcheck="true"
-                    placeholder="Enter receiver address"></textarea>
+                  <label class="form-label">Photo</label>
+                  <file _ngcontent-cqi-c52="" formControlName="shipp_address" name="shipp_address" class="form-control"
+                    spellcheck="true" placeholder="Enter receiver address"></file>
                 </div>
-                <button type="button" class="btn btn-primary" (click)="submitOrder()"> Send</button>
+                <button type="button" class="btn btn-secondary"> Upload</button>
               </form>
             </div>
           </div>

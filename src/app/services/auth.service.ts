@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, pipe } from 'rxjs';
+import { BehaviorSubject, Observable, pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 export interface Product{
   _id: string,
   product_name: string
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +58,12 @@ export class AuthService {
   private _baseURL = "http://localhost:3000/api"
   private _search_posUrl = "http://localhost:3000/api/fetchpos";
   private _item_orderUrl = "http://localhost:3000/api/item_order";
+
+  private _dynamicDataUrl = "http://localhost:3000/api/dynamic_data";
+
+
+  private _orderDataStream = new BehaviorSubject("");
+
   constructor(private http: HttpClient,
     private _router: Router) { }
 
@@ -66,6 +74,14 @@ export class AuthService {
 
     serverURL = 'http://localhost:3000'; // this is backend server url
 
+    //passing order form data to another page here
+    getDataStream(){ // get the data info
+      return this._orderDataStream.asObservable();
+    }
+
+    orderDataPassed(data: any){ // receive the info fill into the form here
+      this._orderDataStream.next(data);
+    }
 
   // register method that process the registration
   registerUser(user:any){
@@ -254,6 +270,13 @@ addNewProduct(addproductData:any){
 saveItemOrder(itemData: any){
   return this.http.post<any>(this._item_orderUrl, itemData);
 }
+
+// post item order selected data here
+sendDynamicData(dataSend: any){
+  return this.http.post<any>(this._dynamicDataUrl, dataSend);
+}
+
+
 
 getLocalStorage(){
  return this.recordId = localStorage.getItem('userData');
