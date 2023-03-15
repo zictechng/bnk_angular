@@ -60,7 +60,7 @@
         <div class="col-xl-3">
           <div style="float: right">
             <h2 class="text-black font-w600 mb-0"></h2>
-            <h2 class="text-black font-w600 mb-0">G.Total:{{getTotalAmt()}}</h2>
+            <h2 class="text-black font-w600 mb-0">G.Total:{{gTotal}}</h2>
           </div>
         </div>
 
@@ -146,8 +146,8 @@
                   class="form-control form-control-sm" [(ngModel)]="dataItem.product_qty" name="product_qty{{i}}"
                   style="width: 100px;" /></td>
               <td><input type="text" (keydown.enter)='enterKeySave()' class="form-control form-control-sm"
-                  name="amt_total{{i}}" [(ngModel)]="dataItem.amt_total"
-                  [value]="(dataItem.product_sale_price*dataItem.product_qty)" style="width: 100px;" />
+                  name="amt_total{{i}}" [(ngModel)]="dataItem.product_sale_price*dataItem.product_qty"
+                  [value]="calculateValue(dataItem)" style="width: 100px;" />
               </td>
               <td><span>
                   <a data-bs-toggle="tooltip" data-placement="top" title="Remove"
@@ -158,7 +158,7 @@
 
           </tbody>
         </table>
-        <button type="submit" (click)="saveButtonClick()" class="btn btn-primary" style="float: right">Add</button>
+        <button type="submit" (click)="saveAll()" class="btn btn-primary" style="float: right">Add</button>
         <div class="page-titles">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Please click on the Add button to add the order to cart</a></li>

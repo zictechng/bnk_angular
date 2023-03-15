@@ -46,7 +46,7 @@ export class PosComponent implements OnInit{
   currencyPipe: any;
   subTotalItems: any;
   cartService: any;
-  gTotal:any
+  gTotal = 0
   constructor(private _auth: AuthService,
     private fb: FormBuilder,
       private _router: Router){
@@ -248,30 +248,27 @@ export class PosComponent implements OnInit{
         this.multipleImages = event.target.files
       }
     }
-        test(value:any, qu:any){
-          if(value && qu){
-            console.log(value*qu)
-            return value* qu;
+
+    updateGrandTotal() {
+      this.gTotal = this.searchProducts.reduce((total, item) => {
+        return total + (item.product_sale_price * item.product_qty);
+      }, 0);
+    }
+
+    calculateValue(item:any){
+          if(item.product_sale_price && item.product_qty){
+            console.log(item.product_sale_price* (+item.product_qty))
+            this.updateGrandTotal();
+            return Number(item.product_sale_price * item.product_qty);
+
           }
           else{
-        return null;
+            this.updateGrandTotal();
+        return item.product_sale_price * item.product_qty;
+
           }
 
         }
-        public getTotalAmt(): number {
-          let totalAmt = 0;
-          if(this.searchProducts==undefined){
-
-          }
-          else{
-            for (const dataItem of this.searchProducts) {
-              totalAmt += dataItem?.amt_total;
-            }
-            return totalAmt;
-          }
-    return totalAmt;
-        }
-
 
     // multiple image upload here
     submitMultipleImage(){
@@ -420,61 +417,28 @@ export class PosComponent implements OnInit{
 
 
 
+  saveAll(){
+// let use this to get all the data from frontend to display here in console. Then I will make api call to send to databasecons
+// console.log(payload)
+  // Iterate over the searchProducts array and save each item
+  for (let item of this.searchProducts) {
+    // Save the item using your preferred method (e.g. HTTP request to a server)
+    // ...
+    console.log(`Saved item: ${JSON.stringify(item)}`);
+  }
 
-    // total(searchProducts) {
-    //   var totalAll = 0;
-    //   searchProducts.forEach(element => {
-    //     totalAll = totalAll + (element.product_sale_price * element.product_qty);
-    //   });
-    //   return totalAll;
-    // }
-
-  // formatPrice(value) {
-  //   let val = (value/1)
-  //   return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-  // }
-
-  // totalPrice(data) {
-  //   this.value=data
-  //   console.log("Value Details: ", this.value);
-  //   for(let data of this.searchProducts){
-  //     this.totalAmt += data.product_sale_price;
-  //     console.log("Total List Details: ", this.totalAmt);
-  //   }
-  //   console.log("Total Details: ", this.totalAmt);
-  //   //return this.formatPrice(this.totalAmt);
-  // }
-
-  // total() {
-  //   return this.searchProducts.reduce(
-  //     (sum, x) => ({
-  //       qtyTotal: 1,
-  //       product_sale_price: sum.product_sale_price + x.qtyTotal * x.product_sale_price
-  //     }),
-  //     { qtyTotal: 1, product_sale_price: 0 }
-  //   ).product_sale_price;
-  // }
-
-  // changeSubtotal(item, index) {
-  //   const qty = item.qtyTotal;
-  //   const amt = item.product_sale_price;
-  //   const subTotal = amt * qty;
-  //   const subTotal_converted = this.currencyPipe.transform(subTotal, "USD");
-
-  //   this.subTotalItems.toArray()[
-  //     index
-  //   ].nativeElement.innerHTML = subTotal_converted;
-
-  // }
-
+  // Clear the searchProducts array after saving all items
+  this.searchProducts = [];
+  }
   // save detail when enter key is press here
       enterKeySave(){
+        this.updateGrandTotal();
         console.log("Enter key button is press: ", this.searchKey)
       }
       // save the details when save button is click
-      saveButtonClick(){
-        console.log("Add button is click: ", this.searchKey)
-      }
+      // saveButtonClick(){
+      //   console.log("Add button is click: ", this.searchKey)
+      // }
 
       // this is for testing notification attribute
       checkOutP(){
