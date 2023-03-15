@@ -418,16 +418,9 @@ export class PosComponent implements OnInit{
 
 
   saveAll(){
-// let use this to get all the data from frontend to display here in console. Then I will make api call to send to databasecons
-// console.log(payload)
-  // Iterate over the searchProducts array and save each item
-  for (let item of this.searchProducts) {
-    // Save the item using your preferred method (e.g. HTTP request to a server)
-    // ...
-    console.log(`Saved item: ${JSON.stringify(item)}`);
-  }
+// display the data in console here when the add button is clicked
 
-  // Clear the searchProducts array after saving all items
+
   this.searchProducts = [];
   }
   // save detail when enter key is press here
