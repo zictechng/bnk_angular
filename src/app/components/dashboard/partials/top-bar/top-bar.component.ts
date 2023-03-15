@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -14,14 +14,26 @@ export class TopBarComponent implements OnInit{
   userDa = (JSON.parse(localStorage.getItem('userData')));
   userDatas:any;
   myProfilePhoto = '';
+  defaultPhoto:String ="";
+
 
   constructor(public _authService: AuthService,
     private _router: Router){}
 
-  ngOnInit(): void {
+    // receive data details from parent component here
+    @Input() allNotification: Number = 0;
+    @Input() allMessage: Number = 0;
+    @Input() myProfilePic = '';
+    @Input() profileDefaultPhoto = '';
+
+    ngOnInit(): void {
     this.getUserDetails();
-    this.getMyData()
+    this.getMyData();
+    this.profileDefaultPhoto = this._authService.getDefaultImage();
+
+    //console.log(this.defaultPhoto);
   }
+
 
   getUserDetails(){
     this.myuUserInfo = localStorage.getItem('userData');
@@ -32,8 +44,9 @@ export class TopBarComponent implements OnInit{
 // get user profile details here
 getMyData(){
   this._authService.getMyData(this.userDa._id).subscribe(res =>{
-    this.userDatas = res.others.photo;
-    this.myProfilePhoto = this._authService.serverURL+res.others.photo
+    this.userDatas = res.others;
+    this.myProfilePhoto = this._authService.serverURL+res.others.photo;
+    this.myProfilePic = this._authService.serverURL+res.others.photo;
     //console.log(this.userDatas)
   });
 }

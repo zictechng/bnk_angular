@@ -31,6 +31,7 @@ export class AuthService {
   private _supportTicketUrl = "http://localhost:3000/api/support";
   private _incomeUrl = "http://localhost:3000/api/income_details/";
   private _uploadImageUrl = "http://localhost:3000/api/upload";
+  private _uploadThumbImageUrl = "http://localhost:3000/api/upload_thumb";
   private _deleteHistoryUrl = "http://localhost:3000/api/delete-history/";
   private _deleteCheckHistoryUrl = "http://localhost:3000/api/history_delete";
   private _productSearchUrl = "http://localhost:3000/api/product-search/";
@@ -60,6 +61,8 @@ export class AuthService {
   private _item_orderUrl = "http://localhost:3000/api/item_order";
 
   private _dynamicDataUrl = "http://localhost:3000/api/dynamic_data";
+  private _multipleFilesUploadUrl = "http://localhost:3000/api/multiplefiles";
+
 
 
   private _orderDataStream = new BehaviorSubject("");
@@ -69,8 +72,10 @@ export class AuthService {
 
     recordId:any = '';
     userId : any = '';
-
-    defaultProfileImage = '/assets/images/profile/profile.png'; // this is for default image if user don't have
+    defaultProfileImage:String = '';
+    getDefaultImage(){
+    return this.defaultProfileImage = '/assets/images/profile/profile.png'; // this is for default image if user don't have
+    }
 
     serverURL = 'http://localhost:3000'; // this is backend server url
 
@@ -185,10 +190,21 @@ supportTicket(user:any){
   return this.http.post<any>(this._supportTicketUrl, user);
 }
 
-// submit ticket support here
+// submit profile image upload here
 uploadImage(user:any){
   return this.http.post<any>(this._uploadImageUrl, user);
 }
+
+// submit product thumb image upload here
+uploadProductThumbImage(product_thumb:any){
+  return this.http.post<any>(this._uploadThumbImageUrl, product_thumb);
+}
+
+// submit product thumb image upload here
+uploadMultipleFiles(multiple_files:any){
+  return this.http.post<any>(this._multipleFilesUploadUrl, multiple_files);
+}
+
 
 //delete history record here...
 deleteHistory(id:any){
@@ -245,7 +261,7 @@ findProductData(productData:any){
 
 // pos product search api call here..
 posProduct(searchKey:any){
-  console.log(searchKey);
+  //console.log(searchKey);
   return this.http.post(this._search_posProductUrl, searchKey )
 }
 

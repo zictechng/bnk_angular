@@ -28,6 +28,13 @@ export class AccountProfileComponent  implements OnInit{
   ngOnInit(): void {
     this.getMyData();
   }
+
+  //passing this details to child component ( Top bar component)
+  pNotification: Number = 20;
+  aMessage: Number = 15;
+  topbarProfileImage = "";
+  topbarDefaultImage: any = this._auth.getDefaultImage;
+
   selectedFile = null;
 
   onFileSelected(event){
@@ -40,6 +47,8 @@ export class AccountProfileComponent  implements OnInit{
       reader.onload = (event: any) =>{
         this.defaultProfileImage = event.target.result;
         this.myProfilePhoto = event.target.result;
+        this.topbarProfileImage = event.target.result;
+        this.topbarDefaultImage = event.target.result;
 
         this.file_name = this.selectedFile
       }
@@ -53,7 +62,6 @@ export class AccountProfileComponent  implements OnInit{
   }
   uploadImage(){
     //console.log(this.selectedFile);
-
     const formData = new FormData();
     formData.append('file', this.file_name);
     formData.append('user_id', this.obj2)
@@ -72,7 +80,8 @@ export class AccountProfileComponent  implements OnInit{
   getMyData(){
     this._auth.getMyData(this.userDa._id).subscribe(res =>{
       this.myData = res.others;
-      this.myProfilePhoto = this.serverURL+res.others.photo
+      this.myProfilePhoto = this.serverURL+res.others.photo;
+
     });
   }
 

@@ -1,4 +1,5 @@
-<app-top-bar></app-top-bar>
+<app-top-bar [allNotification]="pNotification" [allMessage]="aMessage" [myProfilePic]="topbarProfileImage"
+  [profileDefaultPhoto]="topbarDefaultImage"></app-top-bar>
 <app-side-bar></app-side-bar>
 
 <div class="content-body">
@@ -234,11 +235,11 @@
                       <form method="post" enctype="multipart/form-data">
                         <div class="profile-photo">
                           <div *ngIf="myData.photo !==''; else defaultImage ">
-                            <img [src]="myProfilePhoto" width="100" alt="" />
+                            <img [src]="myProfilePhoto" width="100px" height="40px" alt="profile_photo" />
                           </div>
 
                           <ng-template #defaultImage>
-                            <img [src]="defaultProfileImage" class="img-fluid rounded-circle" alt="" width="50px">
+                            <img [src]="defaultProfileImage" height="40px" width="20px" alt="profile_photo">
                           </ng-template>
 
 

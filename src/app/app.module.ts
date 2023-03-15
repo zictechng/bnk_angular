@@ -48,6 +48,7 @@ import { PosComponent } from './components/dashboard/pos/pos.component';
 import { OrderformComponent } from './components/dashboard/orderform/orderform.component';
 import { OrdercomfirmComponent } from './components/dashboard/ordercomfirm/ordercomfirm.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 
 @NgModule({
@@ -108,6 +109,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ReactiveFormsModule,
   NgxPaginationModule,
   NgSelectModule,
+  NgxDropzoneModule,
   ],
   providers: [AuthService, AuthGuard,
     {

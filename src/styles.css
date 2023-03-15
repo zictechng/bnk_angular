@@ -1,3 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+/*
+.ng-select.ng-select-multiple .ng-select-container .ng-value-container .ng-value{
+  background: #d7d7d7 !important;
+  box-sizing: border-box !important;
+  border-radius: 5px !important;
+  transform: matrix(1,0,0,1,0,0) !important;
+}
+*/
+

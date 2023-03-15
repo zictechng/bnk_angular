@@ -59,12 +59,16 @@
         </div>
         <div class="col-xl-3">
           <div style="float: right">
-            <h2 class="text-black font-w600 mb-0">G.Total: &#8358;30,000</h2>
+            <h2 class="text-black font-w600 mb-0"></h2>
+            <h2 class="text-black font-w600 mb-0">G.Total:{{getTotalAmt()}}</h2>
           </div>
         </div>
 
       </div>
+      <p id="demo"></p>
+      <script>
 
+      </script>
 
     </div>
 
@@ -119,7 +123,7 @@
       </div>
     </ng-template> -->
 
-    <div class="col-lg-6">
+    <div class="col-lg-10">
       <div class="table-responsive">
         <p><b>Item listed list</b></p>
         <table class="table table-bordered verticle-middle table-responsive-sm">
@@ -132,13 +136,19 @@
               <th scope="col">Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody *ngFor="let dataItem of searchProducts; let i = index">
             <tr>
-              <td></td>
-              <td></td>
-              <td style="width: 20%;"><input type="text" class="form-control form-control-sm" name="poduct_qty"
+              <td><input type="text" name="product_name{{i}}" [(ngModel)]="dataItem.product_name"
+                  class="form-control form-control-sm" style="width: 200px;" /></td>
+              <td><input type="text" name="product_sale_price{{i}}" [(ngModel)]="dataItem.product_sale_price"
+                  class="form-control form-control-sm" style="width: 100px;" /></td>
+              <td style="width: 20%;"><input type="text" (keydown.enter)='enterKeySave()'
+                  class="form-control form-control-sm" [(ngModel)]="dataItem.product_qty" name="product_qty{{i}}"
                   style="width: 100px;" /></td>
-              <td></td>
+              <td><input type="text" (keydown.enter)='enterKeySave()' class="form-control form-control-sm"
+                  name="amt_total{{i}}" [(ngModel)]="dataItem.amt_total"
+                  [value]="(dataItem.product_sale_price*dataItem.product_qty)" style="width: 100px;" />
+              </td>
               <td><span>
                   <a data-bs-toggle="tooltip" data-placement="top" title="Remove"
                     class="btn btn-danger shadow btn-xs sharp"><i class="fas fa-times"></i></a>
@@ -148,7 +158,7 @@
 
           </tbody>
         </table>
-        <button type="submit" class="btn btn-primary" style="float: right">Add</button>
+        <button type="submit" (click)="saveButtonClick()" class="btn btn-primary" style="float: right">Add</button>
         <div class="page-titles">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Please click on the Add button to add the order to cart</a></li>
@@ -193,7 +203,7 @@
 
           </tbody>
         </table>
-        <button type="submit" class="btn btn-danger" style="float: right">Check Out</button>
+        <button type="submit" class="btn btn-danger" style="float: right" (click)="checkOutP()">Check Out</button>
         <div class="page-titles">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Please click on the checkout button to process the order</a></li>
@@ -202,8 +212,80 @@
         </div>
 
         <br /><br />
+
+        <br /><br />
+        <br /><br />
       </div>
     </div>
+    <div class="row">
+      <div class="col-xl-9 col-lg-9">
+        <div class="card">
+          <div class="card-header">
+            <h6 class="card-title">Thumb Image Upload</h6>
+          </div>
+          <div class="card-body">
+            <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event)" #drop
+              [id]="'idtest'" [aria-label]="'al-test'" [aria-labelledby]="'alb-test'">
+
+              <ngx-dropzone-label>Drag image to upload here</ngx-dropzone-label>
+              <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+                [removable]="true" (removed)="onRemove(f)">
+                <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+              </ngx-dropzone-image-preview>
+            </div>
+            <br>
+            <button type="submit" [disabled]="upload_btn == false" (click)="uploadAllImages()" class="btn btn-info"
+              style=" float: right">Upload</button>
+          </div>
+        </div>
+
+      </div>
+
+      <input type="file" name="image" multiple (change)="selectMultipleImage($event)" class="custom-dropzone"
+        class="form-control form-control-sm custom-dropzone" [accept]="'image/*'" />
+
+
+      <button type="submit" (click)="submitMultipleImage()" class="btn btn-primary" style=" float: right">Multiple
+        Upload</button>
+    </div>
+    <!-- <ngx-dropzone #drop [id]="'idtest'" [aria-label]="'al-test'" [aria-labelledby]="'alb-test'"
+      (change)="onFilesAdded($event)">
+      <ngx-dropzone-label>Drop it, baby!</ngx-dropzone-label>
+      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+    <br /><br />
+    <button (click)="drop.showFileSelector()">Open</button>
+    <br /><br />
+
+
+    <br /><br />
+    <ngx-dropzone (change)="onFilesAdded($event)" [multiple]="false">
+      <ngx-dropzone-label>Drop it like it's hott!</ngx-dropzone-label>
+      <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+
+    <br /><br />
+
+    <div class="custom-dropzone" ngx-dropzone [accept]="'image/png'" [expandable]="true"
+      (change)="onFilesAdded($event)">
+      <ngx-dropzone-label>
+        <div>
+          <h2>My custom dropzone I</h2>
+        </div>
+      </ngx-dropzone-label>
+
+      <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f"
+        [removable]="true" (removed)="onRemove(f)">
+
+      </ngx-dropzone-image-preview>
+    </div> -->
+    <br /><br />
+    <br /><br />
+    <br /><br />
     <ng-template #loadingProduct>
 
     </ng-template>

@@ -92,12 +92,14 @@ export class StudentsComponent implements OnInit{
               // success: {
               //     background: '#1EAAE7',
               //     },
+              showOnlyTheLastOne: true,
               });
               $('#myModal').modal('hide'); // close the modal here
              this._router.navigate(['/dashboard']); // redirect back home
           }
             else {
               Notiflix.Notify.failure('Sorry! Failed to register', {
+                showOnlyTheLastOne: true,
                 });
            }
          }, err =>{
@@ -107,6 +109,7 @@ export class StudentsComponent implements OnInit{
               width: '300px',
               svgSize: '40px',
               backOverlayColor: '#000000',
+
             },);
             }
           else if(err.status == "403"){
@@ -119,6 +122,7 @@ export class StudentsComponent implements OnInit{
           }
           else if(err.status == '503'){
             Notiflix.Notify.failure('Failed to register student', {
+              showOnlyTheLastOne: true,
               });
           }
         });
@@ -143,12 +147,14 @@ export class StudentsComponent implements OnInit{
               // success: {
               //     background: '#1EAAE7',
               //     },
+              showOnlyTheLastOne: true,
               });
            // this._router.navigate(['/dashboard']); // redirect back home
           }
             else {
               Notiflix.Notify.failure('Sorry! Failed to save record',
                 {
+                  showOnlyTheLastOne: true,
                 });
            }
          }, err =>{
@@ -222,6 +228,7 @@ validationMessage(msg){
     width: '300px',
     svgSize: '60px',
     backOverlayColor: '#000000',
+
   },);
 }
 

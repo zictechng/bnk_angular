@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './ordercomfirm.component.html',
   styleUrls: ['./ordercomfirm.component.css']
 })
-export class OrdercomfirmComponent {
+export class OrdercomfirmComponent implements OnInit, OnDestroy{
 
   public orderConfirmForm:FormGroup;
   orderConfirmData:any = {}
@@ -19,7 +19,7 @@ export class OrdercomfirmComponent {
 
 
   constructor(private _auth: AuthService,
-    private fb: FormBuilder,
+     private fb: FormBuilder,
     private _router: Router){
       this.orderConfirmForm = this.fb.group({
         shipp_type: new FormControl("", Validators.required),
@@ -30,18 +30,32 @@ export class OrdercomfirmComponent {
     }
 
     ngOnInit(): void {
-      // get the data passed from order page here
-      const orderInfo = this._auth.getDataStream();
-      orderInfo.subscribe({
-        next:(data: any) =>{
-          this.orderConfirmData = data;
-          //console.log(this.orderConfirmData);
-        },
-        error:(err: any) =>{
-          console.log(err);
-        }
-      })
+
+      // get data from order page via sessionStorage here..
+      this.orderConfirmData = JSON.parse(sessionStorage.getItem('order_info'));
+      if(this.orderConfirmData == null){
+        this._router.navigate(['/order-form']);
+      }
+      //console.log("This is order confirm Page: ", this.orderConfirmData)
+
+      // get the data passed from order page via serviceprovider here
+      //let orderInfo = this._auth.getDataStream();
+      //this.orderConfirmData = (orderInfo);
+      // orderInfo.subscribe({
+      //   next:(data: any) =>{
+      //     this.orderConfirmData = data;
+      //     console.log("This is confirm page data ", this.orderConfirmData);
+      //   },
+      //   error:(err: any) =>{
+      //     console.log(err);
+      //   }
+      // })
     }
+
+    // clear all store details in session here
+      ngOnDestroy() {
+        sessionStorage.clear();
+      }
 
 
     obj2 = {

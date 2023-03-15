@@ -71,6 +71,7 @@ export class CreateInvoiceComponent implements OnInit{
           success: {
               background: '#1EAAE7',
               },
+              showOnlyTheLastOne: true,
           });
 
       }
@@ -78,6 +79,7 @@ export class CreateInvoiceComponent implements OnInit{
         Notiflix.Loading.remove();
         Notiflix.Notify.warning('Error! Some fields missing..', {
           width: '150px',
+          showOnlyTheLastOne: true,
         });
       }
      }, err =>{
@@ -90,6 +92,7 @@ export class CreateInvoiceComponent implements OnInit{
     else if(err.status == "400"){
       Notiflix.Notify.warning('Error! Some fields missing..', {
             width: '150px',
+            showOnlyTheLastOne: true,
           });
       Notiflix.Loading.remove();
       }
