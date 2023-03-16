@@ -60,15 +60,11 @@
         <div class="col-xl-3">
           <div style="float: right">
             <h2 class="text-black font-w600 mb-0"></h2>
-            <h2 class="text-black font-w600 mb-0">G.Total:{{gTotal}}</h2>
+            <h2 class="text-black font-w600 mb-0">G.Total: &#x20A6;{{gTotal | number:'1.2-2'}}</h2>
           </div>
         </div>
 
       </div>
-      <p id="demo"></p>
-      <script>
-
-      </script>
 
     </div>
 
@@ -124,53 +120,56 @@
     </ng-template> -->
 
     <div class="col-lg-10">
-      <div class="table-responsive">
-        <p><b>Item listed list</b></p>
-        <table class="table table-bordered verticle-middle table-responsive-sm">
-          <thead>
-            <tr>
-              <th scope="col">Item Name</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Qty</th>
-              <th scope="col">Total</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let dataItem of searchProducts; let i = index">
-            <tr>
-              <td><input type="text" name="product_name{{i}}" [(ngModel)]="dataItem.product_name"
-                  class="form-control form-control-sm" style="width: 200px;" /></td>
-              <td><input type="text" name="product_sale_price{{i}}" [(ngModel)]="dataItem.product_sale_price"
-                  class="form-control form-control-sm" style="width: 100px;" /></td>
-              <td style="width: 20%;"><input type="text" (keydown.enter)='enterKeySave()'
-                  class="form-control form-control-sm" [(ngModel)]="dataItem.product_qty" name="product_qty{{i}}"
-                  style="width: 100px;" /></td>
-              <td><input type="text" (keydown.enter)='enterKeySave()' class="form-control form-control-sm"
-                  name="amt_total{{i}}" [(ngModel)]="dataItem.product_sale_price*dataItem.product_qty"
-                  [value]="calculateValue(dataItem)" style="width: 100px;" />
-              </td>
-              <td><span>
-                  <a data-bs-toggle="tooltip" data-placement="top" title="Remove"
-                    class="btn btn-danger shadow btn-xs sharp"><i class="fas fa-times"></i></a>
-                </span>
-              </td>
-            </tr>
+      <div class="table-responsive" *ngIf="searchProducts.length > 0">
+        <form #orderForm="ngForm" (ngSubmit)="processOrderDetails(orderForm.value)">
+          <p><b>Item listed list</b></p>
+          <table class="table table-bordered verticle-middle table-responsive-sm">
+            <thead>
+              <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Total</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let dataItem of searchProducts; let i = index">
+              <tr>
+                <td><input type="text" name="product_name{{i}}" [(ngModel)]="dataItem.product_name"
+                    class="form-control form-control-sm" style="width: 200px;" /></td>
+                <td><input type="text" name="product_sale_price{{i}}" [(ngModel)]="dataItem.product_sale_price"
+                    class="form-control form-control-sm" style="width: 100px;" /></td>
+                <td style="width: 20%;"><input type="text" (keydown.enter)='enterKeySave()'
+                    class="form-control form-control-sm" name="product_qty{{i}}" [(ngModel)]="dataItem.product_qty"
+                    style="width: 100px;" /></td>
+                <td><input type="text" (keydown.enter)='enterKeySave()' class="form-control form-control-sm"
+                    name="product_total_amt{{i}}" [(ngModel)]="dataItem.product_sale_price*dataItem.product_qty"
+                    [value]="calculateValue(dataItem)" style="width: 100px;" />
+                </td>
+                <td><span>
+                    <a data-bs-toggle="tooltip" data-placement="top" title="Remove" (click)="deleteOrder(dataItem._id)"
+                      class="btn btn-danger shadow btn-xs sharp"><i class="fas fa-times"></i></a>
+                  </span>
+                </td>
+              </tr>
 
-          </tbody>
-        </table>
-        <button type="submit" (click)="saveAll()" class="btn btn-primary" style="float: right">Add</button>
-        <div class="page-titles">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Please click on the Add button to add the order to cart</a></li>
-            <li class="active"></li>
-          </ol>
-        </div>
+            </tbody>
+          </table>
 
+          <button type="submit" class="btn btn-primary" style="float: right">Add</button>
+          <div class="page-titles">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">Please click on the Add button to add the order to cart</a></li>
+              <li class="active"></li>
+            </ol>
+          </div>
+        </form>
         <br /><br />
       </div>
     </div>
-
-    <div class="col-lg-9">
+    <br /><br />
+    <br /><br />
+    <!-- <div class="col-lg-9">
       <div class="table-responsive">
         <p><b>Item Ordered List</b></p>
         <table class="table table-bordered verticle-middle table-responsive-sm">
@@ -193,8 +192,7 @@
                   style="width: 100px;" /></td>
               <td><span class="badge badge-dark"></span></td>
               <td><span>
-                  <!-- <a href="javascript:void()" class="me-4" data-bs-toggle=cartProduct"tooltip" data-placement="top" title="Edit"><i
-                      class="fas fa-pencil-alt color-muted"></i> </a> -->
+
                   <a data-bs-toggle="tooltip" data-placement="top" title="Remove"
                     class="btn btn-danger shadow btn-xs sharp"><i class="fas fa-trash-alt"></i></a>
                 </span>
@@ -216,7 +214,7 @@
         <br /><br />
         <br /><br />
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div class="col-xl-9 col-lg-9">
         <div class="card">

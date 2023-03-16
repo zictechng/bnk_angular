@@ -6,6 +6,20 @@ import { Notify } from 'notiflix';
 import { debounceTime, Subject } from 'rxjs';
 import { AuthService, Product } from 'src/app/services/auth.service';
 
+
+interface orderList{
+  product_name?: String,
+  product_description?: String,
+  product_sale_price?: Number,
+  product_qty?: Number,
+  product_total_amt?: Number,
+  product_all_total_amt?: Number,
+  product_id?: String,
+  reg_code?: String,
+  product_order_id?: String,
+  addedby: String,
+}
+
 @Component({
   selector: 'app-pos',
   templateUrl: './pos.component.html',
@@ -13,24 +27,26 @@ import { AuthService, Product } from 'src/app/services/auth.service';
 })
 export class PosComponent implements OnInit{
 
+  passData: any[]
   productData: any[] = [];
   searchData: any[];
   cartProduct:any[] = [];
   sale_ref_code: any = {};
   ref_code:any = {};
+  orderData: orderList[]=[]
   public searchInput: String = '';
 
  public searchResult: Array<any> = [];
  public toggle: Boolean = false;
  public selectedInput: any = {};
- public totalAmt = 0;
- public totalAll;
  private value = '';
 
  // search product interface model call here
  product:any[] = [];
  hasQuery:Boolean = false;
  itemOrderID: string = '';
+ orderRefCode: any = '';
+ orderInvoiceID: any ='';
 
   myId : any = localStorage.getItem('userData');
   userDa = (JSON.parse(localStorage.getItem('userData')));
@@ -39,13 +55,11 @@ export class PosComponent implements OnInit{
 
 
   @ViewChild('posForm') form: NgForm;
-  searchProducts: any;
+
+  searchProducts:any ='';
   searchName: string = '';
   keyUpSubject = new Subject<any>();
   data: any;
-  currencyPipe: any;
-  subTotalItems: any;
-  cartService: any;
   gTotal = 0
   constructor(private _auth: AuthService,
     private fb: FormBuilder,
@@ -63,6 +77,8 @@ export class PosComponent implements OnInit{
 
    ngOnInit() {
     this.generateOrderID();
+    this. generateOrderRecordID();
+    this.generateOrderSaleRef();
 
    }
    files: File[] = [];
@@ -136,13 +152,14 @@ export class PosComponent implements OnInit{
           this.files.splice(0);
         }
       }
-      // upload image action goes here---
+
+      // upload mutiple dropZone images action goes here---
       uploadAllImages(){
         const formData = new FormData();
         if(this.dropZoneImages.length < 1){
          Notiflix.Notify.failure('Please choose a file',
           {
-          fontSize:'20',
+          fontSize:'20px',
           width: '300px',
           position: 'center-bottom',
           showOnlyTheLastOne: true,
@@ -168,7 +185,8 @@ export class PosComponent implements OnInit{
             if(res.msg == '200'){
               Notiflix.Notify.success('Successful! Images uploaded successfully',
                 {
-                width: '300px',
+                fontSize:'20px',
+                width: '450px',
                 position: 'center-bottom',
                 showOnlyTheLastOne: true,
               });
@@ -179,6 +197,7 @@ export class PosComponent implements OnInit{
             } else if(res.msg == '400'){
               Notiflix.Notify.warning('Error! Images not uploaded.',
                 {
+                fontSize:'20px',
                 width: '300px',
                 position: 'center-bottom',
                 showOnlyTheLastOne: true,
@@ -186,7 +205,8 @@ export class PosComponent implements OnInit{
             } else if(res.msg == '402'){
               Notiflix.Notify.warning('Access denied! Login to upload images.',
                 {
-                width: '300px',
+                fontSize:'20px',
+                width: '350px',
                 position: 'center-bottom',
                 showOnlyTheLastOne: true,
               });
@@ -194,7 +214,8 @@ export class PosComponent implements OnInit{
             else if(res.msg == '404'){
               Notiflix.Notify.failure('Failed! Files not selected.',
                 {
-                width: '300px',
+                fontSize:'20px',
+                width: '350px',
                 position: 'center-bottom',
                 showOnlyTheLastOne: true,
               });
@@ -211,7 +232,8 @@ export class PosComponent implements OnInit{
             if(err.status == "500"){
             Notiflix.Notify.failure('Failed! Error occured, try again',
             {
-              width: '300px',
+              fontSize:'20px',
+              width: '350px',
               position: 'center-bottom',
               showOnlyTheLastOne: true,
             });
@@ -220,7 +242,8 @@ export class PosComponent implements OnInit{
             else if(err.status == "404"){
               Notiflix.Notify.failure('Failed! no file selected, try again',
               {
-                width: '300px',
+                fontSize:'20px',
+                width: '350px',
                 position: 'center-bottom',
                 showOnlyTheLastOne: true,
               });
@@ -233,6 +256,7 @@ export class PosComponent implements OnInit{
           //alert('If you say so...'); no operation goes here
           Notiflix.Notify.info('Request cancelled!',
               {
+                fontSize:'20px',
                 width: '300px',
                 position: 'center-bottom',
                 showOnlyTheLastOne: true,
@@ -256,21 +280,18 @@ export class PosComponent implements OnInit{
     }
 
     calculateValue(item:any){
-          if(item.product_sale_price && item.product_qty){
-            console.log(item.product_sale_price* (+item.product_qty))
-            this.updateGrandTotal();
-            return Number(item.product_sale_price * item.product_qty);
-
-          }
-          else{
-            this.updateGrandTotal();
-        return item.product_sale_price * item.product_qty;
-
-          }
-
+      if(item.product_sale_price && item.product_qty){
+        //console.log(item.product_sale_price* (+item.product_qty))
+        this.updateGrandTotal();
+        return Number(item.product_sale_price * item.product_qty);
+      }
+        else{
+          this.updateGrandTotal();
+      return item.product_sale_price * item.product_qty;
         }
+    }
 
-    // multiple image upload here
+  // Normal multiple image upload here
     submitMultipleImage(){
       const formData = new FormData();
       for(let img of this.multipleImages){
@@ -281,29 +302,38 @@ export class PosComponent implements OnInit{
         if(res.msg == '200'){
           Notiflix.Notify.success('Successful! Images uploaded successfully',
             {
-            width: '300px',
-            position: 'center-bottom',
+              fontSize:'20px',
+              cssAnimationStyle:'from-bottom',
+              width: '400px',
+              position: 'center-bottom',
+              showOnlyTheLastOne: true,
           });
         }
         else {
           Notiflix.Notify.warning('Failed! Try upload again',
           {
-            width: '300px',
-            position: 'center-bottom',
+              cssAnimationStyle:'from-bottom',
+              fontSize:'20px',
+              width: '350px',
+              position: 'center-bottom',
+              showOnlyTheLastOne: true,
           });
         }
       }, err =>{
         if(err.status == "500"){
         Notiflix.Notify.failure('Failed! Error occured, try again',
         {
+          position:'center-bottom',
           width: '300px',
-          position: 'center-bottom',
+         cssAnimationStyle:'from-bottom',
+         fontSize:'20px',
+          showOnlyTheLastOne: true,
         });
 
         }})
     }
 
-   // auto complete search request here
+   // auto complete search request that recieve the input value here
    sendData(event:any){
     // console.log(event.target.value);
     let query:string = event.target.value;
@@ -311,6 +341,7 @@ export class PosComponent implements OnInit{
     this.searchDataFn(query)
    }
 
+   // searching that show the dropdown list and remove space in the type words
    searchDataFn(query){
     let matchSpaces:any = query.match(/\s*/);
     if(matchSpaces[0] === query){
@@ -325,16 +356,6 @@ export class PosComponent implements OnInit{
     });
    }
 
-  //  fetchSeries(event: any): any {
-  //   if (event.target.value === '') {
-  //     return this.searchResult = [];
-  //   }
-  //   this.searchResult = this.seriesList.filter((series) => {
-  //     return series.name.toLowerCase().startsWith(event.target.value.toLowerCase());
-  //   })
-  // }
-
-
     showDetails(series) {
        this.selectedInput = series;
        this.toggle = true;
@@ -345,8 +366,15 @@ export class PosComponent implements OnInit{
       generateOrderID(){
         this.itemOrderID = this.randomOrderId(12)
       }
+      // get auto generate order invoice ID here
+      generateOrderRecordID(){
+        this.orderInvoiceID = this.randomOrderId(12)
+      }
+      // get auto generate order sale ref ID here
+      generateOrderSaleRef(){
+        this.orderRefCode = this.randomString(25)
+      }
 
-    //   search(event: any) {
     //   const value = event.target.value;
     //   this.searchName = value;
     //   this.keyUpSubject.next(value);
@@ -371,19 +399,10 @@ export class PosComponent implements OnInit{
     this.searchKey = data.product_name;
     this.hasQuery = false
     // this.searchDataFn(this.searchKey);
-    this.product = [] // this set the array to empty so that the droplist can go off
+    this.product = [] // this set the array to empty so that the dropdown list can go off
     this.searchProduct(data._id); // here receive the value and send to a function
     //console.log(data)
     }
-
-
-// getTotalCost() {
-//   let sum: number = this.searchProducts.map(a => a.value).reduce(function(a, b)
-//   {
-//     return a + b;
-//   });
-//   console.log("Sum Total: ", sum);
-// }
 
 // get product ID from search input unchange here and send it to api to fetch details
     searchProduct(id:string){
@@ -393,18 +412,13 @@ export class PosComponent implements OnInit{
       'user_id': this.userDa._id,
       'order_id':this.itemOrderID
     });
-    console.log(newSearchKey)
+    //console.log(newSearchKey)
+    this.searchKey=''; // this will clear off the search input filed after clicking on the list item
     this._auth.posProduct(newSearchKey).subscribe((res:any) =>{
     //console.log(res)
-
-
     this.searchProducts = res;
-    //this.getTotalCost();
-    let oldTotal = 0;
-    oldTotal = this.searchProducts[0].product_sale_price * 1;
-    console.log("Old Total: ", oldTotal );
-    //this.totalPrice(this.searchProducts)
-     }, err =>{
+    this.orderData = res;
+    }, err =>{
       if(err.status == "500"){
        Notiflix.Notify.failure('Failed! Error occured, try again',
        {
@@ -415,13 +429,137 @@ export class PosComponent implements OnInit{
        }})
   }
 
+  param = {
+    "addedby": (JSON.parse(this.myId)),
+    // "reg_code": this.randomString(25),
+    // "order_id":this.randomOrderId(12)
+   };
 
+  processOrderDetails(val: any){
+    //console.log("Old data", this.searchProducts)
+    //const orderData = Object.assign({"TotalValue":this.gTotal}, this.orderData);
+    //console.log("Data send to API: ", orderDataDetails, "Total Amt: ", this.gTotal);
+    this.orderData = this.orderData.map((m)=>{
+      return {
+        ...m,
+        product_all_total_amt:this.gTotal,
+        reg_code: this.orderRefCode,
+        product_order_id:this.orderInvoiceID
+      }
+    });
+    this._auth.saveOrderDetails(this.orderData).subscribe(res =>{
+      console.log("Data send to API: ", this.orderData);
+        console.log("API Result: ", res);
+        if(res.msg == '200')
+          {
+            Notiflix.Notify.success('Order processed Successfully', {
+              cssAnimationStyle:'from-bottom',
+              fontSize:'20px',
+              position:'center-bottom',
+              width: '350px',
+              showOnlyTheLastOne: true,
+             });
+          }
+            else {
+              Notiflix.Notify.failure('Sorry! Failed to process order', {
+                position:'center-bottom',
+                width: '300px',
+                fontSize:'20px',
+                showOnlyTheLastOne: true,
+                });
+           }
+         }, err =>{
+           if(err.status == "400"){
+            Notiflix.Notify.failure('Failed! Product ID number already exist',
+            {
+              fontSize:'20px',
+              width: '300px',
+              position: 'center-bottom',
+              showOnlyTheLastOne: true,
+           });
+            }
+          else if(err.status == "403"){
+            Notiflix.Notify.failure('Failed! Some required fields are missing',
+            {
+              fontSize:'20px',
+              width: '350px',
+              position: 'center-bottom',
+              showOnlyTheLastOne: true,
+           });
+          }
+          else if(err.status == '503'){
+            Notiflix.Notify.failure('Failed to register new product', {
+              fontSize:'20px',
+              width: '350px',
+              position: 'center-bottom',
+              showOnlyTheLastOne: true,
+              });
+          }
+        });
+       //console.warn("Form details", this.orderData);
+       this.gTotal = 0
+       this.searchProducts = [];
+       this.orderData = [];
+       this.generateOrderID();
+       this.generateOrderRecordID()
+       this.generateOrderSaleRef()
+       this.form.resetForm();
+  }
+  // remove order from pre order (cart) list
+  deleteOrder(id:any){
+    Notiflix.Confirm.show(
+      'Please confirm',
+      'Are you sure you want to remove order?',
+      'Yes',
+      'No',
+      () => {
+        this._auth.deleteOrderList(id).subscribe(res =>{
+          if(res.msg == 200){
+            Notiflix.Notify.success('Order removed from cart', {
+              cssAnimationStyle:'from-bottom',
+              fontSize:'20px',
+              width: '350px',
+              position: 'center-bottom',
+              showOnlyTheLastOne: true,
+             });
+             this.searchProduct(id)
+          }
+          else if(res.msg == 403){
+            Notiflix.Notify.failure('No found!, try again', {
+              fontSize:'20px',
+              width: '350px',
+              position: 'center-bottom',
+              showOnlyTheLastOne: true,
+             });
+          }
+          else{
+            Notiflix.Notify.warning('Sorry! Something went wrong', {
+              fontSize:'20px',
+              width: '350px',
+              position: 'center-bottom',
+              showOnlyTheLastOne: true,
+             });
+          }
 
-  saveAll(){
-// display the data in console here when the add button is clicked
+        }, err =>{
+        if(err.status == "500"){
+          Notiflix.Notify.failure('Sorry! Technical problem occured', {
+            cssAnimationStyle:'from-bottom',
+            fontSize:'20px',
+            width: '350px',
+            position: 'center-bottom',
+            showOnlyTheLastOne: true,
+           });
+          console.log(err.message)
+        }}
+        );
+      },
+      () => {
+        // No don't remove the order and the operation stop
+        //alert('If you say so...');
+      },);
 
-
-  this.searchProducts = [];
+    this.searchProducts
   }
   // save detail when enter key is press here
       enterKeySave(){
@@ -439,13 +577,11 @@ export class PosComponent implements OnInit{
                 {
                 //cssAnimationStyle:'zoom',
                 cssAnimationStyle:'from-bottom',
-
-                fontSize:'35',
+                fontSize:'20px',
                 width: '300px',
                 position: 'center-bottom',
                 //position: 'right-top',
                 showOnlyTheLastOne: true,
-
               });
       }
    // generate random string for transaction ID

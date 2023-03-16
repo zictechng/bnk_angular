@@ -62,6 +62,8 @@ export class AuthService {
 
   private _dynamicDataUrl = "http://localhost:3000/api/dynamic_data";
   private _multipleFilesUploadUrl = "http://localhost:3000/api/multiplefiles";
+  private _saveOrderDetailsUrl = "http://localhost:3000/api/save-order";
+  private _removeOrderListUrl = "http://localhost:3000/api/delet_order/";
 
 
 
@@ -212,6 +214,11 @@ deleteHistory(id:any){
 }
 
 //delete history record here...
+deleteOrderList(id:any){
+  return this.http.get<any>(this._removeOrderListUrl + id);
+}
+
+//delete history record here...
 deleteHistoryCheckBox(ids:String[]){
   return this.http.post<any>(this._deleteCheckHistoryUrl, ids);
 }
@@ -285,6 +292,11 @@ addNewProduct(addproductData:any){
 // post item order selected data here
 saveItemOrder(itemData: any){
   return this.http.post<any>(this._item_orderUrl, itemData);
+}
+
+//send order details to backend api here
+saveOrderDetails(orderData: any){
+  return this.http.post<any>(this._saveOrderDetailsUrl, orderData);
 }
 
 // post item order selected data here
